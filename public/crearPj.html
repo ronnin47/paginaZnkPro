@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!--CSS-->
+    <link rel="stylesheet" href="styles.css">
+    <title>Nuevo personaje</title>
+  </head>
+  <body>
+      <!--Navar hamburguesa de Bootstrap-->
+      <nav class="navbar navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">ZEPIRO NO KIOKU</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">ZNK</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                      <a class="nav-link" id="cerrarSesion"  href="/">Cerrar Sesion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="paginaMisPersonajes" href="misPersonajes.html">Mis personajes</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" aria-current="page" id="paginaNarrador" href="narrador.html">Narrador</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="paginaMaster" href="master.html">Master</a>
+                    </li>
+                  
+                  </ul>
+                
+                </div>
+              </div>
+            </div>
+      </nav>
+       <!--Contenido de main dela pagina-->
+       <main class="bordeCrearPj">
+
+        <div  id="origen">
+
+          <div class="centrame">
+              <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                presentacion
+              </button>
+          </div>      
+          <div class="collapse show" id="collapseExample">
+            <div class="card card-body fondo">
+              <!--presentacion del personaje-->
+              <div class="apertura">
+                <div>
+                    <img src="https://i.pinimg.com/550x/33/2a/be/332abe02e0fcc2c15e6b1f08515368ca.jpg" class="imagen" alt="imagenPj">
+                </div>           
+                <div class="container info">
+                    <ul>
+                        <div>
+                            <label for="nombre" class="form-label labels">Nombre de personaje:</label>
+                            <input type="text" class="form-control inputSegundaFicha1" id="nombreInput" aria-describedby="nombre" placeholder="Ingrese nombre del personaje">
+                        </div>
+                        <div >
+                            <label for="raza" class="form-label labels">Raza:</label>
+                            <input type="text" class="form-control inputSegundaFicha1" id="razaInput" aria-describedby="raza" placeholder="Ingrese raza">
+                        </div>   
+                        <div >
+                          <label for="raza" class="form-label labels">Naturaleza:</label>
+                          <input type="text" class="form-control inputSegundaFicha1" id="naturalezaInput" aria-describedby="naturaleza" placeholder="Ingrese naturaleza">
+                        </div>                 
+                        <div>
+                            <label for="dominio" class="form-label labels">Dominio:</label>
+                            <select class="form-select inputSegundaFicha1"  id="dominioInput" aria-label="Default select example" required>
+                              <option value="Seleciona un dominio" disabled selected>Selecciona un dominio</option>
+                              <option value="Guerrero de las artes marciales">Guerrero de las artes marciales</option>
+                              <option value="Maestro de armas">Maestro de armas</option>
+                              <option value="Maestro de las sombras">Maestro de sombras</option>
+                              <option value="Hechicero">Hechicero</option>
+                              <option value="Criador Bakemono">Ciador Bakemono</option>
+                              <option value="Maestro espiritual">Maestro espiritual</option>
+                            </select>
+                        </div>
+                        <div class="parejo">
+                            <div >
+                                <label for="ki" class="labelParejoIzquierdo">Nivel de ki:</label>
+                                <input type="number" class="form-control inputSegundaFicha2 inputParejoIzquierdo " id="kiInput" aria-describedby="ki"  required>  
+                            </div>
+                            <div >
+                                <label for="ken" class="labelParejoDerecho">Ken:</label>
+                                <input type="number" class="form-control inputSegundaFicha2 inputParejoDerecho" id="kenInput" aria-describedby="ken" required>  
+                            </div>
+                        </div>
+                        
+                        <div >
+                            <label for="imagen" class="form-label labels">url de la imagen del personaje:</label>
+                            <input type="text" class="form-control inputSegundaFicha" id="imagenInput" aria-describedby="imagen" placeholder="Ingrese url de imagen del producto" >
+                        </div>
+                    </ul>
+                </div>
+                
+              </div>
+              
+            </div>
+          </div>
+                
+
+         <div class="centrame">
+          <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+            caracteristicas
+          </button>
+         </div>
+         <div class="collapse show" id="collapseExample2">
+              <div class="card card-body fondo">
+                <!--caracteristicas del personaje-->
+                  <!--CARACTERISTICAS ZNK-->
+                    <div class="tronco">
+                      <!--RAMAS DEL TRONCO-->
+                      <div class="caracteristicasIzquierda">
+                        <div>
+                          <label for="fuerza" class="form-label labelTronco">Fuerza:</label>
+                          <input type="number" class="form-control inputTronco" min="5" max="20" id="fuerzaInput" aria-describedby="fuerza">
+                        </div>
+                        <div>
+                          <label for="ki" class="form-label labelTronco">Fortaleza:</label>
+                          <input type="number" class="form-control inputTronco" min="5" max="20"  id="fortalezaInput"  aria-describedby="fortaleza">  
+                        </div>               
+                        <div>
+                          <label for="destreza" class="form-label labelTronco">Destreza:</label>
+                          <input type="number" class="form-control inputTronco" min="5" max="20"  id="destrezaInput"  aria-describedby="destreza">  
+                        </div>
+                        <div>
+                          <label for="agilidad" class="form-label labelTronco">Agilidad:</label>
+                          <input type="number" class="form-control inputTronco" min="5" max="20"  id="agilidadInput"  aria-describedby="agilidad">  
+                        </div>
+                          <div>
+                          <label id="resultado" class="resultadoR" placeholder="resultado">resultado</label>
+                          <label >p totales tronco</label>
+                          </div> 
+                      </div>
+                        
+                      <div class="caracteristicasDerecha">
+                          <div>
+                              <label for="sabiduria" class="form-label labelTronco">Sabiduria:</label>
+                              <input type="number" class="form-control inputTronco" min="5" max="20"  id="sabiduriaInput" aria-describedby="sabiduria" >
+                          </div>        
+                          <div>
+                              <label for="principio" class="form-label labelTronco">Principio:</label>
+                              <input type="number" class="form-control inputTronco" min="5" max="20"  id="principioInput" aria-describedby="principio" >  
+                          </div>       
+                          <div>
+                              <label for="presencia" class="form-label labelTronco">Presencia:</label>
+                              <input type="number" class="form-control inputTronco"  min="5" max="20"  id="presenciaInput"  aria-describedby="presencia">  
+                          </div>
+                          <div>
+                              <label for="sentidos" class="form-label labelTronco">Sentidos:</label>
+                              <input type="number" class="form-control inputTronco" min="5" max="20"  id="sentidosInput"  aria-describedby="sentidos">  
+                          </div>
+                          <div>        
+                          <label id="resultado2" class="resultadoR" placeholder="resultado">resultado</label>
+                          <label >p totales aptitudes</label>
+                          </div>            
+                      </div> 
+                    
+                      <!--APTITUDESS ZNK-->
+                          <div class="aptitudes">
+                          
+                                
+                                <div>
+                                <label for="academisismo" class="form-label labelHabilidad">Academisismo:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="academisismoInput"  aria-describedby="academisismo">  
+                                </div>
+                                <div>
+                                <label for="artesMarciales" class="form-label labelHabilidad">Artes marciales:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="artesMarcialesInput" aria-describedby="artesMarciales">  
+                                </div>
+                                <div>
+                                <label for="atletismo" class="form-label labelHabilidad">Atletismo:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="atletismoInput"  aria-describedby="atletismo"   >  
+                                </div>
+                                <div>
+                                <label for="conBakemono" class="form-label labelHabilidad">Con. Bakemono:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="conBakemonoInput" aria-describedby="conBakemono"   >  
+                                </div>
+                                <div>
+                                <label for="conDemonio" class="form-label labelHabilidad">Con. Demonio:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="conDemonioInput"  aria-describedby="conDemonio"  >  
+                                </div>
+                                <div>
+                                <label for="conEsferas" class="form-label labelHabilidad">Con. Esferas:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="conEsferasInput"  aria-describedby="conEsferas"  >  
+                                </div>
+                                <div>
+                                <label for="conEspiritual" class="form-label labelHabilidad">Con. Espiritual:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="conEspiritualInput" aria-describedby="conEspiritual">  
+                                </div>    
+
+                                <div>
+                                <label for="forja" class="form-label labelHabilidad">Forja:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="forjaInput"  aria-describedby="forja">  
+                                </div>
+                                <div>
+                                <label for="medicina" class="form-label labelHabilidad">Medicina:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="medicinaInput" aria-describedby="medicina">  
+                                </div>
+                                <div>
+                                <label for="montar" class="form-label labelHabilidad">Montar:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="montarInput" aria-describedby="montar">  
+                                </div>
+                                <div>
+                                <label for="sigilo" class="form-label labelHabilidad">Sigilo:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="sigiloInput"  aria-describedby="sigilo"  >  
+                                </div>
+                                <div>
+                                <label for="pilotear" class="form-label labelHabilidad">Pilotear:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="pilotearInput" aria-describedby="pilotear"  >  
+                                </div>
+                                <div>
+                                <label for="manejoArma" class="form-label labelHabilidad">Manejo de Arma:</label>
+                                <input type="text" class="nomArma" id="nombreArmaInput">
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="manejoArmaInput"  aria-describedby="manejoArma">  
+                                </div>
+                                <div>
+                                <label for="conObjMagicos" class="form-label labelHabilidad">Con. Obj. Magicos:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="conObjMagicosInput" aria-describedby="conObjMagicos">  
+                                </div>   
+                                <div>
+                                <label for="conLeyendas" class="form-label labelHabilidad">Con. de Leyendas:</label>
+                                <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="conLeyendasInput" aria-describedby="conLeyendas">  
+                                </div>                       
+                          </div>
+
+                    </div>
+
+                      <!--aptitudes especializadas-->
+                    <div class="aptitudesE">
+                      <div>
+                      <label for="resCorte" class="form-label labelHabilidad">Res. Esp. Corte:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="resCorteInput"  aria-describedby="resCorte">  
+                      </div>
+                      <div>
+                      <label for="resEnergia" class="form-label labelHabilidad">Res. Esp. Energia:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="resEnergiaInput"  aria-describedby="resEnergia">  
+                      </div>
+                      <div>
+                      <label for="resRayo" class="form-label labelHabilidad">Res. Esp. Rayo:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="resRayoInput"  aria-describedby="resRayo">  
+                      </div>
+                      <div>
+                      <label for="resFuego" class="form-label labelHabilidad">Res. Esp. Fuego:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="resFuegoInput"  aria-describedby="resFuego">  
+                      </div>
+                      <div>
+                      <label for="resFrio" class="form-label labelHabilidad">Res. Esp. Frio:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="resFrioInput"  aria-describedby="resFrio" >  
+                      </div>
+                      <div>
+                      <label for="resVeneno" class="form-label labelHabilidad">Res. Esp. Veneno:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="resVenenoInput"  aria-describedby="resVeneno" >  
+                      </div>
+                      <div>
+                      <label for="manejoSombras" class="form-label labelHabilidad">M. de Sombras:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="manejoSombrasInput" aria-describedby="manejoSombras">  
+                      </div>
+                      <div>
+                      <label for="tratoBakemono" class="form-label labelHabilidad">Trato Bakemono:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="tratoBakemonoInput" aria-describedby="tratoBakemono">  
+                      </div>
+                      <div>
+                      <label for="conHechiceria" class="form-label labelHabilidad">Con. Hechiceria:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="conHechiceriaInput" aria-describedby="conHechiceria">  
+                      </div>   
+                      <div>
+                      <label for="meditacionEspiritual" class="form-label labelHabilidad">Med. Espiritual:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="meditacionEspiritualInput" aria-describedby="meditacionEspitual">  
+                      </div>
+                      <div>
+                      <label for="meditacionVital" class="form-label labelHabilidad">Meditacion Vital:</label>
+                      <input type="number" class="form-control inputHabilidad" min="5" max="20"  id="meditacionVitalInput" aria-describedby="meditacionVital">  
+                      </div>  
+                    </div>  
+                                              
+              </div>
+         </div>
+          
+        
+
+
+          <div class="centrame">
+            <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample2">
+              barras
+            </button>
+          </div>
+          <div class="collapse show" id="collapseExample3">
+                <div class="card card-body fondo">
+                  
+                  <!--barras de vida, ki y ken del personaje-->
+                  <div class="barras">
+
+                    <div class="barraParejo2">
+                                <div>
+                                  <label class="labelKen">VITALIDAD</label>
+                                </div>
+
+                                <div >
+                                  <label class="fas" >cantidad de fases Positivas</label>
+                                  <input class="small-input" type="number" id="fasesPosInput">
+                                </div>
+
+                                <div >
+                                  <label class="fas" >cantidad de fases Negativas</label>
+                                  <input class="small-input" type="number" id="fasesNegInput">
+                                </div>
+      
+                                <div>
+                                  <p id="vita" class="labelFicha" >Vitalidad: / </p></div>   
+                    </div>
+                                              
+                          <div class="progress health-bar miBarraVida">
+                                  <div id="barraVida" class="progress-bar brillanteRojo"  role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                    
+                          <div class="progress health-bar miBarraVidaNegativa">
+                          <div id="barraVidaNegativa" class="progress-bar brillanteRojo" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      
+                    
+      
+                    <div class="barraParejo">
+                    <div> 
+                      <label class="labelKen">KI</label>
+                    </div>
+                    <div> <p id="ki" class="labelFicha" >Ki: / </p></div>
+                    </div> 
+                    
+                    <div class="progress health-bar miBarraKi">
+                            <div id="barraKi" class="progress-bar brillante" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    
+                <div class="barraParejo">
+                    <div>
+                    <label class="labelKen">KEN</label>
+                   
+                    </div>
+      
+                    <div> <p id="ken" class="labelFicha">Ken: / </p></div>
+                </div>
+                    
+                    <div class="progress health-bar miBarraKen">
+                            <div id="barraKen" class="progress-bar brillanteKen" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+      
+      
+            
+      
+                  </div>
+                                                
+                </div>
+          </div>
+
+
+          <div class="centrame">
+              <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#dominios" aria-expanded="false" aria-controls="collapseExample">
+                Dominios
+              </button>
+          </div>  
+        </div>      
+         <div class="collapse show dominios" id="dominios">
+          <div class="container" id="dominiosPj"></div>
+         
+
+
+         <br><br>
+
+         
+            <div class="selector">
+              <label for="selectDominio">Dominio</label>
+              <select name="selectDominio" id="selectDominio">
+              <option value="">Escoja dominio</option>
+              <option value="1">Guerrero de las artes marciales</option>
+              <option value="2">Maestro de armas</option>
+              <option value="3">Maestro de sombras</option>
+              <option value="4">Hechicero</option>
+              <option value="5">Criador Bakemono</option>
+              <option value="6">Maestro espiritual</option>
+              </select>
+              <button id="btnNuevoDominio" class="btn btn-success">+ Dominio</button>
+            </div>
+          
+              
+       
+        </div>
+
+
+
+        <div class="centrame">
+          <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#ventajasDesventajas" aria-expanded="false" aria-controls="collapseExample">
+            ventajas y desventajas
+          </button>
+      </div>  
+    </div>      
+    <div class="collapse show ventajas" id="ventajasDesventajas">
+      <div id="ventajas-container">
+       <!-- <div id="ventaja-1"  class="ventajasClass">
+            <input type="text" class="item-ventajas nombreVentaja" placeholder="Nombre de la ventaja" class="nombre-ventaja">
+            <button class="btn btn-danger eliminar-item-ventajas" onclick="eliminarVentaja(1)">Eliminar</button>
+        </div>-->
+      
+        
+      </div>
+      <div>
+        <button class="agregar-ventaja" id="agregar-ventaja">Agregar Ventaja</button>
+     </div>
+
+    </div>
+
+      </main>
+    </div>          
+    <div class="guardarCambios">
+    <button type="button" class="btn btn-success" id="guardarPersonajeBtn">crear personaje</button>
+    </div> 
+  
+      <!--quite el footer momentaneamente-->
+      <footer >@ ZNK-2024</footer>
+      <!--Script de Bootstrap-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+      </script> 
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script src="classPj.js"></script>    
+      <script src="crearPj.js"></script>
+  </body>
+</html>
