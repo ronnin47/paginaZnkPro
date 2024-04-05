@@ -47,6 +47,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Establece el motor de vistas como EJS
 app.set('view engine', 'ejs');
 
+
 // Ruta de inicio que renderiza el archivo index.ejs
 app.get('/', (req, res) => {
     res.render('index'); // Renderiza el archivo index.ejs
