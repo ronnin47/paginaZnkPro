@@ -1,13 +1,14 @@
-.miBarraVida{
+.miBarraVida {
     background-color: rgb(251, 229, 33);
     width: 80%; 
-    height: 25px;
+    height:25px;
     transform: skewX(-25deg);
     font-size: 20px;
     margin-left: 6%;
     margin-top: 10px;  
     text-align: right;      
     color: black;  
+    margin-top: 0px; 
 }
 .miBarraVidaNegativa{
     background-color: rgba(145, 130, 187, 0.959);
@@ -93,6 +94,7 @@
     background-color: black;
 }
 .apertura{
+    border: blanchedalmond solid 3px;
     display: grid;
     grid-template-columns: 35% 65%;
     gap: 0%;   
@@ -236,7 +238,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #F0F0F0;
+    background: linear-gradient(to bottom, #add8e6, #ffffff);
     background-size: cover;  
     background-position: center; 
     background-repeat: no-repeat; 
@@ -276,14 +278,6 @@ footer {
 .fas:hover{
   color: greenyellow;
 }
-.miBarraVida {
-    position: relative;
-    height: 20px;
-    background-color: rgb(251, 229, 33);
-    width: 80%;
-    margin-left: 6%;
-    margin-top: 10px;
-}
 .miBarraVida::before {
     content: '';
     position: absolute;
@@ -304,7 +298,6 @@ footer {
     background: linear-gradient(to right, rgb(0, 0, 0) 1px, transparent 1px); 
     background-size: calc(100% / var(--numeroDivisionesNeg)) 100%; 
 }
-
 .miInputF {
     background-color: rgba(16, 16, 18, 0.625);
     color: rgb(246, 241, 241); 
@@ -384,7 +377,6 @@ footer {
 }
 .nomArma{
     background: linear-gradient(to bottom, #1a1a1a, #4a704a, #91cc52, #c7d3e4);
-
 }
 .nombreVentaja{
     width: 70%;
@@ -392,7 +384,6 @@ footer {
     margin-left: 10%;
     margin-top: 20px;
     text-align: center;
-
 }
 .mi-bodyImagen {
     background-size: cover; 
@@ -405,7 +396,7 @@ footer {
 }
 .izquierda {
     flex: 30%;
-    display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
+    display: flex;
     flex-direction: column; 
     justify-content: center; 
     align-items: center; 
@@ -484,14 +475,14 @@ footer {
 }
 .izquierdaChar{
     flex: 50%;
-    display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
-    flex-direction: column; /* Para centrar verticalmente */ 
+    display: flex; 
+    flex-direction: column; 
     margin-left: 10px;
 }
 .derechaChar{
     flex: 50%;
-    display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
-    flex-direction: column; /* Para centrar verticalmente */
+    display: flex; 
+    flex-direction: column; 
 }
 .caracteristicas{
     margin-top: 1px;
@@ -556,7 +547,7 @@ footer {
     width: 50%;    
 }
 .barras{
-    border: 3px solid black;
+    border: blanchedalmond solid 3px;
     width: 100%;
     height: 100%;
     background-color:rgb(16, 16, 16);  
@@ -594,7 +585,7 @@ footer {
    background-size: cover; 
    background-position: center;
    padding: 2%;
-   border: 3px solid rgb(0, 0, 0);
+   border: blanchedalmond solid 3px;
    align-items: center;
 }
 .tronco input{
