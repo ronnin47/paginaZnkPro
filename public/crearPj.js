@@ -37,7 +37,6 @@ function verificacionEstadoSesion(){
 
 verificacionEstadoSesion();
 
-
 //BOTON CERRAR SESION
 let cerrarSesion=document.getElementById("cerrarSesion");
 cerrarSesion.addEventListener("click",()=>{
@@ -48,226 +47,93 @@ cerrarSesion.addEventListener("click",()=>{
     localStorage.removeItem(`pj`);
     localStorage.removeItem(`permisoUsuario`);
     localStorage.removeItem(`estadoUsuario`);
-    localStorage.removeItem(`pjsJugador`);
+    localStorage.removeItem(`coleccionPj`);
     console.log("sesion cerrada");
     let nombresSesion = document.getElementById('offcanvasDarkNavbarLabel');
     nombresSesion.textContent=`ZNK`;
 })
 
-
-//objeto para guardar dominios y tecnicas
-let pjDominios = {
-    idPersonaje: 0,
-    dominio: [],
-    tecnicas: {}
-};
-
-let ventajasData = {
-    idPersonaje: 0,
-    ventaja: [],  
-};
-
-
-
-const consumirPersonajesBd = async () => {
-    try {   
-        const resp = await fetch(`/basePersonajes`,{
-            method:'GET',
-            headers:{
-                'Content-Type': 'application/json',
-            },
-            
-        }); 
-        
-        if (!resp.ok) {
-            throw new Error(`Error en la solicitud: ${resp.status}`);
-        }
-        const data = await resp.json();
-        data.forEach((pj) => {
-            // Instancia objetos dandoles la clase Pj con los datos obtenidos de la base de datos znk
-            let pjNuevo = new Pj(
-                pj.idpersonaje,
-                pj.nombre,
-                pj.raza,
-                pj.naturaleza,
-                pj.dominio,
-                pj.fuerza,
-                pj.fortaleza,
-                pj.ki,
-                pj.kiActual,
-                pj.faseSalud,
-                pj.vidaTotal,
-                pj.damageActual,
-                pj.ken,
-                pj.kenActual,
-                pj.imagen,
-                pj.destreza,
-                pj.agilidad,
-                pj.sabiduria,
-                pj.sentidos,
-                pj.presencia,
-                pj.principio,
-
-                pj.academisismo,
-                pj.artesMarciales,
-                pj.atletismo,  
-                pj.conBakemono,
-                pj.conDemonio,
-                pj.conEsferas,
-                pj.conEspiritual,
-                pj.forja,
-                pj.medicina,
-                pj.montar,
-                pj.sigilo,
-                pj.pilotear,
-                pj.manejoArma,
-                pj.conObjMagicos,
-                pj.conLeyendas,
-                pj.resCorte,
-                pj.resEnergia,
-                pj.resRayo,
-                pj.resFuego,
-                pj.resFrio,
-                pj.resVeneno,
-                pj.manejoSombras,
-                pj.tratoBakemono,
-                pj.conHechiceria,
-                pj.meditacionEspiritual, 
-                pj.meditacionVital,
-                pj.idusuario_fk,
-                pj.cantFases,
-                pj.fasesPos,
-                pj.fasesNeg
-            );
-            coleccionPj.push(pjNuevo);
-            console.log(coleccionPj)
-        });
-        // Guarda la lista en el localStorage
-        localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));  
-       
-        // Muestra la lista de personajes
-        //mostrarFichas(coleccionPj);
-        console.log("el array tiene dentro: ",coleccionPj);
-    } catch (error) {
-        console.error('Error al obtener personajes:', error);
-    }
-};
-
-
-let sesionIniciada=localStorage.getItem("sesionIniciada");
-//el storage solo se recupera si hay sesion inciada y toma el nombre de usuario
-if(sesionIniciada=="true"){
-    let idusuario=localStorage.getItem("idusuario");
-    consumirPersonajesBd();
-}
-
-
-//async function de INSERT NUEVO PRODUCTO
-async function realizarInsertBbdd(nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi){
-    try{
-        //let idusuario_fk = localStorage.getItem("idusuario");
-        const response= await fetch('/insert',{
-        method:'POST',
-        headers:{
-            'Content-Type': 'application/json',
-        },
-        body:JSON.stringify({
-            
-            nombre:`${nombre}`,
-            raza:`${raza}`,
-            naturaleza:`${naturaleza}`,
-            dominio:`${dominio}`,
-            fuerza:`${fuerza}`,
-            fortaleza:`${fortaleza}`,
-            ki:`${ki}`,
-            kiActual:`${kiActual}`,
-            faseSalud:`${faseSalud}`,
-            vidaTotal:`${vidaTotal}`,
-            damageActual:`${damageActual}`,
-            ken:`${ken}`,
-            kenActual:`${kenActual}`,
-            imagen:`${imagen}`,
-            destreza:`${destreza}`,
-            agilidad:`${agilidad}`,
-            sabiduria:`${sabiduria}`,
-            sentidos:`${sentidos}`,
-            presencia:`${presencia}`,
-            principio:`${principio}`,
-            academisismo:`${academisismo}`,
-            artesMarciales:`${artesMarciales}`,
-            atletismo:`${atletismo}`,  
-            conBakemono:`${conBakemono}`,
-            conDemonio:`${conDemonio}`,
-            conEsferas:`${conEsferas}`,
-            conEspiritual:`${conEspiritual}`,
-            forja:`${forja}`,
-            medicina:`${medicina}`,
-            montar:`${montar}`,
-            sigilo:`${sigilo}`,
-            pilotear:`${pilotear}`,
-            manejoArma:`${manejoArma}`,
-            conObjMagicos:`${conObjMagicos}`,
-            conLeyendas:`${conLeyendas}`,
-            resCorte:`${resCorte}`,
-            resEnergia:`${resEnergia}`,
-            resRayo:`${resRayo}`,
-            resFuego:`${resFuego}`,
-            resFrio:`${resFrio}`,
-            resVeneno:`${resVeneno}`,
-            manejoSombras:`${manejoSombras}`,
-            tratoBakemono:`${tratoBakemono}`,
-            conHechiceria:`${conHechiceria}`,
-            meditacionEspiritual:`${meditacionEspiritual}`, 
-            meditacionVital:`${meditacionVital}`,
-            idusuario_fk: `${idusuario_fk}`,
-            cantFases: `${cantFases}`,
-            fasesPos: `${fasesPos}`,
-            fasesNeg: `${fasesNeg}`,
-            nombreArma: `${nombreArma}`,
-            consumicionKi: `${consumicionKi}`
-
-        })
-        });
-    
-    if(response.ok){
-        //console.log("insert exitoso!!")
-        const jsonResponse = await response.json();
-        console.log("Respuesta del servidor (JSON):", jsonResponse);
-        const idNuevoPersonaje = jsonResponse.idpersonaje;
-        
-        return idNuevoPersonaje;
-    
-    }else{
-        console.error('Error en la solicitud:', response.status);
-        return null;
-    }
-    
-    }catch (error){
-    console.log('Error en la solicitud:', error.message)
-     return null;
-    }    
+//recuperarStorage
+function recuperarStoragePjs(coleccionPj){
+    let coleccionRecuperada = JSON.parse(localStorage.getItem('coleccionPj')) || [];
+    coleccionRecuperada.forEach((pj) => {
+        let pjNuevo = new Pj(
+            pj.idpersonaje,
+            pj.nombre,
+            pj.raza,
+            pj.naturaleza,
+            pj.dominio,
+            pj.fuerza,
+            pj.fortaleza,
+            pj.ki,
+            pj.kiActual,
+            pj.faseSalud,
+            pj.vidaTotal,
+            pj.damageActual,
+            pj.ken,
+            pj.kenActual,
+            pj.imagen,
+            pj.destreza,
+            pj.agilidad,
+            pj.sabiduria,
+            pj.sentidos,
+            pj.presencia,
+            pj.principio,
+            pj.academisismo,
+            pj.artesMarciales,
+            pj.atletismo,  
+            pj.conBakemono,
+            pj.conDemonio,
+            pj.conEsferas,
+            pj.conEspiritual,
+            pj.forja,
+            pj.medicina,
+            pj.montar,
+            pj.sigilo,
+            pj.pilotear,
+            pj.manejoArma,
+            pj.conObjMagicos,
+            pj.conLeyendas,
+            pj.resCorte,
+            pj.resEnergia,
+            pj.resRayo,
+            pj.resFuego,
+            pj.resFrio,
+            pj.resVeneno,
+            pj.manejoSombras,
+            pj.tratoBakemono,
+            pj.conHechiceria,
+            pj.meditacionEspiritual, 
+            pj.meditacionVital,
+            pj.idusuario_fk,
+            pj.cantFases,
+            pj.fasesPos,
+            pj.fasesNeg,
+            pj.nombreArma,
+            pj.consumicionKi
+        );
+        coleccionPj.push(pjNuevo);          
+    });
+    return coleccionPj;
 }
 
 async function guardarPjNuevo(coleccionPj)
 {  
+    coleccionPj=[];
+    coleccionPj=recuperarStoragePjs(coleccionPj);
     console.log(coleccionPj)
     let nombreInput=document.getElementById("nombreInput");
     let nombre=nombreInput.value
-    console.log(nombre);
-    //si ese nombre de personaje ya existe, me va decir que escoja otro nombre
-    // se va fijar si el nombre exite en el array coleccionPj
     let nombreExistente=coleccionPj.find(pj=>pj.nombre.toLowerCase()==nombre.toLowerCase());
-         console.log("el nombre si no existe en coleecionPj es undefined:",nombreExistente);
-     if(nombreExistente){
+    if(nombreExistente){
         Swal.fire({
-            position: "top-center",
+            position: "center",
             icon: "error",
             text: `el nombre de personaje ${nombreExistente.nombre} ya existe!
             Escoje un nuevo nombre.`,
             showConfirmButton: true,
             timer: 2500
-        });
-        //si el nombre no esta registrado me va dejar crear un nuevo personaje
+        })
         }else{
         console.log("pj no existe y se va crear")
         let razaInput=document.getElementById("razaInput");
@@ -433,24 +299,135 @@ async function guardarPjNuevo(coleccionPj)
     parseInt(consumicionKi) || 0
 );
         let idpersonaje=idNuevoPersonaje;
-
-        console.log("no llego a crear objeto")
-        
-        
-     
-       
-
         //si no existe lo creo
         let nuevoPj= new Pj(idpersonaje,nombre,raza,naturaleza,dominio,parseInt(fuerza),parseInt(fortaleza),parseInt(ki),kiActual,faseSalud,vidaTotal,damageActual,parseInt(ken),kenActual,imagen,parseInt(destreza),parseInt(agilidad),parseInt(sabiduria),parseInt(sentidos),parseInt(presencia),parseInt(principio), parseInt(academisismo), parseInt(artesMarciales), parseInt(atletismo),parseInt(conBakemono),parseInt(conDemonio),parseInt(conEsferas),parseInt(conEspiritual),parseInt(forja),parseInt(medicina),parseInt(montar),parseInt(sigilo),parseInt(pilotear),parseInt(manejoArma),parseInt(conObjMagicos),parseInt(conLeyendas),parseInt(resCorte),parseInt(resEnergia),parseInt(resRayo),parseInt(resFuego),parseInt(resFrio),parseInt(resVeneno),parseInt(manejoSombras),parseInt(tratoBakemono),parseInt(conHechiceria),parseInt(meditacionEspiritual),parseInt(meditacionVital),idusuario_fk,parseInt(cantFases),parseInt(fasesPos), parseInt(fasesNeg), nombreArma, parseInt(consumicionKi));        
         coleccionPj.push(nuevoPj);
         console.log(coleccionPj);
-        localStorage.setItem("pj", JSON.stringify(coleccionPj));//guardo 
-       
-       
+        localStorage.setItem("coleccionPj", JSON.stringify(coleccionPj));  
         return idpersonaje
-        }   
+        } 
        
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//objeto para guardar dominios y tecnicas
+let pjDominios = {
+    idPersonaje: 0,
+    dominio: [],
+    tecnicas: {}
+};
+
+let ventajasData = {
+    idPersonaje: 0,
+    ventaja: [],  
+};
+
+
+
+
+//async function de INSERT NUEVO PRODUCTO
+async function realizarInsertBbdd(nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi){
+    try{
+        //let idusuario_fk = localStorage.getItem("idusuario");
+        const response= await fetch('/insert',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify({
+            
+            nombre:`${nombre}`,
+            raza:`${raza}`,
+            naturaleza:`${naturaleza}`,
+            dominio:`${dominio}`,
+            fuerza:`${fuerza}`,
+            fortaleza:`${fortaleza}`,
+            ki:`${ki}`,
+            kiActual:`${kiActual}`,
+            faseSalud:`${faseSalud}`,
+            vidaTotal:`${vidaTotal}`,
+            damageActual:`${damageActual}`,
+            ken:`${ken}`,
+            kenActual:`${kenActual}`,
+            imagen:`${imagen}`,
+            destreza:`${destreza}`,
+            agilidad:`${agilidad}`,
+            sabiduria:`${sabiduria}`,
+            sentidos:`${sentidos}`,
+            presencia:`${presencia}`,
+            principio:`${principio}`,
+            academisismo:`${academisismo}`,
+            artesMarciales:`${artesMarciales}`,
+            atletismo:`${atletismo}`,  
+            conBakemono:`${conBakemono}`,
+            conDemonio:`${conDemonio}`,
+            conEsferas:`${conEsferas}`,
+            conEspiritual:`${conEspiritual}`,
+            forja:`${forja}`,
+            medicina:`${medicina}`,
+            montar:`${montar}`,
+            sigilo:`${sigilo}`,
+            pilotear:`${pilotear}`,
+            manejoArma:`${manejoArma}`,
+            conObjMagicos:`${conObjMagicos}`,
+            conLeyendas:`${conLeyendas}`,
+            resCorte:`${resCorte}`,
+            resEnergia:`${resEnergia}`,
+            resRayo:`${resRayo}`,
+            resFuego:`${resFuego}`,
+            resFrio:`${resFrio}`,
+            resVeneno:`${resVeneno}`,
+            manejoSombras:`${manejoSombras}`,
+            tratoBakemono:`${tratoBakemono}`,
+            conHechiceria:`${conHechiceria}`,
+            meditacionEspiritual:`${meditacionEspiritual}`, 
+            meditacionVital:`${meditacionVital}`,
+            idusuario_fk: `${idusuario_fk}`,
+            cantFases: `${cantFases}`,
+            fasesPos: `${fasesPos}`,
+            fasesNeg: `${fasesNeg}`,
+            nombreArma: `${nombreArma}`,
+            consumicionKi: `${consumicionKi}`
+
+        })
+        });
+    
+    if(response.ok){
+        //console.log("insert exitoso!!")
+        const jsonResponse = await response.json();
+        console.log("Respuesta del servidor (JSON):", jsonResponse);
+        const idNuevoPersonaje = jsonResponse.idpersonaje;
+        
+        return idNuevoPersonaje;
+    
+    }else{
+        console.error('Error en la solicitud:', response.status);
+        return null;
+    }
+    
+    }catch (error){
+    console.log('Error en la solicitud:', error.message)
+     return null;
+    }    
+}
+
+
 
 function calcularTotalTronco(){
     let fuerza=document.getElementById("fuerzaInput");
@@ -649,8 +626,6 @@ document.getElementById("meditacionEspiritualInput").addEventListener("input",()
 document.getElementById("meditacionVitalInput").addEventListener("input",()=>{
    calcularTotalHabilidades();
 }) 
-
-
 document.getElementById("fasesPosInput").addEventListener("input",()=>{
 
     let labelVita=document.getElementById(`vita`)
@@ -672,7 +647,6 @@ document.getElementById("fasesPosInput").addEventListener("input",()=>{
     document.documentElement.style.setProperty('--numeroDivisionesPos', numeroDivisionesPos);
     document.documentElement.style.setProperty('--numeroDivisionesNeg', numeroDivisionesNeg);
 });
-
 document.getElementById("fasesNegInput").addEventListener("input",()=>{
 
     let labelVita=document.getElementById(`vita`)
@@ -695,8 +669,6 @@ document.getElementById("fasesNegInput").addEventListener("input",()=>{
     document.documentElement.style.setProperty('--numeroDivisionesPos', numeroDivisionesPos);
     document.documentElement.style.setProperty('--numeroDivisionesNeg', numeroDivisionesNeg);
 });
-
-
 document.getElementById("fortalezaInput").addEventListener("input",()=>{
     console.log("funciona vitalidad por fortaleza")
     //label vita
@@ -721,8 +693,6 @@ document.getElementById("fortalezaInput").addEventListener("input",()=>{
     document.documentElement.style.setProperty('--numeroDivisionesPos', numeroDivisionesPos);
     document.documentElement.style.setProperty('--numeroDivisionesNeg', numeroDivisionesNeg);
 });
-
-
 document.getElementById("kiInput").addEventListener("input",()=>{
     
     console.log("funciona kiInput");
@@ -773,7 +743,6 @@ document.getElementById("kenInput").addEventListener("input",()=>{
     barraKen.style.width = `100%`;
     barraKen.textContent = `${kenInput}`;
 });
-
 document.getElementById("kenInput").addEventListener("input",()=>{
     console.log("funciona kenInput")
 });
@@ -783,46 +752,47 @@ document.getElementById("kenInput").addEventListener("input",()=>{
 //BOTON PARA GUARDAR PERSONAJE NUEVO
 let guardarPersonajeBtn=document.getElementById("guardarPersonajeBtn");
 guardarPersonajeBtn.addEventListener("click",async ()=>{
-    console.log("funciona boton guardar pj nuevo")
-   let idCapturado= await guardarPjNuevo(coleccionPj); 
-
-
-    //despues de guardar pj nuevo quiero el idpersonaje
-    //let ultimoPersonaje = coleccionPj[coleccionPj.length];
-    //let idpersonaje = ultimoPersonaje.idpersonaje;
-    console.log(idCapturado)
-    //quiero tomar el idpersonaje
-    pjDominios.idPersonaje=idCapturado
-    ventajasData.idPersonaje=idCapturado;
-
-    console.log(pjDominios);
-    //AHORA TENDRIA QUE INSERTAR ESTO EN MI BASE DE DATOS , CON UN POST 
-    console.log(ventajasData);
-    guardarVentajas(ventajasData)
-    enviarVentajasAlServidor(ventajasData)
-
-
-    insertDominiosTecnicas(pjDominios)
-    //aca podriamos ya tener el id para luego llamar a lo siguiente
-
-    Swal.fire({
+   let idCapturado= await guardarPjNuevo(coleccionPj);  
+    if(idCapturado){
+        Swal.fire({
         icon: "success",
         title: `El personaje se guardó con éxito!`,
         showConfirmButton: false,
         timer: 1500
-      }).then(() => {
+        }).then(() => {
         //window.location.href = "misPersonajes.html";
         console.log(idCapturado)
-        window.location.href = `miFicha.html?id=${idCapturado}`; 
-        
-      });
-     
+        window.location.href = `miFicha.html?id=${idCapturado}`;  
+        /*
+            pjDominios.idPersonaje=idCapturado
+            ventajasData.idPersonaje=idCapturado;
+            //AHORA TENDRIA QUE INSERTAR ESTO EN MI BASE DE DATOS , CON UN POST 
+            guardarVentajas(ventajasData)
+            enviarVentajasAlServidor(ventajasData)
+            insertDominiosTecnicas(pjDominios)
+        */           
+        });
+    }  
+    
 })
 
 
 
 
-console.log(coleccionPj);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 window.addEventListener('storage', function (event) {

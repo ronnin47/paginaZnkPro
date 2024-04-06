@@ -1,6 +1,4 @@
-//BOTON INICIAR SESION
-//CON ESTE BOTON QUE ES EL BOTON DEL MODAL DE INCIO SESION, SI LA SESION YA SE ENCUENTRA INICADA EN EL STORAGE
-//SALDRA UN SWAL QUE DIRA UPPS, SI NO ESTA INCIADA LA INICIARA
+
 let btnInicioSesion=document.getElementById("btnInicioSesion");
 btnInicioSesion.addEventListener("click", ()=>{
     let sesionIniciada=localStorage.getItem(`sesionIniciada`);
@@ -135,7 +133,8 @@ async function iniciarSesionUsuario(){
                     timer: 2500
                 });
             console.log(`sesion de ${nombreusuario} iniciada!!`);
-           verificacionEstadoSesion();          
+           verificacionEstadoSesion();
+           consumirPersonajesBd();          
             }else{
                 Swal.fire({
                     position: "top-center",
@@ -239,10 +238,89 @@ window.addEventListener('storage', function (event) {
     }
 });
 
-
-
-
 verificacionEstadoSesion();
 
 
+//vamos por la logica de consumri la base de datos en el index y luego manejarse por storage en tooodo 
+//el resto a menos de que se altere con un guardado
+const consumirPersonajesBd = async () => {
+    try {   
+         //let dataidusuario=localStorage.getItem(`idusuario`);
+        const resp = await fetch(`/misPersonajes`,{
+            method:'GET',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+        }); 
+        if (!resp.ok) {
+            throw new Error(`Error en la solicitud: ${resp.status}`);
+        }
+      const data = await resp.json();
+      console.log("informacion de personajes recuperados: ",data)
+
+        data.forEach((pj) => {
+            let pjNuevo = new Pj(
+                pj.idpersonaje,
+                pj.nombre,
+                pj.raza,
+                pj.naturaleza,
+                pj.dominio,
+                pj.fuerza,
+                pj.fortaleza,
+                pj.ki,
+                pj.kiActual,
+                pj.faseSalud,
+                pj.vidaTotal,
+                pj.damageActual,
+                pj.ken,
+                pj.kenActual,
+                pj.imagen,
+                pj.destreza,
+                pj.agilidad,
+                pj.sabiduria,
+                pj.sentidos,
+                pj.presencia,
+                pj.principio,
+                pj.academisismo,
+                pj.artesMarciales,
+                pj.atletismo,  
+                pj.conBakemono,
+                pj.conDemonio,
+                pj.conEsferas,
+                pj.conEspiritual,
+                pj.forja,
+                pj.medicina,
+                pj.montar,
+                pj.sigilo,
+                pj.pilotear,
+                pj.manejoArma,
+                pj.conObjMagicos,
+                pj.conLeyendas,
+                pj.resCorte,
+                pj.resEnergia,
+                pj.resRayo,
+                pj.resFuego,
+                pj.resFrio,
+                pj.resVeneno,
+                pj.manejoSombras,
+                pj.tratoBakemono,
+                pj.conHechiceria,
+                pj.meditacionEspiritual, 
+                pj.meditacionVital,
+                pj.idusuario_fk,
+                pj.cantFases,
+                pj.fasesPos,
+                pj.fasesNeg,
+                pj.nombreArma,
+                pj.consumicionKi
+            );
+            coleccionPj.push(pjNuevo);          
+        });
+        localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));  
+        //mostrarFichas(coleccionPj);
+        console.log("el array tiene dentro: ",coleccionPj);
+    } catch (error) {
+        console.error('Error al obtener personajes:', error);
+    }
+};
 

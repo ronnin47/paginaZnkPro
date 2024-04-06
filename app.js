@@ -7,31 +7,18 @@ const bcrypt = require('bcrypt');
 const nodemailer= require('nodemailer');
 const morgan= require('morgan');
 const path = require('path');
-// Importa el módulo de socket.io
 const http = require('http');
-const socketIo = require('socket.io');
-const { Socket } = require('dgram');
+
 
 const app=express();
 
 const server = http.createServer(app);
-const io = socketIo(server); // Configura socket.io con tu servidor
 const PORT = process.env.PORT || 3000; // Utiliza el puerto proporcionado por el hosting o el 3000 si no se proporciona ninguno
 
 server.listen(PORT, () => {
   console.log(`El servidor está funcionando en el puerto ${PORT}`);
   console.log(`Servidor es http://localhost:${PORT}`);
 });
-
-io.on("connection",(socket)=>{
-  console.log("el usuario se conecta usando socket")
-  socket.on("disconnect",()=>{
-    console.log("un usuario se desconecto")
-  })
-  socket.on("chat message",(msg)=>{
-   io.emit("chat message",msg)
-  })
-})
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -439,115 +426,6 @@ app.get('/misPersonajes', async (req, res) => {
       res.status(500).send('Error en la consulta de personajes');
   }
 });
-
-// este es el ultimo socket con el que trabajamos
-io.on("connection",(socket)=>{
-  socket.on("actualizarPj", async(pj,dataidusuario)=>{
-    console.log(pj);
-    idusuario_fk=dataidusuario;
-    console.log(idusuario_fk)
-
-    try {
-         const {
-          idpersonaje,
-          nombre,
-          raza,
-          naturaleza,
-          dominio,
-          fuerza,
-          fortaleza,
-          ki,
-          kiActual,
-          faseSalud,
-          vidaTotal,
-          damageActual,
-          ken,
-          kenActual,
-          imagen,
-          destreza,
-          agilidad,
-          sabiduria,
-          sentidos,
-          presencia,
-          principio,
-          academisismo,
-          artesMarciales,
-          atletismo,
-          conBakemono,
-          conDemonio,
-          conEsferas,
-          conEspiritual,
-          forja,
-          medicina,
-          montar,
-          sigilo,
-          pilotear,
-          manejoArma,
-          conObjMagicos,
-          conLeyendas,
-          resCorte,
-          resEnergia,
-          resRayo,
-          resFuego,
-          resFrio,
-          resVeneno,
-          manejoSombras,
-          tratoBakemono,
-          conHechiceria,
-          meditacionEspiritual,
-          meditacionVital,
-          idusuario_fk,
-          cantFases,
-          fasesPos,
-          fasesNeg,
-          nombreArma,
-          consumicionKi
-      } = pj;
-           
-      const queryString = `
-          UPDATE personajes
-          SET nombre=?, raza=?, naturaleza=?, dominio=?, fuerza=?, fortaleza=?, ki=?, kiActual=?, faseSalud=?, vidaTotal=?, damageActual=?, ken=?, kenActual=?, imagen=?, destreza=?, agilidad=?, sabiduria=?, sentidos=?, presencia=?, principio=?, academisismo=?, artesMarciales=?, atletismo=?, conBakemono=?, conDemonio=? , conEsferas=?, conEspiritual=?, forja=?, medicina=?, montar=?, sigilo=?, pilotear=?, manejoArma=?, conObjMagicos=?, conLeyendas=?, resCorte=?, resEnergia=?, resRayo=?, resFuego=?, resFrio=?, resVeneno=?, manejoSombras=?, tratoBakemono=?, conHechiceria=?, meditacionEspiritual=?, meditacionVital=?, idusuario_fk=?, cantFases=?, fasesPos=?, fasesNeg=?, nombreArma=?,consumicionKi=?
-          WHERE idpersonaje=?;
-      `;
-
-console.log("esto es lo que tiene el array",[nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases, fasesPos, fasesNeg,nombreArma, consumicionKi,idpersonaje])
-       
-//dejo el idpersonaje como ultimo parametro
-      connection.query(queryString, [nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,idpersonaje], (err, result) => {
-          if (err) {
-              console.error('Error al ejecutar la consulta:', err);
-            
-          }else{
-             
-              console.log("UPDATE EXITOSO"); 
-          }});
-      // Necesitas hacer la consulta a la base de datos
-       const queryAsync = util.promisify(connection.query).bind(connection);
-
-       const resultado = await queryAsync(`
-       SELECT personajes.*
-       FROM personajes; 
-     `);
-
-       if (resultado.length > 0) {
-         const pjActualizado = resultado;
-         console.log(pjActualizado);
-         io.emit('pjActualizado', pjActualizado);
-       } else {
-         const infoActualizada = resultado;
-         console.log(infoActualizada);
-         console.error('Error en la estructura del resultado de la consulta:', resultado);
-         io.emit('error_en_actualizacion', 'Error al actualizar en el servidor');
-       }
-
-  } catch (error) {
-      console.error('Error en el servidor:', error);
-      res.status(500).send('Error interno del servidor');
-  }
-  })
-
-})
-
 
 //El GET este QUE CONSUME todos los personajes de la base de datos
 app.get('/basePersonajes', async (req, res) => {

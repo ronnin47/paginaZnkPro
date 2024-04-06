@@ -60,8 +60,6 @@ class Pj{
 
     actualizarBarraDeProgreso(){
 
-
-
         if(this.damageActual<=0){
             this.damageActual=0;
         }
@@ -90,12 +88,9 @@ class Pj{
             barraVida.textContent = ``;
             let EtiquetaVitaACtualizado=document.getElementById(`vita-${this.idpersonaje}`);
             EtiquetaVitaACtualizado.innerHTML=`Vitalidad: ${this.damageActual}/ ${this.vidaTotal}`;
-            
-
             if(this.damageActual>this.vidaTotal){
              barraVidaNegativa.textContent = `MUERTO`;
              EtiquetaVitaACtualizado.innerHTML=`Vitalidad: ${this.damageActual}/ ${this.vidaTotal} MUERTO`;
-             
              let muerto=document.getElementById(`${this.idpersonaje}`);
              muerto.classList.add('muerto');
              localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj)); 

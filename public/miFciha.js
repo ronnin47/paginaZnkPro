@@ -1,5 +1,4 @@
-//importacion de io
-const socket = io(); 
+
 let arrayDominiosTecnicas=[];
 //objeto para guardar dominios y tecnicas
 let pjDominios = {
@@ -68,6 +67,7 @@ cerrarSesion.addEventListener("click",()=>{
 })*/
 
 let sesionIniciada=localStorage.getItem("sesionIniciada");
+
 
 //necesitamos consumir todos los personajes de la base
 const consumirPersonajesBd = async () => {
@@ -160,7 +160,6 @@ const consumirPersonajesBd = async () => {
         console.error('Error al obtener personajes:', error);
     }
 };
-
 if(sesionIniciada=="true"){   
     consumirPersonajesBd();
 }
@@ -500,80 +499,7 @@ const consumirVentajas = async () => {
     }
 };
 
-socket.on('pjActualizado', (infoActualizada) => {
-    console.log('Datos actualizados recibidos:', infoActualizada);
-    
-    coleccionPj=infoActualizada;
-    console.log(infoActualizada);
-    coleccionPj=[];
 
-    infoActualizada.forEach((pj) => {
-        // Instancia objetos dandoles la clase Pj con los datos obtenidos de la base de datos znk
-        let pjNuevo = new Pj(
-            pj.idpersonaje,
-            pj.nombre,
-            pj.raza,
-            pj.naturaleza,
-            pj.dominio,
-            pj.fuerza,
-            pj.fortaleza,
-            pj.ki,
-            pj.kiActual,
-            pj.faseSalud,
-            pj.vidaTotal,
-            pj.damageActual,
-            pj.ken,
-            pj.kenActual,
-            pj.imagen,
-            pj.destreza,
-            pj.agilidad,
-            pj.sabiduria,
-            pj.sentidos,
-            pj.presencia,
-            pj.principio,
-
-            pj.academisismo,
-            pj.artesMarciales,
-            pj.atletismo,  
-            pj.conBakemono,
-            pj.conDemonio,
-            pj.conEsferas,
-            pj.conEspiritual,
-            pj.forja,
-            pj.medicina,
-            pj.montar,
-            pj.sigilo,
-            pj.pilotear,
-            pj.manejoArma,
-            pj.conObjMagicos,
-            pj.conLeyendas,
-            pj.resCorte,
-            pj.resEnergia,
-            pj.resRayo,
-            pj.resFuego,
-            pj.resFrio,
-            pj.resVeneno,
-            pj.manejoSombras,
-            pj.tratoBakemono,
-            pj.conHechiceria,
-            pj.meditacionEspiritual, 
-            pj.meditacionVital,
-            pj.idusuario_fk,
-            pj.cantFases,
-            pj.fasesPos,
-            pj.fasesNeg,
-            pj.nombreArma,
-            pj.consumicionKi
-        );
-        coleccionPj.push(pjNuevo);
-    })
-
-
-    mostrarFichas(coleccionPj)
-    //invocamos esto para que consuma la base de datos y muestre los resultados en el dom
-    
-    //consumirPersonajesBd()
-});
 
 
 

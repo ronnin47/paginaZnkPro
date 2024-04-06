@@ -1,5 +1,3 @@
-//importacion de io
-const socket = io();
 //VERIFICA ESTADO DE SESION Y PERMISO PARA HABILITAR LA NAVEGACION EN LAS PAGINAS
 function verificacionEstadoSesion(){
     let sesionIniciada = localStorage.getItem(`sesionIniciada`);
@@ -60,103 +58,10 @@ cerrarSesion.addEventListener("click",()=>{
   
 });
 
-const consumirPersonajesBd = async () => {
-    try {   
-        //let dataidusuario=localStorage.getItem(`idusuario`);
-        const resp = await fetch(`/misPersonajes`,{
-            method:'GET',
-            headers:{
-                'Content-Type': 'application/json',
-            },
-        }); 
-        if (!resp.ok) {
-            throw new Error(`Error en la solicitud: ${resp.status}`);
-        }
-      const data = await resp.json();
-      console.log("informacion de personajes recuperados: ",data)
-
-        data.forEach((pj) => {
-            let pjNuevo = new Pj(
-                pj.idpersonaje,
-                pj.nombre,
-                pj.raza,
-                pj.naturaleza,
-                pj.dominio,
-                pj.fuerza,
-                pj.fortaleza,
-                pj.ki,
-                pj.kiActual,
-                pj.faseSalud,
-                pj.vidaTotal,
-                pj.damageActual,
-                pj.ken,
-                pj.kenActual,
-                pj.imagen,
-                pj.destreza,
-                pj.agilidad,
-                pj.sabiduria,
-                pj.sentidos,
-                pj.presencia,
-                pj.principio,
-                pj.academisismo,
-                pj.artesMarciales,
-                pj.atletismo,  
-                pj.conBakemono,
-                pj.conDemonio,
-                pj.conEsferas,
-                pj.conEspiritual,
-                pj.forja,
-                pj.medicina,
-                pj.montar,
-                pj.sigilo,
-                pj.pilotear,
-                pj.manejoArma,
-                pj.conObjMagicos,
-                pj.conLeyendas,
-                pj.resCorte,
-                pj.resEnergia,
-                pj.resRayo,
-                pj.resFuego,
-                pj.resFrio,
-                pj.resVeneno,
-                pj.manejoSombras,
-                pj.tratoBakemono,
-                pj.conHechiceria,
-                pj.meditacionEspiritual, 
-                pj.meditacionVital,
-                pj.idusuario_fk,
-                pj.cantFases,
-                pj.fasesPos,
-                pj.fasesNeg,
-                pj.nombreArma,
-                pj.consumicionKi
-            );
-            coleccionPj.push(pjNuevo);          
-        });
-        localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));  
-        mostrarFichas(coleccionPj);
-        console.log("el array tiene dentro: ",coleccionPj);
-    } catch (error) {
-        console.error('Error al obtener personajes:', error);
-    }
-};
-
-consumirPersonajesBd();
-
-function mostrarFichas(coleccionPj){
-    fichasCard.innerHTML="";
-    coleccionPj.forEach(pj=>pj.ficha())
-}
-
-socket.on('pjActualizado', (infoActualizada) => {
-    console.log('Datos actualizados recibidos:', infoActualizada);
-    
-    coleccionPj=infoActualizada;
-    console.log(infoActualizada);
-    coleccionPj=[];
-
-    infoActualizada.forEach((pj) => {
-        // Instancia objetos dandoles la clase Pj con los datos obtenidos de la base de datos znk
+//recuperarStorage
+function recuperarStotoragePjs(coleccionPj){
+    let coleccionRecuperada = JSON.parse(localStorage.getItem('coleccionPj')) || [];
+    coleccionRecuperada.forEach((pj) => {
         let pjNuevo = new Pj(
             pj.idpersonaje,
             pj.nombre,
@@ -179,7 +84,6 @@ socket.on('pjActualizado', (infoActualizada) => {
             pj.sentidos,
             pj.presencia,
             pj.principio,
-
             pj.academisismo,
             pj.artesMarciales,
             pj.atletismo,  
@@ -213,13 +117,16 @@ socket.on('pjActualizado', (infoActualizada) => {
             pj.nombreArma,
             pj.consumicionKi
         );
-        coleccionPj.push(pjNuevo);
-    })
+        coleccionPj.push(pjNuevo);          
+    });
+}
 
+function mostrarFichas(coleccionPj){
+    recuperarStotoragePjs(coleccionPj)
+    fichasCard.innerHTML="";
+    coleccionPj.forEach(pj=>pj.ficha())
+}
 
-    mostrarFichas(coleccionPj)
-    //invocamos esto para que consuma la base de datos y muestre los resultados en el dom
-    
-    //consumirPersonajesBd()
-});
+mostrarFichas(coleccionPj)
+
 
