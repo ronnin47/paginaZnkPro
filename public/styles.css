@@ -15,42 +15,6 @@ main {
     margin-top: 3%;
     flex: 1; /* Esto hará que el contenido principal se expanda para ocupar el espacio restante */
 }
-
-footer {
-    padding: 15px;
-    background-color: black;
-    color: #fff;
-    margin-top: auto; /* Asegura que el pie de página esté siempre al final */
-}
-
-
-.miBarraVida{
-    height: 20px;
-    
-    background-color: rgb(251, 229, 33);
-    width: 80%; 
-    height: 25px;
-    transform: skewX(-25deg);
-    font-size: 20px;
-    margin-left: 6%;
-    margin-top: 10px; 
-    color: black;
-        
-}
-
-.miBarraVidaNegativa{
-    height: 20px;
-    background-color: rgba(145, 130, 187, 0.959);
-    width: 80%; 
-    margin-top: 1px;
-    height: 25px;
-    transform: skewX(-25deg);
-    font-size: 20px;
-    margin-left: 5%;
-    margin-bottom: 10px;
-    color: black;
-}
-
 .miBarraKi{
     height: 20px;
     background-color: rgb(251, 229, 33);
@@ -77,26 +41,6 @@ footer {
     color: black;
 }
 
-
-.brillante {
-    color: black;
-    background: linear-gradient(45deg, #0059ff, #00b7ff, #00ffee, #007bff, #003cffb0);
-    background-size: 400% 400%;
-    animation: moverBrillo 5s linear infinite;
-}
-
-
-
-.brillanteRojo {
-    background: linear-gradient(45deg, #ff0000, #ff2200, rgba(255, 132, 0, 0.965), #ff2200, #ff0000,#ff0000 );
-    background-size: 400% 400%;
-    animation: moverBrilloRojo 5s linear infinite;
-    color: black;
-    
-}
-
-
-
 .brillanteKen {
     background: linear-gradient(45deg, #FFD700,#00FF00,#00FF00,#FFD700);
     background-size: 400% 400%;
@@ -104,53 +48,17 @@ footer {
     color: black;
 }
 
-  
-.brillanteNegativa {
-    background: linear-gradient(45deg, rgba(145, 130, 187, 0.5), rgba(145, 130, 187, 0.959), rgba(138, 43, 226, 0.8), rgba(138, 43, 226, 0.8), rgba(145, 130, 187, 0.959));
-    background-size: 400% 400%;
-    animation: moverBrilloNeg 5s linear infinite;
-    color: black;
-}
-
-
 .conten{
     width: 100%;
     height: 100%;  
 }
-
-.imagen {
-  width: 100%;
-  max-height:400px;
-  object-fit: cover;
-}
-
 .barras{
     border: 3px solid black;
     width: 100%;
     height: 100%;
     background-color:rgb(16, 16, 16);   
-    
+  
 }
-
-.botonBarra{
-   margin-top: 0px;
-   margin-left: 5%;
-   margin-right: 5px;
-   margin-bottom: 0px;
-}
-
-.parejo{
-   display: grid;
-    /*grid-template-columns: repeat(2, 1fr);*/
-    grid-template-columns: 40% 40%;
-    gap: 5%;
-}
-
-.barraParejo{
-   display:grid;
-   grid-template-columns: 60% 40%;
-}
-
 .cardInicio{
     font-family:cursive;
     font-size: 16px;
@@ -169,11 +77,9 @@ footer {
     background-size: cover;
     background-position: center;
 }
-
 .circular{
     border-radius: 50%;
 }
-
 .muerto {
     opacity: 0.5;
     background-color: red; /* o el color que prefieras */
@@ -200,52 +106,9 @@ footer {
 .bordeCrearPj{
     border: 50px solid black;
 }
-
-
-.resultado{
-    width: 100%;
-    border: 1px solid #ccc; /* Borde con un color gris claro */
-    padding: 10px; /* Espaciado interno para un aspecto más agradable */
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    font-size: 14px;
-    color:rgb(127, 251, 89);
-    background-color:rgba(0, 0, 0, 0.702);
-
-}
-
-.labelFicha{
-    border: 1px solid #ccc; /* Borde con un color gris claro */
-    padding: 10px; /* Espaciado interno para un aspecto más agradable */
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569); /* Sombra suave */
-    
-    font-size: 12px; /* Tamaño de fuente */
-    width: 80%; /* Ancho fijo o personalizado */
-    background-color: #160505b4; /* Fondo blanco */
-    color: #fcef77; /* Color de texto oscuro */
-    transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves en el borde y la sombra al interactuar */
-    text-align: center; 
-    margin-bottom: 10px;
-}
- 
-.centrame{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: black;
-}
-
-.botonesCollapse{
-    padding: 1px;
-    margin: 5px;
-    
-}
 .fondo{
     background-color: black;
 }
-
-
 .apertura{
     display: grid;
     /*grid-template-columns: repeat(2, 1fr);*/
@@ -254,9 +117,7 @@ footer {
     justify-content: center;
     align-items: center;
     background-color: black;
-
 }
-
 .imagen {
   width: 100%;
   border-radius: 23%;
@@ -342,118 +203,19 @@ footer {
    align-items: center;
    justify-items: center;
    border-radius: 3%;
-
 }
-
 .aptitudesE > div{
-    width: 50%;
-    
+    width: 50%;   
 }
 .aptitudesE input{
     background-image: url('assets2/fondo3\ \(5\).jpg');
     font-family: Impact;
     align-self: center;
 }
-
-
-
-.parejo{
-   display: grid;
-    /*grid-template-columns: repeat(2, 1fr);*/
-    grid-template-columns: 40% 40%;
-    gap: 5%;
-}
-
-.labelParejoIzquierdo{
-   margin: 5%;
-   margin-bottom: 0%;
-  
-}
-
-.labelParejoDerecho{
-   margin: 5%;
-   margin-bottom: 0%;
-}
-.inputParejoIzquierdo{
-   margin-left: 5%;
-   margin-top: 0%;
-   width: 30%;
-}
-.inputParejoDerecho{
-   margin-left: 5%;
-   margin-top: 0%;
-   width: 30%;
-}
-
-.barraParejo{
-   display:grid;
-   grid-template-columns: 60% 40%;
-}
-
-/*TRONCO*/
-.tronco{
-   display: grid;
-   /*grid-template-columns: repeat(2, 1fr);*/
-   grid-template-columns: 12% 12% 76%;
-   gap: 1%;
-   background: linear-gradient(to right, #0e5366, #4CAF50, #a2c0d3);
-   opacity: 0.9;
-   background-size: cover; 
-   background-position: center;
-   padding: 2%;
-   border: 3px solid white;
-   border-radius: 2%;
-   align-items: center;
-}
-
-.tronco input{
-    width: 60%;
-    background-image: url('assets2/fondo3\ \(5\).jpg');
-    text-align: center;
-    font-family: 'Impact';
-}
-
-.tronco label{
-    text-align: center;
-}
-
-.tronco input:hover{
-   color: greenyellow;
-   background-color: black;
-}
-
 .aptitudesE input:hover{
     color: greenyellow;
     background-color: black;
 }
-
-.resultadoR {
-    color: chartreuse;
-    background-color: rgb(16, 16, 16);
-    width: 100px;
-    height: 40px;
-    margin: 5% auto; /* Establece el margen superior e izquierdo a un 5% y el resto a "auto" para centrar horizontalmente */
-    text-align: center;
-    padding: 10px;
-    border-radius: 10%;
-    margin-top: 40%;
-}
-
-.guardarCambios{
-padding: 2%;
-background: black;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 14px;
-position: fixed;
-bottom: 0;
-width: 100%;
-padding: 10px;
-z-index: 1000; 
-}
-
-
 .guardarCambios > button:hover{
 background: linear-gradient(to right, #A9A9A9, #4682B4);
 color:#fff700;
@@ -461,93 +223,22 @@ font-size: 18px;
 font-family: 'Gill Sans';
 border: 3px solid black;
 }
-
-
-
-.muerto:hover {
-    opacity: 1; /* Al pasar el mouse, restauramos la opacidad a 1 */
-}
-
-.presentacion {
-    font-family: 'cursive'; /* Agregué una fuente de respaldo 'sans-serif' */
-    font-size: 22px; /* Cambié a unidades em para hacerlo más escalable */
-    color:black;
-    opacity: 0.9; /* Ajusté la opacidad a 0.9 para hacer el texto más legible */
-    background-color:rgba(172, 255, 47, 0.397);
-    width: 100%;
-    margin-left: 60px;
-    border: 3px solid black;
-    padding: 30px;
-}
-
-
-
-.labelTronco{
-    font-size: 14px;
-    font-weight: bold;
-
-}
 .labelHabilidad{
     font-size: 14px;
     font-weight: bold;
 }
-
 .inputTronco{
-    padding: 1px;
-    
+    padding: 1px; 
 }
 .inputHabilidad{
     padding: 1px;
     text-align: center;
 }
-
-
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-  
-    background-size: cover;  /* Hace que la imagen cubra todo el fondo */
-    background-position: center;  /* Centra la imagen */
-    background-repeat: no-repeat; 
-}
-
-main {
-    margin-top: 3%;
-    flex: 1; /* Esto hará que el contenido principal se expanda para ocupar el espacio restante */
-}
-
 footer {
     padding: 15px;
     background-color: black;
     color: #fff;
     margin-top: auto; /* Asegura que el pie de página esté siempre al final */
-}
-
-
-
-
-
-.barras{
-    border: 3px solid black;
-    width: 100%;
-    height: 100%;
-    background-color:rgb(16, 16, 16);
-
-    
-}
-.botonBarra{
-    margin-top: 0px;
-    margin-left: 5%;
-    margin-right: 5px;
-    margin-bottom: 0px;
-}
-.barraParejo{
-    display:grid;
-    grid-template-columns: 60% 40%;
 }
 .barraParejo2{
     display:grid;
@@ -555,8 +246,6 @@ footer {
     align-items: center;
    
 }
-
-/* Estilo para los inputs pequeños */
 .small-input {
     padding: 8px; /* Ajusta el relleno según sea necesario */
     font-size: 14px; /* Tamaño de fuente */
@@ -585,124 +274,6 @@ footer {
 
 
 
-.miBarraVida {
-    position: relative;
-    height: 20px;
-    background-color: rgb(251, 229, 33);
-    width: 80%;
-    margin-left: 6%;
-    margin-top: 10px;
-}
-
-.miBarraVida::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(to right, rgb(0, 0, 0) 1px, transparent 1px); /* Gradiente para las líneas divisorias */
-    background-size: calc(100% / var(--numeroDivisionesPos)) 100%; /* Tamaño del gradiente */
-}
-
-.miBarraVidaNegativa {
-    position: relative;
-    height: 20px;
-    background-color: rgba(145, 130, 187, 0.959);
-    width: 80%;
-    margin-left: 5%;
-    margin-top: 1px;
-    margin-bottom: 10px;
-}
-
-.miBarraVidaNegativa::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(to right, rgb(0, 0, 0) 1px, transparent 1px); /* Gradiente para las líneas divisorias */
-    background-size: calc(100% / var(--numeroDivisionesNeg)) 100%; /* Tamaño del gradiente */
-}
-
-
-
-
-
-
-.miBarraKi{
-    height: 20px;
-    background-color: rgb(251, 229, 33);
-    width: 80%; 
-    height: 25px;
-    transform: skewX(-25deg);
-    font-size: 20px;
-    margin-left: 5%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.miBarraKen{
-    height: 20px;
-    background-color: rgb(251, 229, 33);
-    width: 80%; 
-    height: 25px;
-    transform: skewX(-25deg);
-    font-size: 20px;
-    margin-left: 5%;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
-
-.miInputF {
-    background-color: rgba(16, 16, 18, 0.625);
-    color: rgb(246, 241, 241); /* Color de texto oscuro */
-    text-align: center;
-    width: 150px; 
-    font-size: 20px;
-    margin-bottom: 0px;
-    margin-top: 10px;
-}
-
-
-.labelFicha{
-    border: 1px solid #ccc; /* Borde con un color gris claro */
-    padding: 10px; /* Espaciado interno para un aspecto más agradable */
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569); /* Sombra suave */
-    
-    font-size: 20px; /* Tamaño de fuente */
-    width: 80%; /* Ancho fijo o personalizado */
-    background-color: #160505b4; /* Fondo blanco */
-    color: #fcef77; /* Color de texto oscuro */
-    transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves en el borde y la sombra al interactuar */
-    text-align: center; 
-    margin-bottom: 10px;
-}
-
-
-.brillante {
-    background: linear-gradient(45deg, #0059ff, #00b7ff, #00ffee, #007bff, #003cffb0);
-    background-size: 400% 400%;
-    animation: moverBrillo 5s linear infinite;
-}
-
-.brillanteRojo {
-    background: linear-gradient(45deg, #ff0000, #ff2200, rgba(255, 132, 0, 0.965), #ff2200, #ff0000,#ff0000 );
-    background-size: 400% 400%;
-    animation: moverBrilloRojo 5s linear infinite;
-    
-}
-
-
-.brillanteNegativa {
-    background: linear-gradient(45deg, rgba(145, 130, 187, 0.5), rgba(145, 130, 187, 0.959), rgba(138, 43, 226, 0.8), rgba(138, 43, 226, 0.8), rgba(145, 130, 187, 0.959));
-    background-size: 400% 400%;
-    animation: moverBrilloNeg 5s linear infinite;
-    
-}
-
 
 
 
@@ -722,6 +293,7 @@ footer {
         background-position: 100% 50%;
     }
 }
+
 @keyframes moverBrilloKen {
     0% {
         background-position: 0 50%;
@@ -740,41 +312,18 @@ footer {
     }
 }
 
-
 .labelKen{
     font-size: 22px;
     font-family: cursive;
     color: white;
-    margin-left: 10%;
-    
+    margin-left: 10%;    
 }
-
-.dominios{
-    border: blanchedalmond solid 3px;
-    background: linear-gradient(to bottom, #1a1a1a, #4a70ab, #c7d3e4);
-    border-radius: 10px;
-}
-.dominioSelect{
-    border: red solid 3px;
-    background: linear-gradient(to bottom, #4a70ab, #c7d3e4);
-    font-family: cursive;
-    color: whitesmoke;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 10px;
-   
-}
-.selector{
-    margin-left: 60%;
-}
-
 
 .ventajas{
     border: blanchedalmond solid 3px;
     background: linear-gradient(to bottom, #1a1a1a, #4a704a, #91cc52, #c7d3e4);
     border-radius: 10px;
 }
-
 
 .ventaja {
     display: grid;
@@ -793,16 +342,6 @@ footer {
     padding: 5px;
 }
 
-.agregar-ventaja {
-    background-color: #4a704a;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 10px;
-}
-
 .agregar-ventaja:hover {
     background-color: #3c603c;
 }
@@ -811,28 +350,16 @@ footer {
     background: linear-gradient(to bottom, #1a1a1a, #4a704a, #91cc52, #c7d3e4);
 
 }
-
-.nombreVentaja{
-    width: 70%;
-    font-family: cursive;
-    margin-left: 10%;
-    margin-top: 20px;
-    text-align: center;
-
-}
-
 .mi-bodyImagen {
     background-image: url('assets/_38ef69d3-6b22-4449-8efd-3040649c0314.jpg'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la URL o la ruta de tu imagen. */
     background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo. */
     background-repeat: no-repeat; /* Evita la repetición de la imagen. */
     background-attachment: fixed; /* Fija la imagen de fondo, para que no se desplace con el contenido. */
 }
-
 .contenedor {
     display: flex;
     justify-content: space-between;
 }
-
 .izquierda {
     flex: 30%;
     display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
@@ -841,7 +368,6 @@ footer {
     align-items: center; /* Centra horizontalmente el contenido */
     margin-left: 10px;
 }
-
 .derecha {
     flex: 60%;
     display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
@@ -851,13 +377,11 @@ footer {
     margin-left: 10px;
     margin-top: 20px;
 }
-
 .mi-input{
     border: 1px solid #ccc; /* Borde con un color gris claro */
     padding: 10px; /* Espaciado interno para un aspecto más agradable */
     border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569); /* Sombra suave */
-    
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569); /* Sombra suave */   
     font-size: 24px; /* Tamaño de fuente */
     width: 250px; /* Ancho fijo o personalizado */
     background-color: #160505b4; /* Fondo blanco */
@@ -865,55 +389,48 @@ footer {
     transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves en el borde y la sombra al interactuar */
     text-align: center;
 }
-
 .mi-input:focus {
     border: 1px solid #007bff; /* Cambio de borde al enfocar el campo */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Cambio de sombra al enfocar el campo */
     outline: none; /* Elimina el borde predeterminado en el enfoque */
-  }
-
+}
 .campo {
     display: block;
     margin-bottom: 10px; /* Espacio entre los campos (puedes ajustarlo según tus preferencias) */
 }
-
 .labelus {
     display: block;
-    margin-top: 5px; /* Espacio entre el input y el label */
+    margin-top: 5px; 
     text-align: center; 
     color: rgb(11, 1, 1);
     font-size: 18px;  
 }
-
 .cajaText {
     width: 80%;
-    height: 300px; /* Tamaño fijo de la caja de texto (ajusta el valor según tus necesidades) */
-    overflow-y: scroll; /* Agrega una barra de desplazamiento vertical cuando el contenido es demasiado grande */
-    border: 1px solid #ccc; /* Agrega un borde de 1 píxel de ancho y color gris claro */
+    height: 300px; 
+    overflow-y: scroll; 
+    border: 1px solid #ccc; 
     padding: 10px; 
     margin-right: 30px;
     color:rgb(127, 251, 89);
     background-color:rgba(0, 0, 0, 0.702);
 }
-
 .resultado{
     width: 100%;
-    border: 1px solid #ccc; /* Borde con un color gris claro */
-    padding: 10px; /* Espaciado interno para un aspecto más agradable */
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    border-radius: 5px; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
     font-size: 16px;
     color:rgb(127, 251, 89);
     background-color:rgba(0, 0, 0, 0.702);
-
 }
 
 .labelFicha{
     border: 1px solid #ccc; /* Borde con un color gris claro */
     padding: 10px; /* Espaciado interno para un aspecto más agradable */
     border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569); /* Sombra suave */
-    
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569); /* Sombra suave */   
     font-size: 20px; /* Tamaño de fuente */
     width: 80%; /* Ancho fijo o personalizado */
     background-color: #160505b4; /* Fondo blanco */
@@ -922,18 +439,6 @@ footer {
     text-align: center; 
     margin-bottom: 10px;
 }
-
-.eliminar-tecnicaEspecial{
-    margin: 10px;
-    margin-left: 90%;
-
-
-}
-
-
-
-
-
 
 
 
@@ -962,8 +467,8 @@ footer {
     font-size: 20px;
     margin-left: 6%;
     margin-top: 10px;  
-    text-align: right;     
-    
+    text-align: right;   
+    color: black;    
 }
 
 
@@ -978,36 +483,10 @@ footer {
     margin-left: 5%;
     margin-bottom: 10px;
     text-align: right;
-    
+    color: black;
 }
 
 
-
-
-
-.miBarraKi{
-    height: 20px;
-    background-color: rgb(251, 229, 33);
-    width: 80%; 
-    height: 25px;
-    transform: skewX(-25deg);
-    font-size: 20px;
-    margin-left: 5%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.miBarraKen{
-    height: 20px;
-    background-color: rgb(251, 229, 33);
-    width: 80%; 
-    height: 25px;
-    transform: skewX(-25deg);
-    font-size: 20px;
-    margin-left: 5%;
-    margin-bottom: 20px;
-    margin-top: 10px;
-}
 
 
 .brillante {
@@ -1068,10 +547,7 @@ footer {
     background-size: 400% 400%;
     animation: moverBrilloRojo 5s linear infinite;
     text-align: right;
-   
-    /*padding-right: 10px;*/
-    
-    
+    color: black;   
 }
 
 @keyframes moverBrilloRojo {
@@ -1129,24 +605,8 @@ footer {
 }
 
 
-.apertura{
-    
-    
 
-    display: grid;
-    /*grid-template-columns: repeat(2, 1fr);*/
-    grid-template-columns: 35% 65%;
-    gap: 0%;   
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-}
 
-.imagen {
-  width: 100%;
-  max-height:400px;
-  object-fit: cover;
-}
 
 .info{
    border: 3px solid black;
@@ -1210,64 +670,30 @@ footer {
     width: 50%;
    
 }
-
-/*APTITUDES ESPECIALIZADAS*/
- 
-.aptitudesE{
-   display: grid;
-   grid-template-columns: 20% 20% 20% 20% 20%;
-   gap: 0%;
-   background: linear-gradient(to right, #A9A9A9, #4682B4);
-   opacity: 0.;
-   background-size: cover; 
-   background-position: center;
-   padding: 2%;
-   align-items: center;
-   justify-items: center;
-
-}
-
 .aptitudesE > div{
-    width: 50%;
-    
+    width: 50%;   
 }
 .aptitudesE input{
     background-image: url('assets2/fondo3\ \(5\).jpg');
     font-family: Impact;
     align-self: center;
 }
-
-.barras{
-    border: 3px solid black;
-    width: 100%;
-    height: 100%;
-    background-color:rgb(16, 16, 16);
-
-    
-}
-
 .botonBarra{
    margin-top: 0px;
    margin-left: 5%;
    margin-right: 5px;
    margin-bottom: 0px;
 }
-
-
-
 .parejo{
    display: grid;
     /*grid-template-columns: repeat(2, 1fr);*/
     grid-template-columns: 40% 40%;
     gap: 5%;
 }
-
 .labelParejoIzquierdo{
    margin: 5%;
-   margin-bottom: 0%;
-  
+   margin-bottom: 0%; 
 }
-
 .labelParejoDerecho{
    margin: 5%;
    margin-bottom: 0%;
@@ -1282,13 +708,10 @@ footer {
    margin-top: 0%;
    width: 30%;
 }
-
 .barraParejo{
    display:grid;
    grid-template-columns: 60% 40%;
 }
-
-/*TRONCO*/
 .tronco{
    display: grid;
    /*grid-template-columns: repeat(2, 1fr);*/
@@ -1302,18 +725,15 @@ footer {
    border: 3px solid rgb(0, 0, 0);
    align-items: center;
 }
-
 .tronco input{
     width: 60%;
     background-image: url('assets2/fondo3\ \(5\).jpg');
     text-align: center;
     font-family: 'Impact';
 }
-
 .tronco label{
     text-align: center;
 }
-
 .tronco input:hover{
     color: greenyellow;
     background-color: black;
@@ -1323,30 +743,11 @@ footer {
     color: greenyellow;
     background-color: black;
 }
-
-.cardInicio{
-    font-family:cursive;
-    font-size: 16px;
-    background: linear-gradient(to right, #0e5366, #7acba5, #a2c0d3);
-    border: 15px solid rgb(18, 18, 18);
-    opacity: 0.97;
-}
-
-.cardhover :hover{
-    transform: scale(1.05);
-}
-
-
 .fondoIndex{
     background-image:url('assets/_74c7cac9-a003-4a3c-8ed8-64c41fa79eb6.jpg');
     background-size: cover;
     background-position: center;
 }
-
-.circular{
-    border-radius: 50%;
-}
-
 .resultadoR {
     color: chartreuse;
     background-color: rgb(16, 16, 16);
@@ -1378,10 +779,7 @@ footer {
     width: 100%;
     padding: 10px;
     z-index: 1000; 
-    }
-
-
-
+}
 
 .guardarCambios > button:hover{
 background: linear-gradient(to right, #A9A9A9, #4682B4);
@@ -1389,17 +787,6 @@ color:#fff700;
 font-size: 20px;
 font-family: 'Gill Sans';
 border: 3px solid black;
-}
-
-.muerto {
-    opacity: 0.5;
-    background-color: red; /* o el color que prefieras */
-    border: 15px solid rgb(166, 43, 43);
-    transition: opacity 0.3s ease-in-out; /* Agregamos una transición para un cambio suave */
-}
-
-.muerto:hover {
-    opacity: 1; /* Al pasar el mouse, restauramos la opacidad a 1 */
 }
 
 .presentacion {
@@ -1415,35 +802,9 @@ border: 3px solid black;
     margin-top: 10px;
 }
 
-.carruselIndex{
-   display: grid;
-   grid-template-columns: 55% 45%;
-   gap: 1%;
-   justify-items: auto;
-   margin-top: 20px;
-   margin-left: 10px;
-}
-
 .labelTronco{
     font-size: 14px;
     font-weight: bold;
-
-}
-.labelHabilidad{
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.small-input {
-    padding: 8px; /* Ajusta el relleno según sea necesario */
-    font-size: 14px; /* Tamaño de fuente */
-    border: 1px solid #ccc; /* Borde del input */
-    border-radius: 5px; /* Bordes redondeados */
-    margin-bottom: 10px; /* Espacio entre los inputs */
-    width: 60px; /* Ancho del input */
-    text-align: center;
-    background-color: black;
-    color: greenyellow;
 }
 
 .fas:hover{
@@ -1454,9 +815,6 @@ border: 3px solid black;
     display: grid;
     grid-template-columns: 20% 80%;
 }
-
-
-
 
 .miBarraVida::before {
     content: '';
@@ -1519,23 +877,16 @@ border: 3px solid black;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    background-color: black;
-    
+    background-color: black;  
 }
-
 .margin16{
     margin-top: 16px;
-
 }
-
 .botonesCollapse{
     padding: 1px;
     margin: 5px;
     
 }
-
-
-
 
 .dominios{
     border: blanchedalmond solid 3px;
@@ -1567,17 +918,6 @@ border: 3px solid black;
    
 }
 
-
-
-
-
-.ventajas{
-    border: blanchedalmond solid 3px;
-    background: linear-gradient(to bottom, #1a1a1a, #4a704a, #91cc52, #c7d3e4);
-    border-radius: 10px;
-}
-
-
 .ventaja {
     display: grid;
     grid-template-columns: 70% 10% 10%; /* Dos columnas: una para el nombre y otra para el costo */
@@ -1606,17 +946,12 @@ border: 3px solid black;
     cursor: pointer;
     margin: 10px;
 }
-
 .agregar-ventaja:hover {
     background-color: #3c603c;
 }
-
 .btn{
     color: white;
 }
-
-
-
 .agregar-tecnicaEspecial {
     background-color: #4a704a;
     color: white;
@@ -1626,10 +961,6 @@ border: 3px solid black;
     cursor: pointer;
     margin: 10px;
 }
-
-
-
-
 .tecnicaEspecial {
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -1642,11 +973,9 @@ border: 3px solid black;
     font-family: cursive;
     margin-left: 20px;
     background-color: #1a1a1a88;
-    color: rgb(255, 230, 0);
-    
+    color: rgb(255, 230, 0);  
 }
 .descripcion-tecnicaEspecial {
-
     width: 100%;
     height: 100px; /* Puedes ajustar la altura según necesites */
     min-height: 200px;
@@ -1656,10 +985,7 @@ border: 3px solid black;
     padding: 20px;
     background-color: #1a1a1a73;
     color: yellow;
- 
 }
-
-
 .sistema-tecnicaEspecial{
     width: 100%;
     height: 100px; /* Puedes ajustar la altura según necesites */
@@ -1670,32 +996,22 @@ border: 3px solid black;
     color: yellow;
 
 }
-
 .coste-tecnicaEspecial,
 .tiempoInvo-tecnicaEspecial {
     margin-top: 10px;
     display: block;
     width: 10%;
 }
-
-
 .nombreEliminar{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-
-
 .eliminar-tecnicaEspecial{
     margin: 0px;
     padding:1%;
     width: 20%;
     margin-left: 80%;
 }
-
-
-
-
-
 .agregar-inventario {
     background-color: #4a704a;
     color: white;
@@ -1705,8 +1021,6 @@ border: 3px solid black;
     cursor: pointer;
     margin: 10px;
 }
-
-
 .item-inventario{
     width: 80%;
     margin: 5px;
@@ -1714,35 +1028,25 @@ border: 3px solid black;
     align-content: center;
     text-align: center;
 }
-
-
 .inventariosClass {
     margin: 10px;
-    display: flex;
-    
+    display: flex;   
     align-items: center;
     justify-content: center;
 }
-
-
-
 .inventarios{
     border: blanchedalmond solid 3px;
     background: linear-gradient(135deg, #333333, #666666, #999999);
     border-radius: 10px;
     font-family: cursive;
-    text-align: center;
-  
+    text-align: center; 
 }
-
-
 .nombreVentaja{
     width: 70%;
     font-family: cursive;
     margin-left: 10%;
     margin-top: 20px;
     text-align: center;
-
 }
 .costeVentaja{
     width: 5%;
@@ -1751,8 +1055,6 @@ border: 3px solid black;
 .idTecnicaEspecialP{
     color: white;
 }
-
-
 .nombre-nueva-tecnicaEspecial{
     font-weight: bold;
     font-size: 22px;
@@ -1765,25 +1067,23 @@ border: 3px solid black;
 }
 .descripcion-nueva-tecnicaEspecial{
     width: 100%;
-    height: 100px; /* Puedes ajustar la altura según necesites */
+    height: 100px; 
     min-height: 200px;
     margin-top: 15px;
     margin-bottom: 15px;
-    resize: vertical; /* Permite ajustar la altura verticalmente */
+    resize: vertical; 
     padding: 20px;
     background-color: #1a1a1a73;
     color: yellow;
-
 }
 .sistema-nueva-tecnicaEspecial{
     width: 100%;
-    height: 100px; /* Puedes ajustar la altura según necesites */
+    height: 100px; 
     margin-bottom: 10px;
-    resize: vertical; /* Permite ajustar la altura verticalmente */
+    resize: vertical; 
     padding: 20px;
     background-color: #1a1a1a88;
     color: yellow;
-
 }
 .eliminar-nueva-tecnicaEspecial{
     margin: 0px;
@@ -1791,16 +1091,15 @@ border: 3px solid black;
     width: 20%;
     margin-left: 80%;
 }
-
 .consumicionKi {
-    width: 150px; /* Ancho del input */
-    height: 40px; /* Altura del input */
-    padding: 10px; /* Espaciado interno */
-    font-size: 16px; /* Tamaño de fuente */
-    border: 2px solid #ccc; /* Borde del input */
-    border-radius: 20px; /* Radio de borde para hacerlo circular */
-    outline: none; /* Quita el resplandor al hacer clic */
-    transition: border-color 0.3s; /* Transición suave para el cambio de color de borde */
+    width: 150px; 
+    height: 40px;
+    padding: 10px; 
+    font-size: 16px; 
+    border: 2px solid #ccc; 
+    border-radius: 20px; 
+    outline: none; 
+    transition: border-color 0.3s; 
     text-align: center; 
     background-color: #98f5f9;
     color:black;

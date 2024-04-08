@@ -326,7 +326,7 @@ async function guardarPjNuevo(coleccionPj)
         let ken=kenInput.value || 0;
         let fuerza=fuerzaInput.value || 0;
         let fortaleza=fortalezaInput.value || 0;
-        let imagen=imagenInput.value || "";
+        let imagen=imagenInput.value || "/assets/plumas.jpg";
         let destreza=destrezaInput.value || 0;
         let agilidad=agilidadInput.value || 0;
         let sabiduria=sabiduriaInput.value || 0;

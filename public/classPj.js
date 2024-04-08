@@ -59,9 +59,6 @@ class Pj{
     }  
 
     actualizarBarraDeProgreso(){
-
-
-
         if(this.damageActual<=0){
             this.damageActual=0;
         }
@@ -70,13 +67,9 @@ class Pj{
         }
         if(this.kenActual<=0){
             this.kenActual=0;
-        }
-
-        
+        }      
         let vidaPositiva=this.fasesPos*this.faseSalud;
-        console.log("VIDA POSITIVA ",vidaPositiva);
         let vidaNegativa=this.fasesNeg*this.faseSalud;
-        console.log("VIDA NEGATIVA ",vidaNegativa);
         this.vidaTotal=(this.fasesPos+this.fasesNeg)*this.faseSalud;
 
         if(this.damageActual>vidaPositiva){
@@ -117,15 +110,9 @@ class Pj{
              EtiquetaVitaACtualizado.innerHTML=`Vitalidad: ${this.damageActual}/ ${this.vidaTotal}`;
              if(this.damageActual<this.vidaTotal){
                  let vivo = document.getElementById(`${this.idpersonaje}`);
-                 
                  vivo.classList.remove('muerto');
-                 console.log(`${this.nombre} esta vivo`);
-                 localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-                 
+                 localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));     
              }
-             
-             
-     
         }
 
      
@@ -147,8 +134,7 @@ class Pj{
         EtiquetaKennACtualizado.innerHTML=`Ken: ${this.kenActual}/ ${this.ken}`;
     }
 
-    ficha(){
-   
+    ficha(){   
                 let nuevaFichaCard = document.createElement("div")
                 nuevaFichaCard.className = "col-sm-12 col-md-6 col-lg-4 col-xxl-3 my-3"         
                 nuevaFichaCard.innerHTML = `<div id="${this.idpersonaje}"  class="card mx-auto cardInicio cardhover" style="width: 18rem;">
@@ -218,6 +204,7 @@ class Pj{
 
             //BOTON CARGAR DAÑO solo para personaje 0
             botonCargarDaño.addEventListener('click', () => {
+                event.preventDefault();
               if(this.damageActual>this.vidaTotal){
                     newDamage = parseInt(inputDamage.value)|| 0;
                     this.damageActual=this.damageActual+newDamage                    
@@ -244,20 +231,32 @@ class Pj{
 
 
             botonCargarKi.addEventListener('click', () => {
-                newKi = parseInt(inputKiGastado.value)|| 0;
-                this.kiActual=this.kiActual+(-newKi) 
+                event.preventDefault();
+                let newKi = parseInt(inputKiGastado.value) || 0;
+                console.log(newKi);
+                this.kiActual = this.kiActual - newKi;
+                // Verificar si se gastó más ki del que se tenía y actualizar la consumición de ki
+                if (newKi > 0 && this.kiActual < 0) {
+                    this.consumicionKi = this.consumicionKi + (newKi + this.kiActual); // Agregar la diferencia a consumiciónKi
+                    this.kiActual = 0; // Establecer kiActual a cero ya que no puede ser negativo
+                } else if (newKi > 0 && this.kiActual >= 0) {
+                    this.consumicionKi = this.consumicionKi + newKi;
+                }
+
+                // Guardar cambios en localStorage y actualizar la interfaz si es necesario
+                if (newKi > 0 && this.kiActual >= 0) {
+                    localStorage.setItem("coleccionPj", JSON.stringify(coleccionPj));
+                    console.log(`Cambios guardados`);
+                    this.actualizarPj();
+                }
                 this.actualizarBarraDeProgreso()
-                inputKiGastado.value=""; 
-                inputKiGastado.focus();
                 console.log(`el Ki actual de ${this.nombre} es ${this.kiActual}`);
-                
                 localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-                console.log(`cambios guardados`)
                 this.actualizarPj();
-                
             });
 
             botonCargarKen.addEventListener('click', () => {
+                event.preventDefault();
                 newKen = parseInt(inputKenGastado.value)|| 0;
                 console.log(newKen)            
                 this.kenActual=this.kenActual+(-newKen)               
@@ -692,6 +691,7 @@ class Pj{
             this.actualizarBarraDeProgreso();
                
             botonCargarDaño.addEventListener('click', () => {
+                event.preventDefault();
             if(this.damageActual>this.vidaTotal){
                     newDamage = parseInt(inputDamage.value) || 0;
                     console.log(newDamage)
@@ -720,10 +720,10 @@ class Pj{
             });
 
             botonCargarKi.addEventListener('click', () => {
+                event.preventDefault();
                 let newKi = parseInt(inputKiGastado.value) || 0;
                 console.log(newKi);
                 this.kiActual = this.kiActual - newKi;
-
                 // Verificar si se gastó más ki del que se tenía y actualizar la consumición de ki
                 if (newKi > 0 && this.kiActual < 0) {
                     this.consumicionKi = this.consumicionKi + (newKi + this.kiActual); // Agregar la diferencia a consumiciónKi
@@ -738,39 +738,19 @@ class Pj{
                     console.log(`Cambios guardados`);
                     this.actualizarPj();
                 }
-                            /*
-                                newKi = parseInt(inputKiGastado.value)|| 0;
-                                console.log(newKi);
-                                this.kiActual=this.kiActual+(-newKi);
-
-                                if(newKi>0 && this.kiActual>=0){
-
-                                    this.consumicionKi=this.consumicionKi+newKi;
-                                    localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-                                    console.log(`cambios guardados`);
-                                    this.actualizarPj()
-                                }
-
-                                */
                 this.actualizarBarraDeProgreso()
-                let color="Blue"
-                //tosti(newKen,color);
                 console.log(`el Ki actual de ${this.nombre} es ${this.kiActual}`);
                 localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-                console.log(`cambios guardados`)
-                this.actualizarPj()
+                this.actualizarPj();
             });
 
             botonCargarKen.addEventListener('click', () => {
+                event.preventDefault();
                 newKen = parseInt(inputKenGastado.value)|| 0;
-                console.log(newKen)
                 this.kenActual=this.kenActual+(-newKen)
-                let color="Gold"
                 this.actualizarBarraDeProgreso()
-                //tosti(newKen,color);
                 console.log(`el Ken actual de ${this.nombre} es ${this.kenActual}`);
                 localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-                console.log(`cambios guardados`)
                 this.actualizarPj();
             });
 
@@ -944,7 +924,6 @@ class Pj{
 let guardarCambiosBtn=document.getElementById(`guardarcambiosBtn-${this.idpersonaje}`);
 guardarCambiosBtn.addEventListener("click",()=>{
     console.log("funciona boton de guardar cambios ficha")
-
     //guardarNuevasVentajas();
     //enviarNuevasVentajasAlServidor(); 
 
@@ -956,8 +935,6 @@ guardarCambiosBtn.addEventListener("click",()=>{
     //modifica la ficha y se guarda en el storage y luego renderiza el dom con los cambios
     this.modificarFicha();
     localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-    
-
     //aca viene la parte donde hacemos un update sobre la base de datos
         // *****ACA TENEMOS QUE HACER UN UPDATE
     
@@ -2059,9 +2036,6 @@ async function updateVentaja(idPersonaje, idVentaja, nombre) {
         let meditacionVital=document.getElementById("meditacionVitalInput"); 
         let nombreArma=document.getElementById("nombreArmaInput");
         
-        //let consumicionKi=document.getElementById(`inputConsumicionKi-${this.idpersonaje}`);
-       // let consumicionKi=document.getElementById(`inputConsumicionKi`);
-
         this.nombre=nombre.value;
         this.raza=raza.value;
         this.dominio=dominio.value;
@@ -2106,7 +2080,7 @@ async function updateVentaja(idPersonaje, idVentaja, nombre) {
         this.nombreArma=nombreArma.value;
         this.faseSalud=this.fortaleza+this.ki;
         this.vidaTotal=this.faseSalud*3;
-        this.kiActual=this.ki;
+        this.kiActual=this.kiActual;
         this.kenActual=this.ken;
 
         localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj)); 
