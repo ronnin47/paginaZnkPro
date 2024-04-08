@@ -4,16 +4,15 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    
     background-image:  url('/assets/_38ef69d3-6b22-4449-8efd-3040649c0314.jpg');
-    background-size: cover;  /* Hace que la imagen cubra todo el fondo */
-    background-position: center;  /* Centra la imagen */
-    background-repeat: no-repeat; 
+    background-size: cover;  
+    background-position: center;  
+    background-repeat: no-repeat;
+    font-size: 16px; 
 }
-
 main {
     margin-top: 3%;
-    flex: 1; /* Esto hará que el contenido principal se expanda para ocupar el espacio restante */
+    flex: 1; 
 }
 .miBarraKi{
     height: 20px;
@@ -27,7 +26,6 @@ main {
     margin-bottom: 10px;
     color: black;
 }
-
 .miBarraKen{
     height: 20px;
     background-color: rgb(251, 229, 33);
@@ -40,14 +38,12 @@ main {
     margin-top: 10px;
     color: black;
 }
-
 .brillanteKen {
     background: linear-gradient(45deg, #FFD700,#00FF00,#00FF00,#FFD700);
     background-size: 400% 400%;
     animation: moverBrilloKen 5s linear infinite;
     color: black;
 }
-
 .conten{
     width: 100%;
     height: 100%;  
@@ -56,8 +52,7 @@ main {
     border: 3px solid black;
     width: 100%;
     height: 100%;
-    background-color:rgb(16, 16, 16);   
-  
+    background-color:rgb(16, 16, 16);    
 }
 .cardInicio{
     font-family:cursive;
@@ -66,12 +61,9 @@ main {
     border: 15px solid rgb(18, 18, 18);
     opacity: 0.97;
 }
-
 .cardhover :hover{
     transform: scale(1.05);
 }
-
-
 .fondoMisPersonajes{
     background-image:url('assets/_74c7cac9-a003-4a3c-8ed8-64c41fa79eb6.jpg');
     background-size: cover;
@@ -82,27 +74,20 @@ main {
 }
 .muerto {
     opacity: 0.5;
-    background-color: red; /* o el color que prefieras */
+    background-color: red; 
     border: 15px solid rgb(166, 43, 43);
-    transition: opacity 0.3s ease-in-out; /* Agregamos una transición para un cambio suave */
+    transition: opacity 0.3s ease-in-out; 
 }
-
 .muerto:hover {
-    opacity: 1; /* Al pasar el mouse, restauramos la opacidad a 1 */
+    opacity: 1; 
 }
-
 .presentacionUser{
     color: greenyellow;
     opacity: 0.9;
 }
-
 .fondoCardUsuarios{
     background-color: black;
 }
-
-
-
-
 .bordeCrearPj{
     border: 50px solid black;
 }
@@ -111,7 +96,6 @@ main {
 }
 .apertura{
     display: grid;
-    /*grid-template-columns: repeat(2, 1fr);*/
     grid-template-columns: 35% 65%;
     gap: 0%;   
     justify-content: center;
@@ -124,7 +108,6 @@ main {
   max-height:400px;
   object-fit: cover;
 }
-
 .info{
    border: 3px solid white;
    border-radius: 2%;
@@ -137,13 +120,10 @@ main {
    font-family:'Times New Roman';
    font-size: 16px;
    color:rgb(8, 9, 9);
-
 }
-
 .info::placeholder {
-    color: white; /* Establece el color del texto de marcador de posición en blanco */
+    color: white; 
 }
-
 .inputSegundaFicha{
    padding: 0px;
    width: 90%;
@@ -152,9 +132,7 @@ main {
    font-size: 16px;
    text-align: center;  
 }
-
-.inputSegundaFicha1{
-   
+.inputSegundaFicha1{  
    padding: 0px;
    width: 70%;
    background-color: rgba(31, 31, 30, 0.697);
@@ -163,19 +141,6 @@ main {
    text-align: center;
    margin-top: 1px;
 }
-
-.inputSegundaFicha2{
-   padding: 0px;
-   width: 20%;
-   background-color: rgba(31, 31, 30, 0.697);
-   color:aliceblue;
-   font-size: 16px;
-   text-align: center;
-   margin-bottom: 0px;
-}
-
-
-/*APTITUDES*/
 .aptitudes{
     display: grid;
     grid-template-columns: 33% 33% 33%; 
@@ -183,14 +148,9 @@ main {
     justify-items: center;
     gap: 0%;
 }
-
 .aptitudes > div{
-    width: 50%;
-   
+    width: 50%;  
 }
-
-/*APTITUDES ESPECIALIZADAS*/
- 
 .aptitudesE{
    display: grid;
    grid-template-columns: 20% 20% 20% 20% 20%;
@@ -216,13 +176,6 @@ main {
     color: greenyellow;
     background-color: black;
 }
-.guardarCambios > button:hover{
-background: linear-gradient(to right, #A9A9A9, #4682B4);
-color:#fff700;
-font-size: 18px;
-font-family: 'Gill Sans';
-border: 3px solid black;
-}
 .labelHabilidad{
     font-size: 14px;
     font-weight: bold;
@@ -238,45 +191,27 @@ footer {
     padding: 15px;
     background-color: black;
     color: #fff;
-    margin-top: auto; /* Asegura que el pie de página esté siempre al final */
+    margin-top: auto; 
 }
 .barraParejo2{
     display:grid;
     grid-template-columns: 20% 20% 20% 40%;
-    align-items: center;
-   
+    align-items: center;  
 }
 .small-input {
-    padding: 8px; /* Ajusta el relleno según sea necesario */
-    font-size: 14px; /* Tamaño de fuente */
-    border: 1px solid #ccc; /* Borde del input */
-    border-radius: 5px; /* Bordes redondeados */
-    margin-bottom: 10px; /* Espacio entre los inputs */
-    width: 60px; /* Ancho del input */
+    padding: 8px; 
+    font-size: 14px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    margin-bottom: 10px;
+    width: 60px; 
     text-align: center;
     background-color: black;
     color: greenyellow;
 }
-
 .fas:hover{
   color: greenyellow;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @keyframes moverBrillo {
     0% {
         background-position: 0 50%;
@@ -293,7 +228,6 @@ footer {
         background-position: 100% 50%;
     }
 }
-
 @keyframes moverBrilloKen {
     0% {
         background-position: 0 50%;
@@ -302,7 +236,6 @@ footer {
         background-position: 100% 50%;
     }
 }
-
 @keyframes moverBrilloNeg {
     0% {
         background-position: 0 50%;
@@ -311,50 +244,34 @@ footer {
         background-position: 100% 50%;
     }
 }
-
 .labelKen{
     font-size: 22px;
     font-family: cursive;
     color: white;
     margin-left: 10%;    
 }
-
 .ventajas{
     border: blanchedalmond solid 3px;
     background: linear-gradient(to bottom, #1a1a1a, #4a704a, #91cc52, #c7d3e4);
     border-radius: 10px;
 }
-
 .ventaja {
     display: grid;
-    grid-template-columns: 60% 15% 10%; /* Dos columnas: una para el nombre y otra para el costo */
+    grid-template-columns: 60% 15% 10%; 
     align-items: center;
-    gap: 10px; /* Espacio entre los elementos */
+    gap: 10px; 
 }
-
-.nombre-ventaja {
-    padding: 5px;
-    margin: 10px;
-    margin-left: 10%;
-}
-
-.input-coste {
-    padding: 5px;
-}
-
 .agregar-ventaja:hover {
     background-color: #3c603c;
 }
-
 .nomArma{
     background: linear-gradient(to bottom, #1a1a1a, #4a704a, #91cc52, #c7d3e4);
-
 }
 .mi-bodyImagen {
-    background-image: url('assets/_38ef69d3-6b22-4449-8efd-3040649c0314.jpg'); /* Reemplaza 'ruta_de_la_imagen.jpg' con la URL o la ruta de tu imagen. */
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo. */
-    background-repeat: no-repeat; /* Evita la repetición de la imagen. */
-    background-attachment: fixed; /* Fija la imagen de fondo, para que no se desplace con el contenido. */
+    background-image: url('assets/_38ef69d3-6b22-4449-8efd-3040649c0314.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-attachment: fixed;
 }
 .contenedor {
     display: flex;
@@ -362,41 +279,41 @@ footer {
 }
 .izquierda {
     flex: 30%;
-    display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
-    flex-direction: column; /* Para centrar verticalmente */
-    justify-content: center; /* Centra verticalmente el contenido */
-    align-items: center; /* Centra horizontalmente el contenido */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
     margin-left: 10px;
 }
 .derecha {
     flex: 60%;
-    display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
-    flex-direction: column; /* Para centrar verticalmente */
-    justify-content: center; /* Centra verticalmente el contenido */
-    align-items: center; /* Centra horizontalmente el contenido */
+    display: flex; 
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
     margin-left: 10px;
     margin-top: 20px;
 }
 .mi-input{
-    border: 1px solid #ccc; /* Borde con un color gris claro */
-    padding: 10px; /* Espaciado interno para un aspecto más agradable */
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569); /* Sombra suave */   
-    font-size: 24px; /* Tamaño de fuente */
-    width: 250px; /* Ancho fijo o personalizado */
-    background-color: #160505b4; /* Fondo blanco */
-    color: #fcef77; /* Color de texto oscuro */
-    transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves en el borde y la sombra al interactuar */
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    border-radius: 5px; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569);  
+    font-size: 24px; 
+    width: 250px; 
+    background-color: #160505b4;
+    color: #fcef77;
+    transition: border 0.3s, box-shadow 0.3s; 
     text-align: center;
 }
 .mi-input:focus {
-    border: 1px solid #007bff; /* Cambio de borde al enfocar el campo */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Cambio de sombra al enfocar el campo */
-    outline: none; /* Elimina el borde predeterminado en el enfoque */
+    border: 1px solid #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+    outline: none; 
 }
 .campo {
     display: block;
-    margin-bottom: 10px; /* Espacio entre los campos (puedes ajustarlo según tus preferencias) */
+    margin-bottom: 10px; 
 }
 .labelus {
     display: block;
@@ -425,39 +342,19 @@ footer {
     color:rgb(127, 251, 89);
     background-color:rgba(0, 0, 0, 0.702);
 }
-
 .labelFicha{
-    border: 1px solid #ccc; /* Borde con un color gris claro */
-    padding: 10px; /* Espaciado interno para un aspecto más agradable */
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569); /* Sombra suave */   
-    font-size: 20px; /* Tamaño de fuente */
-    width: 80%; /* Ancho fijo o personalizado */
-    background-color: #160505b4; /* Fondo blanco */
-    color: #fcef77; /* Color de texto oscuro */
-    transition: border 0.3s, box-shadow 0.3s; /* Transiciones suaves en el borde y la sombra al interactuar */
+    border: 1px solid #ccc; 
+    padding: 10px; 
+    border-radius: 5px; 
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.569);   
+    font-size: 20px; 
+    width: 80%; 
+    background-color: #160505b4; 
+    color: #fcef77;
+    transition: border 0.3s, box-shadow 0.3s; 
     text-align: center; 
     margin-bottom: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .miBarraVida{
     height: 20px;
     background-color: rgb(251, 229, 33);
@@ -470,8 +367,6 @@ footer {
     text-align: right;   
     color: black;    
 }
-
-
 .miBarraVidaNegativa{
     height: 20px;
     background-color: rgba(145, 130, 187, 0.959);
@@ -485,63 +380,44 @@ footer {
     text-align: right;
     color: black;
 }
-
-
-
-
 .brillante {
     background: linear-gradient(45deg, #0059ff, #00b7ff, #00ffee, #007bff, #003cffb0);
     background-size: 400% 400%;
     animation: moverBrillo 5s linear infinite;
 }
-
-@keyframes moverBrillo {
-    0% {
-        background-position: 0 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-}
-
 .miInputF {
     background-color: rgba(16, 16, 18, 0.625);
-    color: rgb(246, 241, 241); /* Color de texto oscuro */
+    color: rgb(246, 241, 241); 
     text-align: center;
     width: 150px; 
     font-size: 20px;
     margin-bottom: 0px;
     margin-top: 10px;
 }
-
 .datosFicha{
     display: flex;
     justify-content: space-between;
     background-color: rgba(4, 4, 4, 0.625);
-    color: rgb(236, 229, 229); /* Color de texto oscuro */
+    color: rgb(236, 229, 229); 
     width: 90%; 
     font-size: 17px;
     margin-top: 40px;
 }
-
 .izquierdaChar{
     flex: 50%;
-    display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
-    flex-direction: column; /* Para centrar verticalmente */ 
+    display: flex; 
+    flex-direction: column; 
     margin-left: 10px;
 }
-
 .derechaChar{
     flex: 50%;
-    display: flex; /* Utilizamos flexbox para centrar el contenido dentro del div derecho */
-    flex-direction: column; /* Para centrar verticalmente */
+    display: flex; 
+    flex-direction: column; 
 }
-
 .caracteristicas{
     margin-top: 1px;
     font-size: 15px;
 }
-
 .brillanteRojo {
     background: linear-gradient(45deg, #ff0000, #ff2200, rgba(255, 132, 0, 0.965), #ff2200, #ff0000,#ff0000 );
     background-size: 400% 400%;
@@ -549,83 +425,26 @@ footer {
     text-align: right;
     color: black;   
 }
-
-@keyframes moverBrilloRojo {
-    0% {
-        background-position: 0 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-}
-
 .brillanteKen {
     background: linear-gradient(45deg, #FFD700,#00FF00,#00FF00,#FFD700);
     background-size: 400% 400%;
     animation: moverBrilloKen 5s linear infinite;
-}
-
-@keyframes moverBrilloKen {
-    0% {
-        background-position: 0 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-}
-  
+} 
 .brillanteNegativa {
     background: linear-gradient(45deg, rgba(145, 130, 187, 0.5), rgba(145, 130, 187, 0.959), rgba(138, 43, 226, 0.8), rgba(138, 43, 226, 0.8), rgba(145, 130, 187, 0.959));
     background-size: 400% 400%;
     animation: moverBrilloNeg 5s linear infinite;
-    text-align: right;
-   /* padding-right: 10px;*/
-    
-}
-
-@keyframes moverBrilloNeg {
-    0% {
-        background-position: 0 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
+    text-align: right;  
 }
 .conten{
     width: 100%;
     height: 100%;  
 }
-
-
-
 .labels{
    margin-bottom: 0px;
    margin-top: 0px;
    padding: 0px;
 }
-
-
-
-
-
-.info{
-   border: 3px solid black;
-   width: 100%;
-   height: 100%;
-   background-image: url('assets/fondo3\ \(5\).jpg');
-   opacity: 0.;
-   background-size: cover; 
-   background-position: center;
-   font-family:'Times New Roman';
-   font-size: 20px;
-   color:rgb(8, 9, 9);
-
-}
-
-.info::placeholder {
-    color: white; /* Establece el color del texto de marcador de posición en blanco */
-}
-
 .inputSegundaFicha{
    padding: 0px;
    width: 90%;
@@ -634,18 +453,6 @@ footer {
    font-size: 20px;
    text-align: center;  
 }
-
-.inputSegundaFicha1{
-   
-   padding: 0px;
-   width: 70%;
-   background-color: rgba(31, 31, 30, 0.697);
-   color:aliceblue;
-   font-size: 20px;
-   text-align: center;
-   margin-top: 1px;
-}
-
 .inputSegundaFicha2{
    padding: 0px;
    width: 20%;
@@ -655,9 +462,6 @@ footer {
    text-align: center;
    margin-bottom: 0px;
 }
-
-
-/*APTITUDES*/
 .aptitudes{
     display: grid;
     grid-template-columns: 33% 33% 33%; 
@@ -665,10 +469,8 @@ footer {
     justify-items: center;
     gap: 0%;
 }
-
 .aptitudes > div{
-    width: 50%;
-   
+    width: 50%;  
 }
 .aptitudesE > div{
     width: 50%;   
@@ -686,7 +488,6 @@ footer {
 }
 .parejo{
    display: grid;
-    /*grid-template-columns: repeat(2, 1fr);*/
     grid-template-columns: 40% 40%;
     gap: 5%;
 }
@@ -714,7 +515,6 @@ footer {
 }
 .tronco{
    display: grid;
-   /*grid-template-columns: repeat(2, 1fr);*/
    grid-template-columns: 12% 12% 76%;
    gap: 1%;
    background: linear-gradient(to right, #0e5366, #4CAF50, #a2c0d3);
@@ -738,7 +538,6 @@ footer {
     color: greenyellow;
     background-color: black;
 }
-
 .aptitudesE input:hover{
     color: greenyellow;
     background-color: black;
@@ -753,34 +552,27 @@ footer {
     background-color: rgb(16, 16, 16);
     width: 100px;
     height: 40px;
-    margin: 5% auto; /* Establece el margen superior e izquierdo a un 5% y el resto a "auto" para centrar horizontalmente */
+    margin: 5% auto;
     text-align: center;
     padding: 10px;
     border-radius: 10%;
     margin-top: 40%;
 }
-
 .guardarCambios{
     background: linear-gradient(to right, #A9A9A9, #4682B4);
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;    
     padding: 2%;
     background: black;
-    color: white;
-    
-    
-    
-    font-size: 14px;
-        
+    color: white;  
+    font-size: 14px;       
     position: fixed;
     bottom: 0;
     width: 100%;
     padding: 10px;
     z-index: 1000; 
 }
-
 .guardarCambios > button:hover{
 background: linear-gradient(to right, #A9A9A9, #4682B4);
 color:#fff700;
@@ -788,12 +580,11 @@ font-size: 20px;
 font-family: 'Gill Sans';
 border: 3px solid black;
 }
-
 .presentacion {
-    font-family: 'cursive'; /* Agregué una fuente de respaldo 'sans-serif' */
-    font-size: 22px; /* Cambié a unidades em para hacerlo más escalable */
+    font-family: 'cursive'; 
+    font-size: 22px; 
     color:black;
-    opacity: 0.9; /* Ajusté la opacidad a 0.9 para hacer el texto más legible */
+    opacity: 0.9; 
     background-color:rgba(172, 255, 47, 0.397);
     width: 100%;
     margin-left: 60px;
@@ -801,21 +592,17 @@ border: 3px solid black;
     padding: 30px;
     margin-top: 10px;
 }
-
 .labelTronco{
     font-size: 14px;
     font-weight: bold;
 }
-
 .fas:hover{
   color: greenyellow;
 }
-
 .gru{
     display: grid;
     grid-template-columns: 20% 80%;
 }
-
 .miBarraVida::before {
     content: '';
     position: absolute;
@@ -826,8 +613,6 @@ border: 3px solid black;
     background: linear-gradient(to right, black 1px, transparent 1px);
     background-size: calc(100% / var(--numeroDivisionesPos)) 100%; 
 }
-
-
 .miBarraVidaNegativa::before {
     content: '';
     position: absolute;
@@ -836,43 +621,8 @@ border: 3px solid black;
     height: 100%;
     width: 100%;
     background: linear-gradient(to right, black 1px, transparent 1px); 
-    background-size: calc(100% / var(--numeroDivisionesNeg)) 100%; 
-    
+    background-size: calc(100% / var(--numeroDivisionesNeg)) 100%;   
 }
-
-
-
-/*
-.miBarraVida{
-    height: 20px;
-    
-    background-color: rgb(251, 229, 33);
-    width: 80%; 
-    height: 25px;
-    transform: skewX(-25deg);
-    font-size: 20px;
-    margin-left: 6%;
-    margin-top: 10px; 
-    color: black;
-        
-}
-
-.miBarraVidaNegativa{
-    height: 20px;
-    background-color: rgba(145, 130, 187, 0.959);
-    width: 80%; 
-    margin-top: 1px;
-    height: 25px;
-    transform: skewX(-25deg);
-    font-size: 20px;
-    margin-left: 5%;
-    margin-bottom: 10px;
-    color: black;
-}
-*/
-
-
-
 .centrame{
     display: flex;
     justify-content: flex-end;
@@ -885,16 +635,13 @@ border: 3px solid black;
 .botonesCollapse{
     padding: 1px;
     margin: 5px;
-    
 }
-
 .dominios{
     border: blanchedalmond solid 3px;
     background: linear-gradient(to bottom, #1a1a1a, #4a70ab, #c7d3e4);
     border-radius: 10px;
     font-family: cursive;
-    color: whitesmoke;
-    
+    color: whitesmoke;  
 }
 .dominioSelect{
     border: red solid 3px;
@@ -905,38 +652,27 @@ border: 3px solid black;
     margin-top: 10px;
     border-radius: 10px;  
 }
-
 .selector{
     margin-left: 60%;
 }
-
-
-
 .dominioSelect label:hover {
    color: yellow;
-   font-size: 18px;
-   
+   font-size: 18px;  
 }
-
 .ventaja {
     display: grid;
-    grid-template-columns: 70% 10% 10%; /* Dos columnas: una para el nombre y otra para el costo */
     align-items: center;
-    gap: 10px; /* Espacio entre los elementos */
+    gap: 10px; 
 }
-
 .nombre-ventaja {
     padding: 5px;
     margin: 10px;
     margin-left: 10%;
     font-family: cursive;
 }
-
 .input-coste {
-    padding: 5px;
-   
+    padding: 5px;  
 }
-
 .agregar-ventaja {
     background-color: #4a704a;
     color: white;
@@ -977,24 +713,23 @@ border: 3px solid black;
 }
 .descripcion-tecnicaEspecial {
     width: 100%;
-    height: 100px; /* Puedes ajustar la altura según necesites */
+    height: 100px; 
     min-height: 200px;
     margin-top: 15px;
     margin-bottom: 15px;
-    resize: vertical; /* Permite ajustar la altura verticalmente */
+    resize: vertical; 
     padding: 20px;
     background-color: #1a1a1a73;
     color: yellow;
 }
 .sistema-tecnicaEspecial{
     width: 100%;
-    height: 100px; /* Puedes ajustar la altura según necesites */
+    height: 100px; 
     margin-bottom: 10px;
-    resize: vertical; /* Permite ajustar la altura verticalmente */
+    resize: vertical; 
     padding: 20px;
     background-color: #1a1a1a88;
     color: yellow;
-
 }
 .coste-tecnicaEspecial,
 .tiempoInvo-tecnicaEspecial {
@@ -1063,7 +798,6 @@ border: 3px solid black;
     margin-left: 20px;
     background-color: #1a1a1a88;
     color: rgb(255, 230, 0);
-
 }
 .descripcion-nueva-tecnicaEspecial{
     width: 100%;
