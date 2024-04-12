@@ -55,13 +55,53 @@
 
 
 
-    <!--Contenido de main dela pagina-->
-    <main>    
-        <!--Container div row-->
-        <div class="container">
-          <h2 id="mostrarPjs" class="text-success"></h2>
-          <div id="fichasCard" class="row"> </div> 
-        </div>   
+   
+    <main>  
+      
+      <div class="personajesNarrador">
+          <button class="btn btn-danger botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#basePersonajes" aria-expanded="false" aria-controls="basePersonajes">
+            Todos los personajes
+          </button>
+          <button class="btn btn-success botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#sagas" aria-expanded="false" aria-controls="sagas">
+            Crear Saga nueva
+          </button>
+          <button class="btn btn-danger botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#grupos" aria-expanded="false" aria-controls="grupos">
+            Personajes en saga
+          </button>
+
+          <div class="collapse" id="basePersonajes">
+              <div class="container">
+                <h2 id="mostrarPjs" class="text-success"></h2>
+                <div id="fichasCard" class="row mini"> </div> 
+              </div>  
+          </div>          
+
+          <div class="collapse" id="sagas">
+                    <div class="sagas">
+                      <label for="" class="tituloCrearSaga">Titulo</label>
+                      <input type="text" class="inputTituloCrearSaga" id="inputTituloSaga">
+                    
+                    
+                      <label for="" class="labelBuscarPersonaje">buscar personaje</label>
+                      <input type="text" id="inputBuscarPersonaje" class="inputBuscarPersonaje">
+                      <button class="btn btn-primary btnCrearSagaNueva" id="btnCrearSaga">Crear saga</button>
+                      
+                      <div id="pjs" class="container-fluid pjsSumar"></div>
+
+                      <div class="container containerPjCrear">
+                        <h2 id="mostrarPjs" class="text-success"></h2>
+                        <div id="fichasSagas" class="row"> </div> 
+                      </div>  
+
+                    </div>     
+          </div>        
+     
+          <div class="collapse " id="grupos">
+              <div id="gruposSagas" class="contenedorGrupos"></div>         
+          </div>
+     
+      
+      </div>  
     </main>
 
     <footer >@ ZNK-2024</footer>

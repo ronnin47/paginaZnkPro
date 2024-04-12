@@ -677,17 +677,18 @@ app.post('/insert', async (req, res) => {
       fasesPos,
       fasesNeg,
       nombreArma,
-      consumicionKi
+      consumicionKi,
+      imagenFile
     } = req.body;
 
     console.log('Body del POST del cliente:', req.body);
 //aca va ir en el primer campo idpersonaje_fk
     const queryString = `
-      INSERT INTO personajes (nombre, raza, naturaleza, dominio, fuerza, fortaleza, ki, kiActual, faseSalud, vidaTotal, damageActual, ken, kenActual, imagen, destreza, agilidad, sabiduria, sentidos, presencia, principio, academisismo, artesMarciales, atletismo,conBakemono, conDemonio, conEsferas, conEspiritual, forja, medicina, montar, sigilo, pilotear, manejoArma, conObjMagicos, conLeyendas, resCorte, resEnergia, resRayo, resFuego, resFrio, resVeneno, manejoSombras, tratoBakemono, conHechiceria, meditacionEspiritual, meditacionVital, idusuario_fk, cantFases, fasesPos, fasesNeg, nombreArma, consumicionKi)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?);
+      INSERT INTO personajes (nombre, raza, naturaleza, dominio, fuerza, fortaleza, ki, kiActual, faseSalud, vidaTotal, damageActual, ken, kenActual, imagen, destreza, agilidad, sabiduria, sentidos, presencia, principio, academisismo, artesMarciales, atletismo,conBakemono, conDemonio, conEsferas, conEspiritual, forja, medicina, montar, sigilo, pilotear, manejoArma, conObjMagicos, conLeyendas, resCorte, resEnergia, resRayo, resFuego, resFrio, resVeneno, manejoSombras, tratoBakemono, conHechiceria, meditacionEspiritual, meditacionVital, idusuario_fk, cantFases, fasesPos, fasesNeg, nombreArma, consumicionKi,imagenFile)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?);
     `;
 
-    await connection.query(queryString, [nombre, raza, naturaleza, dominio, fuerza, fortaleza, ki, kiActual, faseSalud, vidaTotal, damageActual, ken, kenActual, imagen, destreza, agilidad, sabiduria, sentidos, presencia, principio, academisismo, artesMarciales, atletismo, conBakemono, conDemonio, conEsferas, conEspiritual, forja, medicina, montar, sigilo, pilotear, manejoArma, conObjMagicos, conLeyendas, resCorte, resEnergia, resRayo, resFuego, resFrio, resVeneno, manejoSombras, tratoBakemono, conHechiceria, meditacionEspiritual,meditacionVital, idusuario_fk,cantFases, fasesPos, fasesNeg, nombreArma,consumicionKi], (err, result) => {
+    await connection.query(queryString, [nombre, raza, naturaleza, dominio, fuerza, fortaleza, ki, kiActual, faseSalud, vidaTotal, damageActual, ken, kenActual, imagen, destreza, agilidad, sabiduria, sentidos, presencia, principio, academisismo, artesMarciales, atletismo, conBakemono, conDemonio, conEsferas, conEspiritual, forja, medicina, montar, sigilo, pilotear, manejoArma, conObjMagicos, conLeyendas, resCorte, resEnergia, resRayo, resFuego, resFrio, resVeneno, manejoSombras, tratoBakemono, conHechiceria, meditacionEspiritual,meditacionVital, idusuario_fk,cantFases, fasesPos, fasesNeg, nombreArma,consumicionKi,imagenFile], (err, result) => {
       if (err) {
         console.error('Error al ejecutar la consulta:', err);
         return res.status(500).json({ error: 'Error interno del servidor' });
@@ -1266,3 +1267,139 @@ try {
 });
 
 
+app.post('/insertSaga', async (req, res) => {
+  try {
+      const { nombre, idpersonajes } = req.body;
+
+      console.log('Body del POST del cliente:', req.body);
+
+      // Insertar la saga en la base de datos
+      const insertSagaQuery = `
+          INSERT INTO sagas (nombre)
+          VALUES (?);
+      `;
+
+      await connection.query(insertSagaQuery, [nombre], async (err, result) => {
+          if (err) {
+              console.error('Error al ejecutar la consulta de inserción de saga:', err);
+              return res.status(500).json({ error: 'Error interno del servidor al insertar la saga' });
+          }
+
+          const idSaga = result.insertId; // Obtener el ID de la saga recién insertada
+
+          // Insertar los personajes asociados a la saga en la tabla personajes_sagas
+          const insertPersonajesSagaQuery = `
+              INSERT INTO personajes_sagas (idSaga_fk, idpersonaje_fk)
+              VALUES (?, ?);
+          `;
+
+          for (const idPersonaje of idpersonajes) {
+              await connection.query(insertPersonajesSagaQuery, [idSaga, idPersonaje], (err, result) => {
+                  if (err) {
+                      console.error('Error al ejecutar la consulta de inserción de personaje en saga:', err);
+                      return res.status(500).json({ error: 'Error interno del servidor al insertar personajes en la saga' });
+                  }
+              });
+          }
+
+          res.status(200).json({ message: 'Inserciones exitosas' });
+      });
+  } catch (error) {
+      console.error('Error en el servidor:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+app.get('/misPjsSagas', async (req, res) => {
+  try {    
+      // Utilizamos el método promisify para convertir la función de callback en una función basada en promesas
+      const queryAsync = util.promisify(connection.query).bind(connection);
+      
+      // Realizamos la consulta utilizando el método promisificado
+      const resultado = await queryAsync(`
+          SELECT sagas.nombre AS nombreSaga, sagas.idSaga, GROUP_CONCAT(personajes_sagas.idpersonaje_fk) AS idPersonajes
+          FROM sagas
+          INNER JOIN personajes_sagas ON sagas.idSaga = personajes_sagas.idSaga_fk
+          GROUP BY sagas.idSaga;
+      `);
+
+      if (Array.isArray(resultado)) {
+          
+          const resultadoFormateado = resultado.map(row => ({
+            idSaga: row.idSaga,
+            nombreSaga: row.nombreSaga,
+            idPersonajes: row.idPersonajes.split(',').map(id => parseInt(id))
+        }));
+        console.log(resultadoFormateado)
+        res.json(resultadoFormateado);
+         
+      } else {
+          console.error('Error en la estructura del resultado de la consulta:', resultado);
+          res.status(500).send('Error en la consulta de sagas');
+      }       
+
+  } catch (error) {
+      console.error('Error en la consulta de sagas:', error);
+      res.status(500).send('Error en la consulta de sagas');
+  }
+});
+
+
+
+app.post('/insertPjSaga', async (req, res) => {
+  try {
+      const { idSaga, idpersonaje } = req.body;
+
+      console.log('Body del POST del cliente:', req.body);
+
+      // Insertar la saga en la base de datos
+      const insertPersonajesSagaQuery = `
+      INSERT INTO personajes_sagas (idSaga_fk, idpersonaje_fk)
+      VALUES (?, ?);
+      `;  
+        await connection.query(insertPersonajesSagaQuery, [idSaga, idpersonaje], (err, result) => {
+            if (err) {
+                console.error('Error al ejecutar la consulta de inserción de personaje en saga:', err);
+                return res.status(500).json({ error: 'Error interno del servidor al insertar personajes en la saga' });
+            }
+        });
+
+          res.status(200).json({ message: 'Inserciones exitosas' });
+ 
+  } catch (error) {
+      console.error('Error en el servidor:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+app.delete('/deletePjSaga', async (req, res) => {
+  try {
+      const { idSaga, idpersonaje } = req.body;
+
+      console.log('Body de la solicitud DELETE del cliente:', req.body);
+
+      // Consulta para eliminar el personaje de la saga en la base de datos
+      const deletePersonajeSagaQuery = `
+          DELETE FROM personajes_sagas
+          WHERE idSaga_fk = ? AND idpersonaje_fk = ?;
+      `;
+
+      await connection.query(deletePersonajeSagaQuery, [idSaga, idpersonaje], (err, result) => {
+          if (err) {
+              console.error('Error al ejecutar la consulta de eliminación de personaje en saga:', err);
+              return res.status(500).json({ error: 'Error interno del servidor al eliminar personaje de la saga' });
+          }
+
+          // Verifica si alguna fila fue afectada
+          if (result.affectedRows > 0) {
+              res.status(200).json({ message: 'Eliminación exitosa' });
+          } else {
+              res.status(404).json({ error: 'No se encontró el personaje en la saga' });
+          }
+      });
+
+  } catch (error) {
+      console.error('Error en el servidor:', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});

@@ -163,7 +163,7 @@ if(sesionIniciada=="true"){
 
 
 //async function de INSERT NUEVO PRODUCTO
-async function realizarInsertBbdd(nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi){
+async function realizarInsertBbdd(nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,imagenFile){
     try{
         //let idusuario_fk = localStorage.getItem("idusuario");
         const response= await fetch('/insert',{
@@ -224,7 +224,8 @@ async function realizarInsertBbdd(nombre,raza,naturaleza,dominio,fuerza,fortalez
             fasesPos: `${fasesPos}`,
             fasesNeg: `${fasesNeg}`,
             nombreArma: `${nombreArma}`,
-            consumicionKi: `${consumicionKi}`
+            consumicionKi: `${consumicionKi}`,
+            imagenFile: `${imagenFile}`
 
         })
         });
@@ -278,6 +279,7 @@ async function guardarPjNuevo(coleccionPj)
         let fuerzaInput=document.getElementById("fuerzaInput");
         let fortalezaInput=document.getElementById("fortalezaInput");
         let imagenInput=document.getElementById("imagenInput");
+        //let imagenFileInput=document.getElementById("imagenFile").files[0];
         let destrezaInput=document.getElementById("destrezaInput");
         let agilidadInput=document.getElementById("agilidadInput");
         let sabiduriaInput=document.getElementById("sabiduriaInput");
@@ -327,6 +329,7 @@ async function guardarPjNuevo(coleccionPj)
         let fuerza=fuerzaInput.value || 0;
         let fortaleza=fortalezaInput.value || 0;
         let imagen=imagenInput.value || "/assets/plumas.jpg";
+        let imagenFile="/assets/plumas.jpg";
         let destreza=destrezaInput.value || 0;
         let agilidad=agilidadInput.value || 0;
         let sabiduria=sabiduriaInput.value || 0;
@@ -359,23 +362,19 @@ async function guardarPjNuevo(coleccionPj)
         let conHechiceria=conHechiceriaInput.value || 0;
         let meditacionEspiritual=meditacionEspiritualInput.value || 0;
         let meditacionVital=meditacionVitalInput.value || 0;
-
         let nombreArma=nombreArmaInput.value || "";
         let consumicionKi=0;
-        
-        
+               
         let fasesPos=fasesPosInput.value || 3;
         let fasesNeg=fasesNegInput.value || 3;
         let cantFases=(parseInt(fasesPos)+parseInt(fasesNeg)) || 6;
 
-        let idusuario_fk = localStorage.getItem("idusuario");
-        
+        let idusuario_fk = localStorage.getItem("idusuario");       
         let faseSalud=parseInt(fortaleza)+parseInt(ki);
         let vidaTotal=faseSalud*cantFases;  
         let damageActual=0;
         let kiActual=parseInt(ki);
         let kenActual=parseInt(ken);
-
   
    const idNuevoPersonaje = await realizarInsertBbdd(
     nombre || '',
@@ -428,25 +427,15 @@ async function guardarPjNuevo(coleccionPj)
     parseInt(cantFases) || 6,
     parseInt(fasesPos) || 3,
     parseInt(fasesNeg) || 3,
-
     nombreArma || '',
-    parseInt(consumicionKi) || 0
+    parseInt(consumicionKi) || 0,
+    imagenFile
 );
         let idpersonaje=idNuevoPersonaje;
-
-        console.log("no llego a crear objeto")
-        
-        
-     
-       
-
-        //si no existe lo creo
-        let nuevoPj= new Pj(idpersonaje,nombre,raza,naturaleza,dominio,parseInt(fuerza),parseInt(fortaleza),parseInt(ki),kiActual,faseSalud,vidaTotal,damageActual,parseInt(ken),kenActual,imagen,parseInt(destreza),parseInt(agilidad),parseInt(sabiduria),parseInt(sentidos),parseInt(presencia),parseInt(principio), parseInt(academisismo), parseInt(artesMarciales), parseInt(atletismo),parseInt(conBakemono),parseInt(conDemonio),parseInt(conEsferas),parseInt(conEspiritual),parseInt(forja),parseInt(medicina),parseInt(montar),parseInt(sigilo),parseInt(pilotear),parseInt(manejoArma),parseInt(conObjMagicos),parseInt(conLeyendas),parseInt(resCorte),parseInt(resEnergia),parseInt(resRayo),parseInt(resFuego),parseInt(resFrio),parseInt(resVeneno),parseInt(manejoSombras),parseInt(tratoBakemono),parseInt(conHechiceria),parseInt(meditacionEspiritual),parseInt(meditacionVital),idusuario_fk,parseInt(cantFases),parseInt(fasesPos), parseInt(fasesNeg), nombreArma, parseInt(consumicionKi));        
+        let nuevoPj= new Pj(idpersonaje,nombre,raza,naturaleza,dominio,parseInt(fuerza),parseInt(fortaleza),parseInt(ki),kiActual,faseSalud,vidaTotal,damageActual,parseInt(ken),kenActual,imagen,parseInt(destreza),parseInt(agilidad),parseInt(sabiduria),parseInt(sentidos),parseInt(presencia),parseInt(principio), parseInt(academisismo), parseInt(artesMarciales), parseInt(atletismo),parseInt(conBakemono),parseInt(conDemonio),parseInt(conEsferas),parseInt(conEspiritual),parseInt(forja),parseInt(medicina),parseInt(montar),parseInt(sigilo),parseInt(pilotear),parseInt(manejoArma),parseInt(conObjMagicos),parseInt(conLeyendas),parseInt(resCorte),parseInt(resEnergia),parseInt(resRayo),parseInt(resFuego),parseInt(resFrio),parseInt(resVeneno),parseInt(manejoSombras),parseInt(tratoBakemono),parseInt(conHechiceria),parseInt(meditacionEspiritual),parseInt(meditacionVital),idusuario_fk,parseInt(cantFases),parseInt(fasesPos), parseInt(fasesNeg), nombreArma, parseInt(consumicionKi),imagenFile);        
         coleccionPj.push(nuevoPj);
         console.log(coleccionPj);
-        localStorage.setItem("pj", JSON.stringify(coleccionPj));//guardo 
-       
-       
+        localStorage.setItem("pj", JSON.stringify(coleccionPj));//guardo       
         return idpersonaje
         }   
        
@@ -569,7 +558,6 @@ document.getElementById("principioInput").addEventListener("input",()=>{
 document.getElementById("presenciaInput").addEventListener("input",()=>{
    calcularTotalTronco();
 });
-
 document.getElementById("academisismoInput").addEventListener("input",()=>{
     console.log("dispara el eventos de calcular Habilidades")
    calcularTotalHabilidades();
@@ -724,21 +712,12 @@ document.getElementById("fortalezaInput").addEventListener("input",()=>{
 
 
 document.getElementById("kiInput").addEventListener("input",()=>{
-    
-    console.log("funciona kiInput");
     let kiInput=document.getElementById("kiInput").value;
     let labelKi=document.getElementById(`ki`);
-    labelKi.innerHTML=`Ki: ${kiInput}/${kiInput}`;
-    
+    labelKi.innerHTML=`Ki: ${kiInput}/${kiInput}`; 
     let barraKi = document.getElementById(`barraKi`)
-
-    
-
     barraKi.style.width = `100%`;
     barraKi.textContent = `${kiInput}`;
-
-    
-    //label vita
     let labelVita=document.getElementById(`vita`)
     let fort=document.getElementById("fortalezaInput").value || 0 ;
     
@@ -1133,4 +1112,4 @@ async function enviarVentajasAlServidor(ventajasData) {
 function eliminarVentaja(idVentaja) {
     const ventajaEliminar = document.getElementById("ventaja-" + idVentaja);
     ventajaEliminar.remove();
-}
+};

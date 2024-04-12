@@ -1,4 +1,9 @@
-//importacion de io
+let saga={
+    nombre:"",
+    idpersonaje:[]
+}
+let sagas
+
 const socket = io();
 //VERIFICA ESTADO DE SESION Y PERMISO PARA HABILITAR LA NAVEGACION EN LAS PAGINAS
 function verificacionEstadoSesion(){
@@ -56,8 +61,6 @@ cerrarSesion.addEventListener("click",()=>{
     console.log("sesion cerrada");
     let nombresSesion = document.getElementById('offcanvasDarkNavbarLabel');
     nombresSesion.textContent=`ZNK`;
-   //window.location.href = '/';
-  
 });
 
 const consumirPersonajesBd = async () => {
@@ -135,6 +138,7 @@ const consumirPersonajesBd = async () => {
         });
         localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));  
         mostrarFichas(coleccionPj);
+        //mostrarFichasSagas(coleccionPj);
         console.log("el array tiene dentro: ",coleccionPj);
     } catch (error) {
         console.error('Error al obtener personajes:', error);
@@ -149,14 +153,11 @@ function mostrarFichas(coleccionPj){
 }
 
 socket.on('pjActualizado', (infoActualizada) => {
-    console.log('Datos actualizados recibidos:', infoActualizada);
-    
+    console.log('Datos actualizados recibidos:', infoActualizada);  
     coleccionPj=infoActualizada;
     console.log(infoActualizada);
     coleccionPj=[];
-
     infoActualizada.forEach((pj) => {
-        // Instancia objetos dandoles la clase Pj con los datos obtenidos de la base de datos znk
         let pjNuevo = new Pj(
             pj.idpersonaje,
             pj.nombre,
@@ -179,7 +180,6 @@ socket.on('pjActualizado', (infoActualizada) => {
             pj.sentidos,
             pj.presencia,
             pj.principio,
-
             pj.academisismo,
             pj.artesMarciales,
             pj.atletismo,  
@@ -215,11 +215,237 @@ socket.on('pjActualizado', (infoActualizada) => {
         );
         coleccionPj.push(pjNuevo);
     })
-
-
-    mostrarFichas(coleccionPj)
-    //invocamos esto para que consuma la base de datos y muestre los resultados en el dom
-    
-    //consumirPersonajesBd()
+    localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj)); 
+    mostrarFichas(coleccionPj);
+    let data = JSON.parse(localStorage.getItem("data"));
+    //consumirSagas()
+    gruposSagas.innerHTML="";
+    console.log("paso por el io")
+    mostrarFichasSagas(data)
+   
 });
 
+//nodo
+let pjsLabel=document.getElementById("pjs");
+let inputBuscarPersonaje=document.getElementById("inputBuscarPersonaje");
+inputBuscarPersonaje.addEventListener("input",()=>{
+    let personajeBuscado=inputBuscarPersonaje.value;
+    if (personajeBuscado === "") {
+        fichasSagas.innerHTML = ""; 
+        return; 
+    }
+   
+   
+    fichasSagas.innerHTML="";
+    coleccionPj.forEach(pj=>{
+        
+        if(pj.nombre.toLowerCase().includes(personajeBuscado.toLowerCase())){
+           
+            pj.fichasSaga();
+          
+        }
+    })
+});
+
+//crear saga
+let inputTituloSaga=document.getElementById("inputTituloSaga");
+let btnCrearSaga=document.getElementById("btnCrearSaga");
+inputTituloSaga.addEventListener("input",()=>{
+    saga.nombre=inputTituloSaga.value;
+    console.log(saga);
+})
+
+btnCrearSaga.addEventListener("click",()=>{
+    let inputTituloSaga=document.getElementById("inputTituloSaga");
+    console.log("funciona el boton crear saga")
+    console.log(sagas)
+    
+   
+
+    let nombreSagaExistente = sagas.find(saga => (saga.nombreSaga).toLowerCase() === (inputTituloSaga.value).toLowerCase());
+    if (nombreSagaExistente) {
+        console.log("El nombre de saga ya existe:", inputTituloSaga.value);
+        Swal.fire({
+            icon: "error",
+            title: `El nombre de saga ya existe`,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        return; 
+    }else{
+        //aca vamos a hacer la llamada a la funcion async de insertar saga
+    // luego vamos a limpiar el objeto
+    console.log("personajes de saga ",saga);
+    insertSaga(saga.nombre,saga.idpersonaje);
+    //vacia el objeto
+    saga={
+        nombre:"",
+        idpersonaje:[]
+    }
+    pjsLabel.innerText="";
+    fichasSagas.innerHTML = "";
+    inputTituloSaga.value="";
+    inputBuscarPersonaje.value="";
+    console.log(saga)
+
+    }
+    location.reload();
+
+})
+
+//insetar sagas y personajes en proceso
+async function insertSaga(nombre,idpersonajes){
+    try{
+        //let idusuario_fk = localStorage.getItem("idusuario");
+        const response= await fetch('/insertSaga',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify({
+            
+            nombre:`${nombre}`,
+            idpersonajes:idpersonajes,
+        })
+        });
+    
+    if(response.ok){
+        //console.log("insert exitoso!!")
+        const jsonResponse = await response.json();
+        console.log("Respuesta del servidor (JSON):", jsonResponse);
+        Swal.fire({
+            icon: "success",
+            title: `personaje añadido a la saga`,
+            showConfirmButton: false,
+            timer: 2500
+          })
+    
+    }else{
+        console.error('Error en la solicitud:', response.status);
+        return null;
+    }
+    
+    }catch (error){
+    console.log('Error en la solicitud:', error.message)
+     return null;
+    }    
+}
+
+//consumir sagas y personajes
+const consumirSagas = async () => {
+    try {   
+        //let dataidusuario=localStorage.getItem(`idusuario`);
+        const resp = await fetch(`/misPjsSagas`,{
+            method:'GET',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+        }); 
+        if (!resp.ok) {
+            throw new Error(`Error en la solicitud: ${resp.status}`);
+        }
+      const data = await resp.json();
+      console.log("informacion de SAGAS recuperadas: ",data)
+      document.getElementById("gruposSagas").innerHTML=""
+      localStorage.setItem("data", JSON.stringify(data));
+      mostrarFichasSagas(data)
+
+      sagas=data
+
+
+        
+    } catch (error) {
+        console.error('Error al obtener personajes:', error);
+    }
+};
+
+consumirSagas();
+
+let gruposSagas=document.getElementById("gruposSagas");
+
+function mostrarFichasSagas(data){
+    //fichasCard.innerHTML="";
+    data.forEach(saga => {
+        let idGrupo=saga.idSaga
+        let nombreSaga=saga.nombreSaga
+        console.log("id grupo ",idGrupo)
+        const personajesSaga = coleccionPj.filter(pj => saga.idPersonajes.includes(pj.idpersonaje));
+        console.log(personajesSaga)
+        personajesSaga.forEach(pj=>{
+        pj.gruposSaga(idGrupo,nombreSaga);
+        });
+    });
+
+
+/*
+console.log(coleccionPj)
+
+coleccionPj.forEach(pj=>{
+    if(pj.idpersonaje==data.idPersonajes){
+        pj.gruposSaga()
+    }
+})
+*/
+
+  
+
+};
+
+async function agregarPersonajeSaga(idSaga,idpersonaje){
+    try{
+        const response= await fetch('/insertPjSaga',{
+        method:'POST',
+        headers:{
+            'Content-Type': 'application/json',
+        },
+        body:JSON.stringify({    
+            idSaga:`${idSaga}`,
+            idpersonaje:idpersonaje,
+        })
+        });
+    
+    if(response.ok){
+        console.log("insert exitoso!!")
+        const jsonResponse = await response.json();
+        console.log("Respuesta del servidor (JSON):", jsonResponse);
+        consumirSagas();
+    }else{
+        console.error('Error en la solicitud:', response.status);
+        return null;
+    }
+    
+    }catch (error){
+    console.log('Error en la solicitud:', error.message)
+     return null;
+    }    
+};
+
+
+// eliminarPersonajeSaga(idGrupo,idpersonajeEliminar);
+async function eliminarPersonajeSaga(idSaga, idpersonaje) {
+    try {
+        const response = await fetch('/deletePjSaga', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                idSaga: `${idSaga}`,
+                idpersonaje: idpersonaje,
+            }),
+        });
+    
+        if (response.ok) {
+            console.log("Eliminación exitosa!!");
+            const jsonResponse = await response.json();
+            console.log("Respuesta del servidor (JSON):", jsonResponse);
+            consumirSagas(); // Vuelve a cargar las sagas después de eliminar el personaje
+        } else {
+            console.error('Error en la solicitud:', response.status);
+            return null;
+        }
+    } catch (error) {
+        console.log('Error en la solicitud:', error.message);
+        return null;
+    }
+}

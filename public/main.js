@@ -1,6 +1,3 @@
-//BOTON INICIAR SESION
-//CON ESTE BOTON QUE ES EL BOTON DEL MODAL DE INCIO SESION, SI LA SESION YA SE ENCUENTRA INICADA EN EL STORAGE
-//SALDRA UN SWAL QUE DIRA UPPS, SI NO ESTA INCIADA LA INICIARA
 let btnInicioSesion=document.getElementById("btnInicioSesion");
 btnInicioSesion.addEventListener("click", ()=>{
     let sesionIniciada=localStorage.getItem(`sesionIniciada`);
@@ -98,9 +95,6 @@ async function iniciarSesionUsuario(){
     const contraseniaInput = document.getElementById('contraseña').value;
     let nombreusuario=nombreusuarioInput;
     let contrasenia=contraseniaInput;
-    console.log(nombreusuario);
-    console.log(contrasenia);
-
       try{
             const response= await fetch('/iniciarSesion',{
                 method:'POST',

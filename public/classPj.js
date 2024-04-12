@@ -1,7 +1,7 @@
 let coleccionPj=[];
 
 class Pj{
-    constructor(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi)
+    constructor(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,imagenFile)
       {
      this.idpersonaje=idpersonaje,
      this.nombre=nombre,
@@ -55,7 +55,8 @@ class Pj{
      this.fasesPos=fasesPos,
      this.fasesNeg=fasesNeg,
      this.nombreArma=nombreArma,
-     this.consumicionKi=consumicionKi
+     this.consumicionKi=consumicionKi,
+     this.imagenFile=imagenFile
     }  
 
     actualizarBarraDeProgreso(){
@@ -83,20 +84,15 @@ class Pj{
             barraVida.textContent = ``;
             let EtiquetaVitaACtualizado=document.getElementById(`vita-${this.idpersonaje}`);
             EtiquetaVitaACtualizado.innerHTML=`Vitalidad: ${this.damageActual}/ ${this.vidaTotal}`;
-            
-
             if(this.damageActual>this.vidaTotal){
              barraVidaNegativa.textContent = `MUERTO`;
-             EtiquetaVitaACtualizado.innerHTML=`Vitalidad: ${this.damageActual}/ ${this.vidaTotal} MUERTO`;
-             
+             EtiquetaVitaACtualizado.innerHTML=`Vitalidad: ${this.damageActual}/ ${this.vidaTotal} MUERTO`;            
              let muerto=document.getElementById(`${this.idpersonaje}`);
              muerto.classList.add('muerto');
              localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj)); 
-         }
+            };
      
         }else{
-     
-            //ESTE SE TRATA DE LA BARRA POSITIVA
              let porcentajeDamage = (this.damageActual * 100) / vidaPositiva;
              const barraVida = document.getElementById(`barraVida-${this.idpersonaje}`); 
              barraVida.style.width = `${porcentajeDamage}%`;
@@ -134,11 +130,216 @@ class Pj{
         EtiquetaKennACtualizado.innerHTML=`Ken: ${this.kenActual}/ ${this.ken}`;
     }
 
+    fichasSaga(){
+        let nuevaFichaCard = document.createElement("div");
+        nuevaFichaCard.className = "col-sm-12 col-md-6 col-lg-3 col-xl-3"; // No es necesario añadir la clase de margen aquí
+        
+        // Agregar la clase de margen directamente a la tarjeta individual
+        nuevaFichaCard.innerHTML = `
+            <div id="${this.idpersonaje}" class="card mx-auto cardInicio cardGrupoHover mb-3" style="width: 18rem;"> <!-- Añadir la clase de margen aquí -->
+                <img src="${this.imagen}" height="250px" width="" class="card-img-top circular" alt="${this.nombre} de ${this.dominio}">
+                <div class="card-body mx-auto">
+                    <h5 class="card-Nombre">${this.nombre}</h5>
+                    <p>ID: ${this.idpersonaje}</p>
+                    <p>Raza: ${this.raza}</p>
+                    <p>Naturaleza: ${this.naturaleza}</p>
+                    <p>Dominio: ${this.dominio}</p>
+                    <p id="vita-${this.idpersonaje}">Vitalidad:${this.damageActual}/ ${this.vidaTotal*2}</p>
+                    <p id="ki-${this.idpersonaje}">Ki:${this.kiActual}/ ${this.ki}</p>
+                    <p id="ken-${this.idpersonaje}">Ken:${this.kenActual}/ ${this.ken}</p>
+                    <div style="text-align: center;">
+                        <a class="btn btn-danger" id="abrirFicha" href="miFicha.html?id=${this.idpersonaje}" target="_blank">Abrir ficha</a><br><br>
+                        <button class="btn btn-success" id="btnAgregar-${this.idpersonaje}">Agregar a saga</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        fichasSagas.appendChild(nuevaFichaCard);
+
+        //agregar a saga
+        let btnAgregar=document.getElementById(`btnAgregar-${this.idpersonaje}`);
+        btnAgregar.addEventListener("click",()=>{
+            console.log("funciona el boton de agregar a saga");
+          
+            //tengo que guardar el personaje en arlguna parte
+           //objeto saga, personaje
+           saga.idpersonaje.push(this.idpersonaje);
+           console.log(saga);
+          // pjsLabel.innerText+=`${this.nombre} / `
+             pjsLabel.innerHTML+=` <img src="${this.imagen}" class="imagenMini" alt="${this.nombre} de ${this.dominio}">
+             <h5 class="card-Nombre">${this.nombre}</h5>`
+        });
+
+    }
+
+    gruposSaga(idGrupo, nombreSaga) {
+      
+        if (!document.getElementById(`grupo-${idGrupo}`)) {
+            // Crear un nuevo div para el grupo
+            let divNuevoGrupo = document.createElement("div");
+            divNuevoGrupo.id = `grupo-${idGrupo}`;
+           // divNuevoGrupo.className = "borderGrupo";
+    
+            // Usar innerHTML para construir el contenido del nuevo grupo
+            divNuevoGrupo.innerHTML = `
+            <div class="borderGrupo">
+                <div class="tituloSaga">
+                <h3 class="tituloSaga">SAGA: ${nombreSaga}</h3>
+                <input type="text" id="inputBuscador-${idGrupo}" class="inputBuscador" placeholder="Buscar personaje">
+                <button class="btn btn-success" id="agregarPersonaje-${idGrupo}">Agregar</button>
+                <button class="btn btn-danger" id="eliminarPersonaje-${idGrupo}">Eliminar</button>
+                </div>   
+                <div id="results-${idGrupo}" class="results"></div> 
+                <div id="cards-${idGrupo}" class="ordenCards"></div>
+            </div>
+            `;
+            let gruposSagas=document.getElementById(`gruposSagas`)
+            // Añadir el grupo al elemento principal
+            gruposSagas.appendChild(divNuevoGrupo);
+            let zona=document.getElementById(`results-${idGrupo}`)
+    
+            // Guardar referencias a los elementos para su uso posterior, si es necesario
+            let nombreSagaElement = divNuevoGrupo.querySelector('.tituloSaga');
+            let btnAgregarPj = divNuevoGrupo.querySelector('.btn-success');
+
+            document.getElementById(`inputBuscador-${idGrupo}`).addEventListener("input", () => {
+              
+
+                let buscado = document.getElementById(`inputBuscador-${idGrupo}`).value.toLowerCase();
+                if (buscado.trim() === "") {
+                    zona.innerHTML = ""; // Limpiar modalBody si el campo de entrada está vacío
+                    return; // Detener la función para evitar buscar personajes
+                }
+                let resultados = [];
+            
+                coleccionPj.forEach(pj => {
+                    if (pj.nombre.toLowerCase().includes(buscado)) {
+                        let card = `
+                            <div id="${pj.idpersonaje}" class="card mx-auto cardInicio cardGrupoHover mb-3" style="width: 18rem;">
+                                <img src="${pj.imagen}" height="250px" width="" class="card-img-top circular" alt="${pj.nombre} de ${pj.dominio}">
+                                <div class="card-body mx-auto">
+                                    <h5 class="card-Nombre">${pj.nombre}</h5>
+                                    <p>ID: ${pj.idpersonaje}</p>
+                                    <p>Raza: ${pj.raza}</p>
+                                    <p>Naturaleza: ${pj.naturaleza}</p>
+                                    <p>Dominio: ${pj.dominio}</p>
+                                    <p id="vita-${pj.idpersonaje}">Vitalidad: ${pj.damageActual} / ${pj.vidaTotal * 2}</p>
+                                    <p id="ki-${pj.idpersonaje}">Ki: ${pj.kiActual} / ${pj.ki}</p>
+                                    <p id="ken-${pj.idpersonaje}">Ken: ${pj.kenActual} / ${pj.ken}</p>
+                                </div>
+                            </div>`;
+                        resultados.push(card);
+                    }
+                });
+            
+                // Muestra los resultados si se encontraron
+                if (resultados.length > 0) {
+                    zona.innerHTML = resultados.join('');
+                } else {
+                    zona.innerHTML = `No se encontraron resultados con "${buscado}"`;
+                }
+            });
+
+            document.getElementById(`eliminarPersonaje-${idGrupo}`).addEventListener("click",()=>{
+                console.log("funciona el boton de eliminar personaje del grupo")
+                let nombre=document.getElementById(`inputBuscador-${idGrupo}`).value
+                //necesitamos el id de ese personaje
+                //necesitamos el id grupo
+                let idpersonajeEliminar
+                coleccionPj.forEach(pj=>{
+                    if(pj.nombre.toLowerCase()==nombre.toLowerCase()){
+                        idpersonajeEliminar=pj.idpersonaje
+                    }
+                });
+                if(idpersonajeEliminar){
+                    console.log("ID PERSONAJE A Eliminar: ",idpersonajeEliminar);
+                    console.log("ID PERSONAJE A Eliminar: ",idGrupo);
+                    eliminarPersonajeSaga(idGrupo,idpersonajeEliminar);
+                   
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: `Ingrese nombre valido`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                });
+            }
+
+            document.getElementById(`agregarPersonaje-${idGrupo}`).addEventListener("click",()=>{
+                console.log("funciona el boton de agregar personaje del grupo")
+                let nombre=document.getElementById(`inputBuscador-${idGrupo}`).value
+                //necesitamos el id de ese personaje
+                //necesitamos el id grupo
+                let idpersonajeAgregar
+                coleccionPj.forEach(pj=>{
+                    if(pj.nombre.toLowerCase()==nombre.toLowerCase()){
+                        idpersonajeAgregar=pj.idpersonaje
+                         
+                    }
+                });
+                if(idpersonajeAgregar){
+                    console.log("ID PERSONAJE A AGREGARR: ",idpersonajeAgregar);
+                    console.log("ID PERSONAJE A AGREGAR: ",idGrupo);
+                    agregarPersonajeSaga(idGrupo,idpersonajeAgregar);
+                   
+                }else{
+                    Swal.fire({
+                        icon: "error",
+                        title: `Ingrese nombre valido`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                });
+             
+
+
+
+
+    
+        // Crear una nueva tarjeta (card) para el personaje
+        let nuevaFichaCard = document.createElement("div");
+        nuevaFichaCard.className = "col-sm-12 col-md-6 col-lg-3 col-xl-3";
+    
+        // Crear el contenido HTML de la tarjeta usando innerHTML
+        nuevaFichaCard.innerHTML = `
+            <div id="${this.idpersonaje}" class="card mx-auto cardInicio cardGrupoHover mb-3" style="width: 18rem;">
+                <img src="${this.imagen}" height="250px" width="" class="card-img-top circular" alt="${this.nombre} de ${this.dominio}">
+                <div class="card-body mx-auto">
+                    <h5 class="card-Nombre">${this.nombre}</h5>
+                    <p>Raza: ${this.raza}</p>
+                    <p>Naturaleza: ${this.naturaleza}</p>
+                    <p>Dominio: ${this.dominio}</p>
+                    <p id="vita-${this.idpersonaje}">Vitalidad: ${this.damageActual} / ${this.vidaTotal * 2}</p>
+                    <p id="ki-${this.idpersonaje}">Ki: ${this.kiActual} / ${this.ki}</p>
+                    <p id="ken-${this.idpersonaje}">Ken: ${this.kenActual} / ${this.ken}</p>
+                    <div style="text-align: center;">
+                        <a class="btn btn-danger" id="abrirFicha" href="miFicha.html?id=${this.idpersonaje}" target="_blank">Abrir ficha</a><br><br>
+                    </div>
+                </div>
+            </div>
+        `;
+    
+        // Añadir la tarjeta al contenedor de tarjetas dentro del grupo utilizando el ID `cards-${idGrupo}`
+        let cardsContainer = document.getElementById(`cards-${idGrupo}`);
+        cardsContainer.appendChild(nuevaFichaCard);
+
+
+
+
+       
+}
+
+
     ficha(){   
                 let nuevaFichaCard = document.createElement("div")
                 nuevaFichaCard.className = "col-sm-12 col-md-6 col-lg-4 col-xxl-3 my-3"         
-                nuevaFichaCard.innerHTML = `<div id="${this.idpersonaje}"  class="card mx-auto cardInicio cardhover" style="width: 18rem;">
+                nuevaFichaCard.innerHTML = `<div id="${this.idpersonaje}"  class="card mx-auto cardInicio cardGrupoHover" style="width: 18rem;">
                                                 <img src="${this.imagen}" height="300px" width="" class="card-img-top circular" alt="${this.nombre} de ${this.dominio}">
+                                               
                                                 <div class="card-body mx-auto">
                                                 <h5 class="card-Nombre">${this.nombre}</h5>
                                                 <p>ID: ${this.idpersonaje}</p>
@@ -179,12 +380,45 @@ class Pj{
                                                 </div>
             
                                             </div> `
-                fichasCard.appendChild(nuevaFichaCard)
-       
+            
+/*
+console.log(this.imagenFile.data)
+// Verificar si hay una imagen de archivo disponible
+if (this.imagenFile && this.imagenFile.data) {
+    // Obtener los datos de la imagen
+    var imageData = this.imagenFile;
+
+    // Obtener el ID del personaje
+    var idPersonaje = this.idpersonaje;
+
+    // Convertir los datos de imagen a un Uint8Array
+    var uint8Array = new Uint8Array(imageData.data);
+
+    // Crear un Blob a partir de los datos en Uint8Array
+    var blob = new Blob([uint8Array], { type: 'image/jpeg' }); // Ajusta el tipo según el formato de la imagen
+
+    // Crear un objeto FileReader
+    var reader = new FileReader();
+
+    // Configurar el evento onload del FileReader
+    reader.onload = function(event) {
+        // Establecer la URL de la imagen como el origen de la etiqueta de imagen
+      
+        document.getElementById(`imagenFile-${idPersonaje}`).src = event.target.result;
+    };
+
+    // Leer el contenido del blob como una URL base64
+    reader.readAsDataURL(blob);
+} else {
+    console.error("No se encontraron datos de imagen válidos.");
+}
+   */            
+
+
+                fichasCard.appendChild(nuevaFichaCard)      
                 let newDamage=0;
                 let newKi=0;
                 let newKen=0;
-                
                 let botonCargarDaño= document.getElementById(`btnCargarDaño-${this.idpersonaje}`)
                 let botonCargarKi= document.getElementById(`btnCargarKi-${this.idpersonaje}`)
                 let botonCargarKen= document.getElementById(`btnCargarKen-${this.idpersonaje}`)
@@ -201,8 +435,7 @@ class Pj{
 
             //luego que carga las card les pone el daño y barra de daño guardadas en el storage
             this.actualizarBarraDeProgreso();
-
-            //BOTON CARGAR DAÑO solo para personaje 0
+           
             botonCargarDaño.addEventListener('click', () => {
                 event.preventDefault();
               if(this.damageActual>this.vidaTotal){
@@ -229,21 +462,16 @@ class Pj{
                               
             });
 
-
             botonCargarKi.addEventListener('click', () => {
                 event.preventDefault();
                 let newKi = parseInt(inputKiGastado.value) || 0;
-                console.log(newKi);
                 this.kiActual = this.kiActual - newKi;
-                // Verificar si se gastó más ki del que se tenía y actualizar la consumición de ki
                 if (newKi > 0 && this.kiActual < 0) {
                     this.consumicionKi = this.consumicionKi + (newKi + this.kiActual); // Agregar la diferencia a consumiciónKi
                     this.kiActual = 0; // Establecer kiActual a cero ya que no puede ser negativo
                 } else if (newKi > 0 && this.kiActual >= 0) {
                     this.consumicionKi = this.consumicionKi + newKi;
                 }
-
-                // Guardar cambios en localStorage y actualizar la interfaz si es necesario
                 if (newKi > 0 && this.kiActual >= 0) {
                     localStorage.setItem("coleccionPj", JSON.stringify(coleccionPj));
                     console.log(`Cambios guardados`);
@@ -337,12 +565,12 @@ class Pj{
                         <div class="barras">
                                 <div class="gru">
                                         <div >
-                                        <label class="fas" >cantidad de fases Positivas</label>
+                                        <label class="fas" >Fases positivas</label>
                                         <input class="small-input" type="number" id="fasesPosInput-${this.idpersonaje}">
                                         </div>
 
                                         <div >
-                                            <label class="fas" >cantidad de fases Negativas</label>
+                                            <label class="fas" >Fases negativas</label>
                                             <input class="small-input" type="number" id="fasesNegInput-${this.idpersonaje}">
                                         </div>
                                 </div>
@@ -570,7 +798,7 @@ class Pj{
                             Dominios
                             </button>
                             </div>      
-                            <div class="collapse show dominios" id="dominios">
+                            <div class="collapse dominios" id="dominios">
                             <div class="container" id="dominiosBox">
                             </div>  
                                 <div class="selector">
@@ -593,7 +821,7 @@ class Pj{
                             Ventajas y desventajas
                             </button>
                             </div>      
-                            <div class="collapse show ventajas" id="ventajas">  
+                            <div class="collapse ventajas" id="ventajas">  
                             <div id="ventajas-container">
                               
                             </div>
@@ -610,7 +838,7 @@ class Pj{
                             </button>
                             </div>  
 
-                           <div class="collapse show ventajas" id="tecnicasEspeciales">  
+                           <div class="collapse ventajas" id="tecnicasEspeciales">  
                             <div id="tecnicasEspeciales-container">
                               
                             </div>
@@ -631,7 +859,7 @@ class Pj{
                             </button>
                             </div>  
 
-                           <div class="collapse show inventarios" id="inventario">  
+                           <div class="collapse inventarios" id="inventario">  
                             <div id="inventario-container">
                               
                             </div>
@@ -667,9 +895,7 @@ class Pj{
 
             pjDominios.idPersonaje=this.idpersonaje;
             let newDamage=0;
-            //let newKi=0;
             let newKen=0;
-
             let  botonCargarDaño= document.getElementById(`btnCargarDaño-${this.idpersonaje}`)
             let  botonCargarKi= document.getElementById(`btnCargarKi-${this.idpersonaje}`)
             let  botonCargarKen= document.getElementById(`btnCargarKen-${this.idpersonaje}`)
@@ -863,88 +1089,47 @@ class Pj{
 
             fasesPos=document.getElementById(`fasesPosInput-${this.idpersonaje}`).value;
             fasesNeg=document.getElementById(`fasesNegInput-${this.idpersonaje}`).value;
-
             let numeroDivisionesPos=parseInt(fasesPos)
             let numeroDivisionesNeg=parseInt(fasesNeg)
-          
-        
             document.documentElement.style.setProperty('--numeroDivisionesPos', numeroDivisionesPos);
             document.documentElement.style.setProperty('--numeroDivisionesNeg', numeroDivisionesNeg);
-
-
             document.getElementById(`fasesPosInput-${this.idpersonaje}`).addEventListener("input",()=>{
                 let fasesPos=document.getElementById(`fasesPosInput-${this.idpersonaje}`).value;
                 let fasesNeg=document.getElementById(`fasesNegInput-${this.idpersonaje}`).value;
                 let cantFases=parseInt(fasesPos)+parseInt(fasesNeg)
                 this.fasesPos=fasesPos;
                 this.fasesNeg=fasesNeg;
-
-
                 this.cantFases=cantFases;
-
                 let vita=this.faseSalud*cantFases;
-                
-                this.vidaTotal=vita
-                
+                this.vidaTotal=vita;                
                 let numeroDivisionesPos=parseInt(fasesPos)
-            console.log(fasesPos)
             let numeroDivisionesNeg=parseInt(fasesNeg)
-            console.log(fasesNeg)
-        
             document.documentElement.style.setProperty('--numeroDivisionesPos', numeroDivisionesPos);
             document.documentElement.style.setProperty('--numeroDivisionesNeg', numeroDivisionesNeg);
-
-                //labelVita.innerHTML=`Vitalidad: ${vita}/${vita}`;
                 this.actualizarPj()
-            })
-
-            document.getElementById(`fasesNegInput-${this.idpersonaje}`).addEventListener("input",()=>{
-                console.log("funciona el evento input de cant fases Negativas");
-
-                //tiene que alterar las fases y la vida total
+            });
+            document.getElementById(`fasesNegInput-${this.idpersonaje}`).addEventListener("input",()=>{            
                 let fasesPos=document.getElementById(`fasesPosInput-${this.idpersonaje}`).value;
                 let fasesNeg=document.getElementById(`fasesNegInput-${this.idpersonaje}`).value;
                 let cantFases=parseInt(fasesPos)+parseInt(fasesNeg)
                 this.fasesPos=fasesPos;
                 this.fasesNeg=fasesNeg;
-
-
                 this.cantFases=cantFases;
-
                 let vita=this.faseSalud*cantFases;
-                
-                this.vidaTotal=vita
-                
-               
+                this.vidaTotal=vita;
                 this.actualizarPj()
-            })
+            });
             
+        //ESTE ES EL BOTON DENTRO DE LA CARD PARA GUARDAS CAMBIOS
+        let guardarCambiosBtn=document.getElementById(`guardarcambiosBtn-${this.idpersonaje}`);
+        guardarCambiosBtn.addEventListener("click",()=>{
+            this.modificarFicha();
+            localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
 
-//ESTE ES EL BOTON DENTRO DE LA CARD PARA GUARDAS CAMBIOS
-let guardarCambiosBtn=document.getElementById(`guardarcambiosBtn-${this.idpersonaje}`);
-guardarCambiosBtn.addEventListener("click",()=>{
-    console.log("funciona boton de guardar cambios ficha")
-    //guardarNuevasVentajas();
-    //enviarNuevasVentajasAlServidor(); 
-
-    //guardarNuevasTecnicasEspeciales();
-    //enviarTecnicasEspecialesAlServidor()
-    //enviarNuevasTecnicasEspecialesAlServidor();
-
-
-    //modifica la ficha y se guarda en el storage y luego renderiza el dom con los cambios
-    this.modificarFicha();
-    localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-    //aca viene la parte donde hacemos un update sobre la base de datos
-        // *****ACA TENEMOS QUE HACER UN UPDATE
-    
-                    
-    realizarUpdateBbdd(this.idpersonaje,this.nombre,this.raza,this.naturaleza,this.dominio,this.fuerza,this.fortaleza,this.ki,this.kiActual,this.faseSalud,this.vidaTotal,this.damageActual,this.ken,this.kenActual,this.imagen,this.destreza,this.agilidad,this.sabiduria,this.sentidos,this.presencia,this.principio, this.academisismo, this.artesMarciales, this.atletismo,this.conBakemono,this.conDemonio,this.conEsferas,this.conEspiritual,this.forja,this.medicina,this.montar,this.sigilo,this.pilotear,this.manejoArma,this.conObjMagicos,this.conLeyendas,this.resCorte,this.resEnergia,this.resRayo,this.resFuego,this.resFrio,this.resVeneno,this.manejoSombras,this.tratoBakemono,this.conHechiceria,this.meditacionEspiritual,this.meditacionVital,this.idusuario_fk,this.cantFases,this.fasesPos,this.fasesNeg,this.nombreArma);
-    
-    insertDominiosTecnicas(pjDominios)
-    //**********************DESPUES LO RESOLVEMOS************************
-    location.reload();            
-}) 
+            realizarUpdateBbdd(this.idpersonaje,this.nombre,this.raza,this.naturaleza,this.dominio,this.fuerza,this.fortaleza,this.ki,this.kiActual,this.faseSalud,this.vidaTotal,this.damageActual,this.ken,this.kenActual,this.imagen,this.destreza,this.agilidad,this.sabiduria,this.sentidos,this.presencia,this.principio, this.academisismo, this.artesMarciales, this.atletismo,this.conBakemono,this.conDemonio,this.conEsferas,this.conEspiritual,this.forja,this.medicina,this.montar,this.sigilo,this.pilotear,this.manejoArma,this.conObjMagicos,this.conLeyendas,this.resCorte,this.resEnergia,this.resRayo,this.resFuego,this.resFrio,this.resVeneno,this.manejoSombras,this.tratoBakemono,this.conHechiceria,this.meditacionEspiritual,this.meditacionVital,this.idusuario_fk,this.cantFases,this.fasesPos,this.fasesNeg,this.nombreArma);
+            insertDominiosTecnicas(pjDominios);
+            location.reload();            
+        });
 
 
         //ACA ES DONDE SE IMPRIMEN LOS DOMINIOS Y LAS TECNICAS
@@ -958,7 +1143,6 @@ guardarCambiosBtn.addEventListener("click",()=>{
             // Utilizamos el método map() para extraer solo los IDs de dominios
             return arrayDominiosTecnicas.map(dominio => dominio.idDominio);
         }
-
         //obtengo las tecncias
         function obtenerIdsTecnicas(arrayDominiosTecnicas) {
             let idsTecnicas = [];
@@ -968,16 +1152,13 @@ guardarCambiosBtn.addEventListener("click",()=>{
                 });
             });
             return idsTecnicas;
-        }
-        
+        }        
         let tecnicasSeleccionadas=obtenerIdsTecnicas(arrayDominiosTecnicas);
         console.log(tecnicasSeleccionadas)
    
         let dominiosSeleccionados=obtenerIdsDominios(arrayDominiosTecnicas);
         console.log(dominiosSeleccionados)
 
-
-        // aca la info
         function obtenerTecnicas(arrayDominiosTecnicas) {
             let tecnicas = [];
             arrayDominiosTecnicas.forEach(dominio => {
@@ -995,7 +1176,6 @@ guardarCambiosBtn.addEventListener("click",()=>{
             });
             return tecnicas;
         }
-
 
         let infoTecnica=obtenerTecnicas(arrayDominiosTecnicas)
         console.log("INFORMACION DE LAS TECNICAS:",infoTecnica)
@@ -1361,277 +1541,322 @@ guardarCambiosBtn.addEventListener("click",()=>{
         });
 
 
-//NUEVO COMPONENTE TECNCIA ESPECIAL
 
-// array para almacenar las ventajas del servidor
-let tecnicasEspecialesServidor = [];
-//<p class="idTecnicaEspecialP">${tecnicaEspecial.idTecnicaEspecial}</p>
-// Función para imprimir las ventajas obtenidas del servidor
-const imprimirTecnicasEspeciales = async () => {
-    try {
-        const tecnicasEspeciales = await consumirTecnicasEspeciales();
-        tecnicasEspecialesServidor = tecnicasEspeciales; // Almacenar las ventajas del servidor en la variable global
+        let tecnicasEspecialesServidor = [];
+        const imprimirTecnicasEspeciales = async () => {
+            try {
+                const tecnicasEspeciales = await consumirTecnicasEspeciales();
+                tecnicasEspecialesServidor = tecnicasEspeciales; // Almacenar las ventajas del servidor en la variable global
 
-        tecnicasEspecialesServidor.forEach(tecnicaEspecial => {
+                tecnicasEspecialesServidor.forEach(tecnicaEspecial => {
+                    const nuevoDiv = document.createElement("div");
+                    nuevoDiv.id = "tecnicaEspecial-" + tecnicaEspecial.idTecnicaEspecial;
+                    nuevoDiv.className = "tecnicaEspecial"; // Utiliza className en lugar de class
+                    nuevoDiv.innerHTML = `
+                    <div class="nombreEliminar">
+                    
+                        
+                        <input type="text" class="nombre-tecnicaEspecial" value="${tecnicaEspecial.nombre}">
+                        <button class="btn btn-danger eliminar-tecnicaEspecial" id="eliminarTecnicaEspecial${tecnicaEspecial.idTecnicaEspecial}">Eliminar</button>
+                    </div>    
+                        <textarea type="text" class="descripcion-tecnicaEspecial" value="${tecnicaEspecial.descripcion}">${tecnicaEspecial.descripcion}</textarea>
+                        <textarea type="text" class="sistema-tecnicaEspecial" value="${tecnicaEspecial.sistema}">${tecnicaEspecial.sistema}</textarea>
+                        <div class="costeTiempo">
+                        <label for="coste">Coste de ki:</label>
+                        <input type="number" class="coste-tecnicaEspecial" value="${tecnicaEspecial.coste}">
+                        <label for="tiempoInvo">Tiempo de Invocación:</label>
+                        <input type="text" class="tiempoInvo-tecnicaEspecial" value="${tecnicaEspecial.tiempoInvo}">
+                        </div>
+                        
+                    `;
+                    document.getElementById("tecnicasEspeciales-container").appendChild(nuevoDiv);
+
+
+
+
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const idPersonaje = parseInt(urlParams.get('id'));
+
+                    let btnEliminarTecnicaEspecial = document.getElementById(`eliminarTecnicaEspecial${tecnicaEspecial.idTecnicaEspecial}`);
+                    btnEliminarTecnicaEspecial.addEventListener("click", function() {
+                        console.log("funciona el boton eliminar tecnica especial")
+                        eliminarTecnicaEspecialBd(idPersonaje,tecnicaEspecial.idTecnicaEspecial);
+                        console.log("ID DE TECNICA ESPECIAL:",tecnicaEspecial.idTecnicaEspecial)
+                        //contenedorTecnicaEspecial.removeChild(nuevoDiv);
+                        document.getElementById("tecnicasEspeciales-container").removeChild(nuevoDiv);
+                    });
+
+
+
+                    //necesito que cuando se cambie nombre,descripcion,sistema,coste,tiempoInvo se dispare un update
+                    // Añadir event listeners para cada campo input y textarea
+                    nuevoDiv.querySelectorAll('input, textarea').forEach(element => {
+                        element.addEventListener('change', function() {
+                            console.log("funciona la actualizacion de tecnica especial")
+                            const nombre = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .nombre-tecnicaEspecial`).value;
+                            const descripcion = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .descripcion-tecnicaEspecial`).value;
+                            const sistema = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .sistema-tecnicaEspecial`).value;
+                            const coste = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .coste-tecnicaEspecial`).value;
+                            const tiempoInvo = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .tiempoInvo-tecnicaEspecial`).value;
+                            console.log(`
+                            nombre:${nombre}
+                            descripcion:${descripcion}
+                            sistema:${sistema}
+                            coste:${coste}
+                            tiempoInvo:${tiempoInvo}`)
+                            actualizarTecnicaEspecial(idPersonaje,tecnicaEspecial.idTecnicaEspecial, nombre, descripcion, sistema, coste, tiempoInvo);
+                            
+                    
+                        });
+                    });
+
+                });
+            } catch (error) {
+                // Manejar el error aquí
+            }
+        };
+        imprimirTecnicasEspeciales();
+        async function actualizarTecnicaEspecial(idPersonaje,idTecnicaEspecial, nombre, descripcion, sistema, coste, tiempoInvo) {
+            try {
+                const response = await fetch(`/updateTecnicaEspecial/${idPersonaje}/${idTecnicaEspecial}`, {
+                    method: 'PUT', // Método HTTP PUT para actualizar
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        nombre: nombre,
+                        descripcion: descripcion,
+                        sistema: sistema,
+                        coste: coste,
+                        tiempoInvo: tiempoInvo
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al actualizar la técnica especial en la base de datos');
+                }
+
+                const data = await response.json();
+                console.log('Técnica especial actualizada:', data);
+            } catch (error) {
+                console.error('Error al actualizar la técnica especial en la base de datos:', error);
+            }
+        }
+        async function eliminarTecnicaEspecialBd(idPersonaje, idTecnicaEspecial) {
+            try {
+            const response = await fetch('/eliminarTecnicaEspecial', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                idpersonaje: idPersonaje,
+                idTecnicaEspecial: idTecnicaEspecial, // Ajusta el nombre del campo según lo esperado por el servidor
+                }),
+            });
+        
+            if (response.ok) {
+                console.log("¡Tecnica especial eliminada exitosamente!");
+                const jsonResponse = await response.json();
+                console.log("Respuesta del servidor:", jsonResponse);
+            } else {
+                console.error('Error en la solicitud de eliminación de Tecnica especial:', response.status);
+            }
+            } catch (error) {
+            console.error('Error en la solicitud de eliminación de Tecnica Especial:', error.message);
+        }}
+
+        const btnAgregarTecnicaEspecial = document.getElementById("agregar-tecnicaEspecial");
+        btnAgregarTecnicaEspecial.addEventListener("click", function() {
             const nuevoDiv = document.createElement("div");
-            nuevoDiv.id = "tecnicaEspecial-" + tecnicaEspecial.idTecnicaEspecial;
-            nuevoDiv.className = "tecnicaEspecial"; // Utiliza className en lugar de class
+            nuevoDiv.className = "nueva-tecnicaEspecial";
             nuevoDiv.innerHTML = `
-            <div class="nombreEliminar">
-              
-                
-                <input type="text" class="nombre-tecnicaEspecial" value="${tecnicaEspecial.nombre}">
-                <button class="btn btn-danger eliminar-tecnicaEspecial" id="eliminarTecnicaEspecial${tecnicaEspecial.idTecnicaEspecial}">Eliminar</button>
-            </div>    
-                <textarea type="text" class="descripcion-tecnicaEspecial" value="${tecnicaEspecial.descripcion}">${tecnicaEspecial.descripcion}</textarea>
-                <textarea type="text" class="sistema-tecnicaEspecial" value="${tecnicaEspecial.sistema}">${tecnicaEspecial.sistema}</textarea>
-                <div class="costeTiempo">
-                <label for="coste">Coste de ki:</label>
-                <input type="number" class="coste-tecnicaEspecial" value="${tecnicaEspecial.coste}">
-                <label for="tiempoInvo">Tiempo de Invocación:</label>
-                <input type="text" class="tiempoInvo-tecnicaEspecial" value="${tecnicaEspecial.tiempoInvo}">
+                <div class="nombreEliminar">
+                    <input type="text" class="nombre-nueva-tecnicaEspecial" placeholder="Nombre">
+                    <button class="btn btn-danger eliminar-nueva-tecnicaEspecial">Eliminar</button>
                 </div>
+                <textarea type="text" class="descripcion-nueva-tecnicaEspecial" placeholder="Descripción"></textarea>
+                <textarea type="text" class="sistema-nueva-tecnicaEspecial" placeholder="Sistema"></textarea>
+                <div class="costeTiempo">
+                    <label for="coste">Coste de ki:</label>
+                    <input type="number" class="coste-nueva-tecnicaEspecial" placeholder="Coste">
+                    <label for="tiempoInvo">Tiempo de Invocación:</label>
+                    <input type="text" class="tiempoInvo-nueva-tecnicaEspecial" placeholder="Tiempo de invocación">
+                    <button class="btn btn-primary guardar-nuevaTecnicaEspecial" id="guardar-nuevaTecnicaEspecial">Guardar nueva tecnica especial</button>
+                </div>
+            
                 
             `;
-            document.getElementById("tecnicasEspeciales-container").appendChild(nuevoDiv);
-
-
-
-
+            document.getElementById("contenedorNuevasTecnicasEspeciales").appendChild(nuevoDiv);
             const urlParams = new URLSearchParams(window.location.search);
             const idPersonaje = parseInt(urlParams.get('id'));
 
-            let btnEliminarTecnicaEspecial = document.getElementById(`eliminarTecnicaEspecial${tecnicaEspecial.idTecnicaEspecial}`);
-            btnEliminarTecnicaEspecial.addEventListener("click", function() {
-                console.log("funciona el boton eliminar tecnica especial")
-                eliminarTecnicaEspecialBd(idPersonaje,tecnicaEspecial.idTecnicaEspecial);
-                console.log("ID DE TECNICA ESPECIAL:",tecnicaEspecial.idTecnicaEspecial)
-                //contenedorTecnicaEspecial.removeChild(nuevoDiv);
-                document.getElementById("tecnicasEspeciales-container").removeChild(nuevoDiv);
+            const btnEliminarNuevaTecnicaEspecial = nuevoDiv.querySelector(".eliminar-nueva-tecnicaEspecial");
+            btnEliminarNuevaTecnicaEspecial.addEventListener("click", function() {
+                nuevoDiv.remove();
             });
 
+            let btnGuardarNuevaTecnicaEspecial=document.getElementById("guardar-nuevaTecnicaEspecial");
+            btnGuardarNuevaTecnicaEspecial.addEventListener("click",()=>{
+                console.log("funciona el boton de guardar nueva tecnica especial")
+                // Capturar los valores de los campos de la nueva técnica especial
+            const nombre = nuevoDiv.querySelector(".nombre-nueva-tecnicaEspecial").value;
+            const descripcion = nuevoDiv.querySelector(".descripcion-nueva-tecnicaEspecial").value;
+            const sistema = nuevoDiv.querySelector(".sistema-nueva-tecnicaEspecial").value;
+            const coste = nuevoDiv.querySelector(".coste-nueva-tecnicaEspecial").value;
+            const tiempoInvo = nuevoDiv.querySelector(".tiempoInvo-nueva-tecnicaEspecial").value;
+
+            // Realizar la inserción en la base de datos o hacer lo que sea necesario con los datos capturados
+            console.log("Nombre:", nombre);
+            console.log("Descripción:", descripcion);
+            console.log("Sistema:", sistema);
+            console.log("Coste:", coste);
+            console.log("Tiempo de Invocación:", tiempoInvo);
+
+            // Aquí puedes enviar los datos al servidor para realizar la inserción en la base de datos
+            enviarNuevasTecnicasEspecialesAlServidor(idPersonaje,nombre,descripcion,sistema,coste,tiempoInvo)
+            location.reload()
 
 
-            //necesito que cuando se cambie nombre,descripcion,sistema,coste,tiempoInvo se dispare un update
-             // Añadir event listeners para cada campo input y textarea
-             nuevoDiv.querySelectorAll('input, textarea').forEach(element => {
-                element.addEventListener('change', function() {
-                    console.log("funciona la actualizacion de tecnica especial")
-                    const nombre = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .nombre-tecnicaEspecial`).value;
-                    const descripcion = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .descripcion-tecnicaEspecial`).value;
-                    const sistema = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .sistema-tecnicaEspecial`).value;
-                    const coste = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .coste-tecnicaEspecial`).value;
-                    const tiempoInvo = document.querySelector(`#tecnicaEspecial-${tecnicaEspecial.idTecnicaEspecial} .tiempoInvo-tecnicaEspecial`).value;
-                    console.log(`
-                    nombre:${nombre}
-                    descripcion:${descripcion}
-                    sistema:${sistema}
-                    coste:${coste}
-                    tiempoInvo:${tiempoInvo}`)
-                    actualizarTecnicaEspecial(idPersonaje,tecnicaEspecial.idTecnicaEspecial, nombre, descripcion, sistema, coste, tiempoInvo);
-                    
-               
-                });
-            });
-
-        });
-    } catch (error) {
-        // Manejar el error aquí
-    }
-};
-
-
-// Llamamos a la función para imprimir las ventajas
-imprimirTecnicasEspeciales();
-
-async function actualizarTecnicaEspecial(idPersonaje,idTecnicaEspecial, nombre, descripcion, sistema, coste, tiempoInvo) {
-    try {
-        const response = await fetch(`/updateTecnicaEspecial/${idPersonaje}/${idTecnicaEspecial}`, {
-            method: 'PUT', // Método HTTP PUT para actualizar
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                nombre: nombre,
-                descripcion: descripcion,
-                sistema: sistema,
-                coste: coste,
-                tiempoInvo: tiempoInvo
             })
         });
 
-        if (!response.ok) {
-            throw new Error('Error al actualizar la técnica especial en la base de datos');
+        async function enviarNuevasTecnicasEspecialesAlServidor(idPersonaje,nombre,descripcion,sistema,coste,tiempoInvo) {
+            try {
+            
+
+                // Realizar la solicitud POST al servidor solo con las nuevas ventajas filtradas
+                const response = await fetch('/insertarTecnicasEspeciales', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        idpersonaje: idPersonaje,
+                        nombre: nombre,
+                        descripcion: descripcion,
+                        sistema: sistema,
+                        coste:coste,
+                        tiempoInvo
+                    }),
+                });
+
+                // Manejar la respuesta del servidor
+                if (response.ok) {
+                    console.log("¡Inserción exitosa de tecncia especial!");
+                    const jsonResponse = await response.json();
+                    console.log("Respuesta del servidor:", jsonResponse);
+                } else {
+                    console.error('Error en la solicitud de inserción de tecnica especial:', response.status);
+                }
+            } catch (error) {
+                console.error('Error en la solicitud de inserción de tecncia especial:', error.message);
+            }
         }
-
-        const data = await response.json();
-        console.log('Técnica especial actualizada:', data);
-    } catch (error) {
-        console.error('Error al actualizar la técnica especial en la base de datos:', error);
-    }
-}
-
-// Función para eliminar una tecnica especial
-async function eliminarTecnicaEspecialBd(idPersonaje, idTecnicaEspecial) {
-    try {
-      const response = await fetch('/eliminarTecnicaEspecial', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          idpersonaje: idPersonaje,
-          idTecnicaEspecial: idTecnicaEspecial, // Ajusta el nombre del campo según lo esperado por el servidor
-        }),
-      });
-  
-      if (response.ok) {
-        console.log("¡Tecnica especial eliminada exitosamente!");
-        const jsonResponse = await response.json();
-        console.log("Respuesta del servidor:", jsonResponse);
-      } else {
-        console.error('Error en la solicitud de eliminación de Tecnica especial:', response.status);
-      }
-    } catch (error) {
-      console.error('Error en la solicitud de eliminación de Tecnica Especial:', error.message);
-}}
-
-
-//ahora vamos con el boton para agregar
-
-
-
-  // Seleccionar el botón de agregar técnica especial
-const btnAgregarTecnicaEspecial = document.getElementById("agregar-tecnicaEspecial");
-
-// Agregar evento de clic al botón
-btnAgregarTecnicaEspecial.addEventListener("click", function() {
-    // Crear los campos similares para agregar una nueva técnica especial
-    const nuevoDiv = document.createElement("div");
-    nuevoDiv.className = "nueva-tecnicaEspecial";
-
-    nuevoDiv.innerHTML = `
-        <div class="nombreEliminar">
-            <input type="text" class="nombre-nueva-tecnicaEspecial" placeholder="Nombre">
-            <button class="btn btn-danger eliminar-nueva-tecnicaEspecial">Eliminar</button>
-        </div>
-        <textarea type="text" class="descripcion-nueva-tecnicaEspecial" placeholder="Descripción"></textarea>
-        <textarea type="text" class="sistema-nueva-tecnicaEspecial" placeholder="Sistema"></textarea>
-        <div class="costeTiempo">
-            <label for="coste">Coste de ki:</label>
-            <input type="number" class="coste-nueva-tecnicaEspecial" placeholder="Coste">
-            <label for="tiempoInvo">Tiempo de Invocación:</label>
-            <input type="text" class="tiempoInvo-nueva-tecnicaEspecial" placeholder="Tiempo de invocación">
-            <button class="btn btn-primary guardar-nuevaTecnicaEspecial" id="guardar-nuevaTecnicaEspecial">Guardar nueva tecnica especial</button>
-        </div>
-       
-        
-    `;
-
-    // Agregar el nuevoDiv al contenedor deseado en tu HTML
-    document.getElementById("contenedorNuevasTecnicasEspeciales").appendChild(nuevoDiv);
-
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const idPersonaje = parseInt(urlParams.get('id'));
-
-    // Agregar evento de clic al botón de eliminar para eliminar el nuevoDiv si es necesario
-    const btnEliminarNuevaTecnicaEspecial = nuevoDiv.querySelector(".eliminar-nueva-tecnicaEspecial");
-    btnEliminarNuevaTecnicaEspecial.addEventListener("click", function() {
-        nuevoDiv.remove();
-    });
-
-    let btnGuardarNuevaTecnicaEspecial=document.getElementById("guardar-nuevaTecnicaEspecial");
-    btnGuardarNuevaTecnicaEspecial.addEventListener("click",()=>{
-        console.log("funciona el boton de guardar nueva tecnica especial")
-          // Capturar los valores de los campos de la nueva técnica especial
-    const nombre = nuevoDiv.querySelector(".nombre-nueva-tecnicaEspecial").value;
-    const descripcion = nuevoDiv.querySelector(".descripcion-nueva-tecnicaEspecial").value;
-    const sistema = nuevoDiv.querySelector(".sistema-nueva-tecnicaEspecial").value;
-    const coste = nuevoDiv.querySelector(".coste-nueva-tecnicaEspecial").value;
-    const tiempoInvo = nuevoDiv.querySelector(".tiempoInvo-nueva-tecnicaEspecial").value;
-
-    // Realizar la inserción en la base de datos o hacer lo que sea necesario con los datos capturados
-    console.log("Nombre:", nombre);
-    console.log("Descripción:", descripcion);
-    console.log("Sistema:", sistema);
-    console.log("Coste:", coste);
-    console.log("Tiempo de Invocación:", tiempoInvo);
-
-    // Aquí puedes enviar los datos al servidor para realizar la inserción en la base de datos
-    enviarNuevasTecnicasEspecialesAlServidor(idPersonaje,nombre,descripcion,sistema,coste,tiempoInvo)
-    location.reload()
-
-
-    })
-    //ahora tengo que tomar todos los campos y realizar un insert
-});
-
-async function enviarNuevasTecnicasEspecialesAlServidor(idPersonaje,nombre,descripcion,sistema,coste,tiempoInvo) {
-    try {
        
 
-        // Realizar la solicitud POST al servidor solo con las nuevas ventajas filtradas
-        const response = await fetch('/insertarTecnicasEspeciales', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                idpersonaje: idPersonaje,
-                nombre: nombre,
-                descripcion: descripcion,
-                sistema: sistema,
-                coste:coste,
-                tiempoInvo
-            }),
-        });
+       
+        let inventario = [];
+        async function imprimirInventario() {
+            try {
+                inventario = await consumirInventario(inventario);
+                console.log(inventario); // Imprimir inventario aquí
 
-        // Manejar la respuesta del servidor
-        if (response.ok) {
-            console.log("¡Inserción exitosa de tecncia especial!");
-            const jsonResponse = await response.json();
-            console.log("Respuesta del servidor:", jsonResponse);
-        } else {
-            console.error('Error en la solicitud de inserción de tecnica especial:', response.status);
+                const contenedorInventario = document.getElementById("inventario-container");
+
+                // Limpiar el contenedor antes de agregar nuevos elementos
+                contenedorInventario.innerHTML = "";
+
+                // Iterar sobre cada elemento del inventario y crear un elemento HTML para cada uno
+                inventario.forEach((item, index) => {
+                    const nuevoDiv = document.createElement("div");
+                    nuevoDiv.innerHTML = `
+                    <div class="inventariosClass">
+                        <input type="text" class="item-inventario" id="item${index}" value="${item.item}">
+                        <button class="btn btn-danger eliminar-item-inventario">Eliminar</button>
+                    </div>`;
+                    contenedorInventario.appendChild(nuevoDiv);
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const idPersonaje = parseInt(urlParams.get('id'));
+                    // Obtener el botón de eliminar asociado al nuevo elemento de inventario
+                    let btnEliminar = nuevoDiv.querySelector(".eliminar-item-inventario");
+                    // Obtenemos el nuevo elemento de entrada
+                    let nuevoInput = nuevoDiv.querySelector(".item-inventario");
+
+                    // Agregar el evento 'click' al botón de eliminar
+                    btnEliminar.addEventListener("click", () => {
+                        contenedorInventario.removeChild(nuevoDiv); // Eliminar el div del inventario del DOM
+                        eliminarItem(idPersonaje, nuevoInput.value); // Llamar a la función para eliminar el item del servidor
+                    });
+
+                    nuevoInput.addEventListener("change",()=>{
+                        console.log("funciona el boton de update")
+                        updateItem(idPersonaje,item.idInventario, nuevoInput.value);
+                    })
+                
+
+
+
+
+                });
+            } catch (error) {
+                console.error('Error al imprimir inventario:', error);
+            }
         }
-    } catch (error) {
-        console.error('Error en la solicitud de inserción de tecncia especial:', error.message);
-    }
-}
+        imprimirInventario();
+        async function updateItem(idPersonaje, idInventario, item) {
+            try {
+                const response = await fetch(`/updateItem/${idPersonaje}/${idInventario}/${item}`, {
+                    method: 'PUT', // Método HTTP PUT para actualizar
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    // Puedes enviar cualquier información adicional en el cuerpo de la solicitud si es necesario
+                    // body: JSON.stringify({ key: value })
+                });
 
+                if (!response.ok) {
+                    throw new Error('Error al actualizar el ítem en la base de datos');
+                }
 
-//COMPONENTE INVENTARIO
+                const data = await response.json();
+                console.log('Ítem actualizado:', data);
+            } catch (error) {
+                console.error('Error al actualizar el ítem en la base de datos:', error);
+            }
+        }
+        let nuevoInventario = document.getElementById("agregar-inventario");
+        nuevoInventario.addEventListener("click", () => {
+            console.log("Funciona el botón nuevo inventario");
 
-//IMPRIMIMOS EL INVENTARIO
-let inventario = [];
-
-// Consumir inventario
-async function imprimirInventario() {
-    try {
-        inventario = await consumirInventario(inventario);
-        console.log(inventario); // Imprimir inventario aquí
-
-        const contenedorInventario = document.getElementById("inventario-container");
-
-        // Limpiar el contenedor antes de agregar nuevos elementos
-        contenedorInventario.innerHTML = "";
-
-        // Iterar sobre cada elemento del inventario y crear un elemento HTML para cada uno
-        inventario.forEach((item, index) => {
+            const contenedorInventario = document.getElementById("inventario-container");
             const nuevoDiv = document.createElement("div");
             nuevoDiv.innerHTML = `
             <div class="inventariosClass">
-                <input type="text" class="item-inventario" id="item${index}" value="${item.item}">
+                <input type="text" class="item-inventario">
                 <button class="btn btn-danger eliminar-item-inventario">Eliminar</button>
             </div>`;
             contenedorInventario.appendChild(nuevoDiv);
-            const urlParams = new URLSearchParams(window.location.search);
-            const idPersonaje = parseInt(urlParams.get('id'));
-            // Obtener el botón de eliminar asociado al nuevo elemento de inventario
-            let btnEliminar = nuevoDiv.querySelector(".eliminar-item-inventario");
+
             // Obtenemos el nuevo elemento de entrada
             let nuevoInput = nuevoDiv.querySelector(".item-inventario");
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const idPersonaje = parseInt(urlParams.get('id'));
+            console.log(idPersonaje)
+            console.log(typeof idPersonaje)
+
+        
+            // Agregamos el event listener directamente al nuevo elemento de entrada
+            nuevoInput.addEventListener("change", () => {
+            
+                insertItem(idPersonaje,nuevoInput.value);
+                
+            });
+
+
+            // Obtener el botón de eliminar asociado al nuevo elemento de inventario
+            let btnEliminar = nuevoDiv.querySelector(".eliminar-item-inventario");
 
             // Agregar el evento 'click' al botón de eliminar
             btnEliminar.addEventListener("click", () => {
@@ -1639,358 +1864,257 @@ async function imprimirInventario() {
                 eliminarItem(idPersonaje, nuevoInput.value); // Llamar a la función para eliminar el item del servidor
             });
 
-            nuevoInput.addEventListener("change",()=>{
-                console.log("funciona el boton de update")
-                updateItem(idPersonaje,item.idInventario, nuevoInput.value);
-            })
-           
-
-
-
-
         });
-    } catch (error) {
-        console.error('Error al imprimir inventario:', error);
-    }
-}
-imprimirInventario();
+        async function insertItem(idPersonaje,item){
+            try{
+                console.log("Insertando nuevo item:", item);
+                console.log("Insertando nuevo item:", idPersonaje);
+            
 
-async function updateItem(idPersonaje, idInventario, item) {
-    try {
-        const response = await fetch(`/updateItem/${idPersonaje}/${idInventario}/${item}`, {
-            method: 'PUT', // Método HTTP PUT para actualizar
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // Puedes enviar cualquier información adicional en el cuerpo de la solicitud si es necesario
-            // body: JSON.stringify({ key: value })
-        });
 
-        if (!response.ok) {
-            throw new Error('Error al actualizar el ítem en la base de datos');
+            
+                
+                const response = await fetch(`/insertarNuevoItem/${idPersonaje}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ item: item })
+            
+                });
+                if (!response.ok) {
+                    throw new Error('Error al insertar el nuevo item en la base de datos');
+                }
+                const data = await response.json();
+                console.log('Nuevo item insertado:', data);
+            
+
+            }catch(error){
+                console.error('Error al insertar nuevo item en la base de datos:', error);
+            }
+        }
+        async function eliminarItem(idPersonaje, item) {
+            try {
+                console.log("Eliminando item:", item);
+                console.log("ID del personaje:", idPersonaje);
+
+                // Realizar la solicitud para eliminar el item del servidor
+                const response = await fetch(`/eliminarItem/${idPersonaje}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ item: item })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al eliminar el item de la base de datos');
+                }
+
+                const data = await response.json();
+                console.log('Item eliminado:', data);
+            } catch (error) {
+                console.error('Error al eliminar el item de la base de datos:', error);
+            }
         }
 
-        const data = await response.json();
-        console.log('Ítem actualizado:', data);
-    } catch (error) {
-        console.error('Error al actualizar el ítem en la base de datos:', error);
-    }
-}
 
-let nuevoInventario = document.getElementById("agregar-inventario");
-nuevoInventario.addEventListener("click", () => {
-    console.log("Funciona el botón nuevo inventario");
-
-    const contenedorInventario = document.getElementById("inventario-container");
-    const nuevoDiv = document.createElement("div");
-    nuevoDiv.innerHTML = `
-    <div class="inventariosClass">
-        <input type="text" class="item-inventario">
-        <button class="btn btn-danger eliminar-item-inventario">Eliminar</button>
-    </div>`;
-    contenedorInventario.appendChild(nuevoDiv);
-
-    // Obtenemos el nuevo elemento de entrada
-    let nuevoInput = nuevoDiv.querySelector(".item-inventario");
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const idPersonaje = parseInt(urlParams.get('id'));
-    console.log(idPersonaje)
-    console.log(typeof idPersonaje)
-
-   
-    // Agregamos el event listener directamente al nuevo elemento de entrada
-    nuevoInput.addEventListener("change", () => {
-      
-        insertItem(idPersonaje,nuevoInput.value);
-        
-    });
-
-
-    // Obtener el botón de eliminar asociado al nuevo elemento de inventario
-    let btnEliminar = nuevoDiv.querySelector(".eliminar-item-inventario");
-
-    // Agregar el evento 'click' al botón de eliminar
-    btnEliminar.addEventListener("click", () => {
-        contenedorInventario.removeChild(nuevoDiv); // Eliminar el div del inventario del DOM
-        eliminarItem(idPersonaje, nuevoInput.value); // Llamar a la función para eliminar el item del servidor
-    });
-
-});
-async function insertItem(idPersonaje,item){
-    try{
-        console.log("Insertando nuevo item:", item);
-        console.log("Insertando nuevo item:", idPersonaje);
-       
-
-
-       
-        
-        const response = await fetch(`/insertarNuevoItem/${idPersonaje}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ item: item })
-    
-        });
-        if (!response.ok) {
-            throw new Error('Error al insertar el nuevo item en la base de datos');
+        let ventajas = [];
+        function escapeHTML(text) {
+            return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
         }
-        const data = await response.json();
-        console.log('Nuevo item insertado:', data);
-     
+        async function imprimirVentajas() {
+            try {
+                ventajas = await consumirVentajas(ventajas);
+                console.log(ventajas); // Imprimir inventario aquí
 
-    }catch(error){
-        console.error('Error al insertar nuevo item en la base de datos:', error);
-    }
-}
-async function eliminarItem(idPersonaje, item) {
-    try {
-        console.log("Eliminando item:", item);
-        console.log("ID del personaje:", idPersonaje);
+                const contenedorVentajas = document.getElementById("ventajas-container");
 
-        // Realizar la solicitud para eliminar el item del servidor
-        const response = await fetch(`/eliminarItem/${idPersonaje}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ item: item })
-        });
+                // Limpiar el contenedor antes de agregar nuevos elementos
+                contenedorVentajas.innerHTML = "";
 
-        if (!response.ok) {
-            throw new Error('Error al eliminar el item de la base de datos');
+                // Iterar sobre cada elemento del inventario y crear un elemento HTML para cada uno
+                ventajas.forEach((ventaja, index) => {
+                    const nuevoDiv = document.createElement("div");
+                    nuevoDiv.innerHTML = `
+                    <div class="ventajasClass">
+                    <input type="text" class="item-ventajas" id="idVentaja${index}" value="${ventaja.idVentaja}" style="display: none;">
+                        <input type="text" class="item-ventajas nombreVentaja" id="nombre${index}" value="${escapeHTML(ventaja.nombre)}">
+                                    
+                        <button class="btn btn-danger eliminar-item-ventajas">Eliminar</button>
+                    </div>`;
+                    contenedorVentajas.appendChild(nuevoDiv);
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const idPersonaje = parseInt(urlParams.get('id'));
+                    // Obtener el botón de eliminar asociado al nuevo elemento de inventario
+                    let btnEliminar = nuevoDiv.querySelector(".eliminar-item-ventajas");
+                    // Obtenemos el nuevo elemento de entrada
+                    //let nuevoInput = nuevoDiv.querySelector(".item-ventajas");
+
+
+                    let nuevoInput = nuevoDiv.querySelector(".item-ventajas.nombreVentaja");
+                    btnEliminar.addEventListener("click", () => {
+                        const idVentaja = nuevoDiv.querySelector(`#idVentaja${index}`).value; // Obtener el ID de la ventaja
+                        contenedorVentajas.removeChild(nuevoDiv); // Eliminar el div del inventario del DOM
+                        eliminarVentajas(idPersonaje, idVentaja); // Llamar a la función para eliminar el item del servidor
+                    });
+
+                    
+                    nuevoInput.addEventListener("change",()=>{
+                        console.log("funciona el boton de update")
+                        //const idVentaja = nuevoDiv.querySelector(`#idVentaja${index}`).value;
+                        updateVentaja(idPersonaje,ventaja.idVentaja, nuevoInput.value);
+                    })
+
+                });
+            } catch (error) {
+                console.error('Error al imprimir ventajas:', error);
+            }
         }
+        imprimirVentajas();
+        let nuevoVentajas = document.getElementById("agregar-ventaja");
+        nuevoVentajas.addEventListener("click", () => {
+            console.log("Funciona el botón nuevo ventajas");
 
-        const data = await response.json();
-        console.log('Item eliminado:', data);
-    } catch (error) {
-        console.error('Error al eliminar el item de la base de datos:', error);
-    }
-}
-
-
-
-
-
-//COMPONENTE VENTAJAS
-
-//IMPRIMIMOS LAS VENTAJAS
-let ventajas = [];
-function escapeHTML(text) {
-    return text.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
-// Consumir inventario
-async function imprimirVentajas() {
-    try {
-        ventajas = await consumirVentajas(ventajas);
-        console.log(ventajas); // Imprimir inventario aquí
-
-        const contenedorVentajas = document.getElementById("ventajas-container");
-
-        // Limpiar el contenedor antes de agregar nuevos elementos
-        contenedorVentajas.innerHTML = "";
-
-        // Iterar sobre cada elemento del inventario y crear un elemento HTML para cada uno
-        ventajas.forEach((ventaja, index) => {
+            const contenedorVentajas = document.getElementById("ventajas-container");
             const nuevoDiv = document.createElement("div");
             nuevoDiv.innerHTML = `
             <div class="ventajasClass">
-            <input type="text" class="item-ventajas" id="idVentaja${index}" value="${ventaja.idVentaja}" style="display: none;">
-                <input type="text" class="item-ventajas nombreVentaja" id="nombre${index}" value="${escapeHTML(ventaja.nombre)}">
-                             
+                <input type="text" class="item-ventajas nombreVentaja" id="nombre">
+                
                 <button class="btn btn-danger eliminar-item-ventajas">Eliminar</button>
             </div>`;
             contenedorVentajas.appendChild(nuevoDiv);
+
+            // Obtenemos el nuevo elemento de entrada
+            let nuevoInput = nuevoDiv.querySelector(".item-ventajas");
+
             const urlParams = new URLSearchParams(window.location.search);
             const idPersonaje = parseInt(urlParams.get('id'));
-            // Obtener el botón de eliminar asociado al nuevo elemento de inventario
-            let btnEliminar = nuevoDiv.querySelector(".eliminar-item-ventajas");
-            // Obtenemos el nuevo elemento de entrada
-            //let nuevoInput = nuevoDiv.querySelector(".item-ventajas");
+            console.log(idPersonaje)
+            console.log(typeof idPersonaje)
 
-
-            let nuevoInput = nuevoDiv.querySelector(".item-ventajas.nombreVentaja");
-            btnEliminar.addEventListener("click", () => {
-                const idVentaja = nuevoDiv.querySelector(`#idVentaja${index}`).value; // Obtener el ID de la ventaja
-                contenedorVentajas.removeChild(nuevoDiv); // Eliminar el div del inventario del DOM
-                eliminarVentajas(idPersonaje, idVentaja); // Llamar a la función para eliminar el item del servidor
+        
+            // Agregamos el event listener directamente al nuevo elemento de entrada
+            nuevoInput.addEventListener("change", () => {
+                const nombre = nuevoDiv.querySelector(`#nombre`).value; 
+                //const coste = nuevoDiv.querySelector(`#coste`).value;
+                insertVentajas(idPersonaje,nombre);
+                
             });
 
-              
-            nuevoInput.addEventListener("change",()=>{
-                console.log("funciona el boton de update")
-                //const idVentaja = nuevoDiv.querySelector(`#idVentaja${index}`).value;
-                updateVentaja(idPersonaje,ventaja.idVentaja, nuevoInput.value);
-            })
+
+            // Obtener el botón de eliminar asociado al nuevo elemento de inventario
+            let btnEliminar = nuevoDiv.querySelector(".eliminar-item-ventajas");
+
+            // Agregar el evento 'click' al botón de eliminar
+            btnEliminar.addEventListener("click", () => {
+                contenedorVentajas.removeChild(nuevoDiv); // Eliminar el div del inventario del DOM
+                eliminarVentajasNombre(idPersonaje, nuevoInput.value); // Llamar a la función para eliminar el item del servidor
+            });
 
         });
-    } catch (error) {
-        console.error('Error al imprimir ventajas:', error);
-    }
-}
-imprimirVentajas();
+        async function insertVentajas(idPersonaje,nombre){
+            try{
+                
+                console.log("Insertando idPersonaje nueva ventaja:", idPersonaje);
+                console.log("Insertando nombre nueva ventaja:", nombre);
+                //console.log("Insertando coste nueva ventaja:", coste);
+            
 
 
+            
+                
+                const response = await fetch(`/insertarNuevaVentaja/${idPersonaje}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre: nombre})
+            
+                });
+                if (!response.ok) {
+                    throw new Error('Error al insertar el nuevo item en la base de datos');
+                }
+                const data = await response.json();
+                console.log('Nuevo item insertado:', data);
+            
 
-
-
-let nuevoVentajas = document.getElementById("agregar-ventaja");
-nuevoVentajas.addEventListener("click", () => {
-    console.log("Funciona el botón nuevo ventajas");
-
-    const contenedorVentajas = document.getElementById("ventajas-container");
-    const nuevoDiv = document.createElement("div");
-    nuevoDiv.innerHTML = `
-    <div class="ventajasClass">
-        <input type="text" class="item-ventajas nombreVentaja" id="nombre">
-        
-        <button class="btn btn-danger eliminar-item-ventajas">Eliminar</button>
-    </div>`;
-    contenedorVentajas.appendChild(nuevoDiv);
-
-    // Obtenemos el nuevo elemento de entrada
-    let nuevoInput = nuevoDiv.querySelector(".item-ventajas");
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const idPersonaje = parseInt(urlParams.get('id'));
-    console.log(idPersonaje)
-    console.log(typeof idPersonaje)
-
-   
-    // Agregamos el event listener directamente al nuevo elemento de entrada
-    nuevoInput.addEventListener("change", () => {
-        const nombre = nuevoDiv.querySelector(`#nombre`).value; 
-        //const coste = nuevoDiv.querySelector(`#coste`).value;
-        insertVentajas(idPersonaje,nombre);
-        
-    });
-
-
-    // Obtener el botón de eliminar asociado al nuevo elemento de inventario
-    let btnEliminar = nuevoDiv.querySelector(".eliminar-item-ventajas");
-
-    // Agregar el evento 'click' al botón de eliminar
-    btnEliminar.addEventListener("click", () => {
-        contenedorVentajas.removeChild(nuevoDiv); // Eliminar el div del inventario del DOM
-        eliminarVentajasNombre(idPersonaje, nuevoInput.value); // Llamar a la función para eliminar el item del servidor
-    });
-
-});
-
-
-async function insertVentajas(idPersonaje,nombre){
-    try{
-        
-        console.log("Insertando idPersonaje nueva ventaja:", idPersonaje);
-        console.log("Insertando nombre nueva ventaja:", nombre);
-        //console.log("Insertando coste nueva ventaja:", coste);
-       
-
-
-       
-        
-        const response = await fetch(`/insertarNuevaVentaja/${idPersonaje}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ nombre: nombre})
-    
-        });
-        if (!response.ok) {
-            throw new Error('Error al insertar el nuevo item en la base de datos');
+            }catch(error){
+                console.error('Error al insertar nuevo item en la base de datos:', error);
+            }
         }
-        const data = await response.json();
-        console.log('Nuevo item insertado:', data);
-     
+        async function eliminarVentajas(idPersonaje, idVentaja) {
+            try {
+                console.log("Eliminando idVentaja:", idVentaja);
+                console.log("ID del personaje:", idPersonaje);
 
-    }catch(error){
-        console.error('Error al insertar nuevo item en la base de datos:', error);
-    }
-}
+                // Realizar la solicitud para eliminar el item del servidor
+                const response = await fetch(`/eliminarVentaja/${idPersonaje}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ idVentaja: idVentaja })
+                });
 
+                if (!response.ok) {
+                    throw new Error('Error al eliminar el ventaja de la base de datos');
+                }
 
-async function eliminarVentajas(idPersonaje, idVentaja) {
-    try {
-        console.log("Eliminando idVentaja:", idVentaja);
-        console.log("ID del personaje:", idPersonaje);
-
-        // Realizar la solicitud para eliminar el item del servidor
-        const response = await fetch(`/eliminarVentaja/${idPersonaje}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ idVentaja: idVentaja })
-        });
-
-        if (!response.ok) {
-            throw new Error('Error al eliminar el ventaja de la base de datos');
+                const data = await response.json();
+                console.log('Ventaja eliminada:', data);
+            } catch (error) {
+                console.error('Error al eliminar ventaja de la base de datos:', error);
+            }
         }
+        async function eliminarVentajasNombre(idPersonaje, nombre) {
+            try {
+                console.log("Eliminando nombre:", nombre);
+                console.log("ID del personaje:", idPersonaje);
 
-        const data = await response.json();
-        console.log('Ventaja eliminada:', data);
-    } catch (error) {
-        console.error('Error al eliminar ventaja de la base de datos:', error);
-    }
-}
+                // Realizar la solicitud para eliminar el item del servidor
+                const response = await fetch(`/eliminarVentajaNombre/${idPersonaje}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre: nombre })
+                });
 
+                if (!response.ok) {
+                    throw new Error('Error al eliminar el ventaja de la base de datos');
+                }
 
-async function eliminarVentajasNombre(idPersonaje, nombre) {
-    try {
-        console.log("Eliminando nombre:", nombre);
-        console.log("ID del personaje:", idPersonaje);
-
-        // Realizar la solicitud para eliminar el item del servidor
-        const response = await fetch(`/eliminarVentajaNombre/${idPersonaje}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ nombre: nombre })
-        });
-
-        if (!response.ok) {
-            throw new Error('Error al eliminar el ventaja de la base de datos');
+                const data = await response.json();
+                console.log('Ventaja eliminada:', data);
+            } catch (error) {
+                console.error('Error al eliminar ventaja de la base de datos:', error);
+            }
         }
+        async function updateVentaja(idPersonaje, idVentaja, nombre) {
+            try {
+                console.log("SE DISPARO UPDATE VENTAJA")
+                const response = await fetch(`/updateVentaja/${idPersonaje}/${idVentaja}/${nombre}`, {
+                    method: 'PUT', // Método HTTP PUT para actualizar
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    // Puedes enviar cualquier información adicional en el cuerpo de la solicitud si es necesario
+                    // body: JSON.stringify({ key: value })
+                });
 
-        const data = await response.json();
-        console.log('Ventaja eliminada:', data);
-    } catch (error) {
-        console.error('Error al eliminar ventaja de la base de datos:', error);
-    }
-}
+                if (!response.ok) {
+                    throw new Error('Error al actualizar ventaja en la base de datos');
+                }
 
-async function updateVentaja(idPersonaje, idVentaja, nombre) {
-    try {
-        console.log("SE DISPARO UPDATE VENTAJA")
-        const response = await fetch(`/updateVentaja/${idPersonaje}/${idVentaja}/${nombre}`, {
-            method: 'PUT', // Método HTTP PUT para actualizar
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            // Puedes enviar cualquier información adicional en el cuerpo de la solicitud si es necesario
-            // body: JSON.stringify({ key: value })
-        });
-
-        if (!response.ok) {
-            throw new Error('Error al actualizar ventaja en la base de datos');
+                const data = await response.json();
+                console.log('Ventaja actualizado:', data);
+            } catch (error) {
+                console.error('Error al actualizar el ventaja en la base de datos:', error);
+            }
         }
-
-        const data = await response.json();
-        console.log('Ventaja actualizado:', data);
-    } catch (error) {
-        console.error('Error al actualizar el ventaja en la base de datos:', error);
-    }
 }
-
-
-
-  
-       
-    }
   
     modificarFicha(){
         let nombre=document.getElementById("nombreInput")
@@ -2035,7 +2159,7 @@ async function updateVentaja(idPersonaje, idVentaja, nombre) {
         let meditacionEspiritual=document.getElementById("meditacionEspiritualInput");
         let meditacionVital=document.getElementById("meditacionVitalInput"); 
         let nombreArma=document.getElementById("nombreArmaInput");
-        
+
         this.nombre=nombre.value;
         this.raza=raza.value;
         this.dominio=dominio.value;
@@ -2081,7 +2205,7 @@ async function updateVentaja(idPersonaje, idVentaja, nombre) {
         this.faseSalud=this.fortaleza+this.ki;
         this.vidaTotal=this.faseSalud*3;
         this.kiActual=this.kiActual;
-        this.kenActual=this.ken;
+        this.kenActual=this.kenActual;
 
         localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj)); 
     }
@@ -2107,13 +2231,10 @@ async function updateVentaja(idPersonaje, idVentaja, nombre) {
         caracteristicas8[7]=parseInt(sentidos.value)|| 0;
         let total=caracteristicas8.reduce((acum,valor)=>acum+valor,0);
         let resultado=document.getElementById("resultado");
-        resultado.innerHTML=total
-        console.log(total);
-    
+        resultado.innerHTML=total;
     }
 
     calcularTotalHabilidades(){
-
         let academisismo=document.getElementById("academisismoInput");
         let artesMarciales=document.getElementById("artesMarcialesInput");
         let atletismo=document.getElementById("atletismoInput");
@@ -2167,13 +2288,10 @@ async function updateVentaja(idPersonaje, idVentaja, nombre) {
         caracteristicas25[22]=parseInt(tratoBakemono.value)|| 0;
         caracteristicas25[23]=parseInt(conHechiceria.value)|| 0;
         caracteristicas25[24]=parseInt(meditacionEspiritual.value)|| 0;
-        caracteristicas25[25]=parseInt(meditacionVital.value)|| 0;
-      
+        caracteristicas25[25]=parseInt(meditacionVital.value)|| 0;     
         let total=caracteristicas25.reduce((acum,valor)=>acum+valor,0);
         let resultado2=document.getElementById("resultado2");
         resultado2.innerHTML=total
-        console.log(total);
-
     }
 
     actualizarPj(){

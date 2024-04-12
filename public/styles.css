@@ -61,9 +61,6 @@ main {
     border: 15px solid rgb(18, 18, 18);
     opacity: 0.97;
 }
-.cardhover :hover{
-    transform: scale(1.05);
-}
 .fondoMisPersonajes{
     background-image:url('assets/_74c7cac9-a003-4a3c-8ed8-64c41fa79eb6.jpg');
     background-size: cover;
@@ -199,18 +196,24 @@ footer {
     align-items: center;  
 }
 .small-input {
-    padding: 8px; 
-    font-size: 14px; 
+    padding: 5px; 
+    font-size: 12px; 
     border: 1px solid #ccc; 
     border-radius: 5px; 
     margin-bottom: 10px;
-    width: 60px; 
+    width: 50px; 
     text-align: center;
     background-color: black;
-    color: greenyellow;
+    color:#212529;
+}
+.fas{
+    margin-left: 10px;
 }
 .fas:hover{
   color: greenyellow;
+}
+.small-input:hover {
+    color: greenyellow;
 }
 @keyframes moverBrillo {
     0% {
@@ -596,9 +599,6 @@ border: 3px solid black;
     font-size: 14px;
     font-weight: bold;
 }
-.fas:hover{
-  color: greenyellow;
-}
 .gru{
     display: grid;
     grid-template-columns: 20% 80%;
@@ -840,9 +840,116 @@ border: 3px solid black;
     font-size: 18px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+.personajesNarrador{
+    margin-top: 15px;
+}
+.sagas{
+    border: 5px solid black;
+    background-color: rgba(0, 128, 0, 0.503);
+    opacity: 0.9;
+}
 
+.borderGrupo {
+    border: 25px solid black;
+    padding: 5%; 
+    background-color: #00b7ff59;
+    margin: 20px auto; 
+    align-self: center;
+    width: 80%; 
+}
+.ordenCards{
+    transform: scale(0.7);
+    transform-origin: top;
+    margin-top: 20px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 35px;
+    justify-content: center;
+    align-items: center;    
+}
+.tituloSaga {
+    display: grid;
+    grid-template-columns: 50% 30% 10% 10%;
+    gap: 1%;
+    color: yellow;  
+    text-align: center;
+    height: 50px; /* Establece una altura fija para la fila */
+    white-space: nowrap; /* Impide que el texto se ajuste en varias líneas */
+}
+.results{
+    transform: scale(0.6);
+    background-color: rgba(0, 128, 0, 0.439);
+    opacity: 0.8;
+    color: aliceblue;
+    display: grid;
+    font-size: 60px;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+}
+.inputBuscador{
+    background-color: black;
+    color: greenyellow;
+    font-size: 14px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    padding: 0px;
+    border-radius: 10px;
+}
+.contenedorGrupos{
+    margin: 0;
+    padding: 0;
+    display: grid;
+    align-items: center;
+}
+.cardGrupoHover:hover{
+    transform: scale(1.05);
+}
+.mini{
+    transform: scale(0.7);
+    transform-origin: top;
+    margin-top: 30px;
+}
+.tituloCrearSaga{
+margin-left: 10px;
+margin-top: 20px;
+}
+.inputTituloCrearSaga{
+    margin-left: 10px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.labelBuscarPersonaje{
+    margin-left: 10px;
+}
+.inputBuscarPersonaje{
+    margin-left: 10px;
+    border-radius: 10px;
+}
+.containerPjCrear{
+    margin-top: 30px;
+}
+.pjsSumar {
+    color: black;  
+    width: 100px; /* Ajusta el ancho según sea necesario */
+    height: 100px; /* Ajusta la altura según sea necesario */
+    display: flex; /* Para centrar el contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    color: aliceblue;
+}
 
-
-
-
+.imagenMini {
+    width: 50px; /* Ajusta el ancho de la imagen según sea necesario */
+    height: 50px; /* Ajusta la altura de la imagen según sea necesario */
+    margin: 5px;
+    border-radius: 25px;
+    
+    
+}
+.imagenMini:hover{
+    transform: scale(2);
+}
+.btnCrearSagaNueva{
+    margin-left: 40%;
+}
 

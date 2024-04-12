@@ -1,8 +1,5 @@
-//importacion de io
 const socket = io();
 
-
-//VERIFICA ESTADO DE SESION Y PERMISO PARA HABILITAR LA NAVEGACION EN LAS PAGINAS
 function verificacionEstadoSesion(){
     let sesionIniciada = localStorage.getItem(`sesionIniciada`);
     let permiso = localStorage.getItem(`permisoUsuario`);
@@ -36,10 +33,8 @@ function verificacionEstadoSesion(){
         paginaMaster.classList.add('d-none');
     }
 }
-
 verificacionEstadoSesion();
 
-//BOTON CERRAR SESION
 let cerrarSesion=document.getElementById("cerrarSesion");
 cerrarSesion.addEventListener("click",()=>{
     console.log("funciona el evento de cerrar sesion");
@@ -54,7 +49,6 @@ cerrarSesion.addEventListener("click",()=>{
     let nombresSesion = document.getElementById('offcanvasDarkNavbarLabel');
     nombresSesion.textContent=`ZNK`;  
 })
-
 
 const consumirPersonajesBd = async () => {
     try {   
@@ -125,7 +119,8 @@ const consumirPersonajesBd = async () => {
                 pj.fasesPos,
                 pj.fasesNeg,
                 pj.nombreArma,
-                pj.consumicionKi
+                pj.consumicionKi,
+                pj.imagenFile
             );
             coleccionPj.push(pjNuevo);          
         });
@@ -136,10 +131,8 @@ const consumirPersonajesBd = async () => {
         console.error('Error al obtener personajes:', error);
     }
 };
-
 consumirPersonajesBd();
 
-//funcion de mostrar las fichas
 function mostrarFichas(coleccionPj){
     fichasCard.innerHTML="";
     let idusuario=localStorage.getItem(`idusuario`);
@@ -223,4 +216,9 @@ socket.on('pjActualizado', (infoActualizada) => {
     
     //consumirPersonajesBd()
 });
+
+
+
+
+
 

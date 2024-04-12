@@ -1,7 +1,6 @@
-//importacion de io
 const socket = io(); 
 let arrayDominiosTecnicas=[];
-//objeto para guardar dominios y tecnicas
+
 let pjDominios = {
     idPersonaje: 0,
     dominio: [],
@@ -49,24 +48,6 @@ function verificacionEstadoSesion(){
 
 verificacionEstadoSesion();
 
-//BOTON CERRAR SESION
-/*let cerrarSesion=document.getElementById("cerrarSesion");
-cerrarSesion.addEventListener("click",()=>{
-    console.log("funciona el evento de cerrar sesion");
-    localStorage.removeItem(`sesionIniciada`);
-    localStorage.removeItem(`nombreusuario`);
-    localStorage.removeItem(`idusuario`);
-    localStorage.removeItem(`pj`);
-    localStorage.removeItem(`permisoUsuario`);
-    localStorage.removeItem(`estadoUsuario`);
-    localStorage.removeItem(`coleccionPj`);
-    console.log("sesion cerrada");
-    let nombresSesion = document.getElementById('offcanvasDarkNavbarLabel');
-    nombresSesion.textContent=`ZNK`;
-
-   
-})*/
-
 let sesionIniciada=localStorage.getItem("sesionIniciada");
 
 //necesitamos consumir todos los personajes de la base
@@ -112,7 +93,6 @@ const consumirPersonajesBd = async () => {
                 pj.sentidos,
                 pj.presencia,
                 pj.principio,
-
                 pj.academisismo,
                 pj.artesMarciales,
                 pj.atletismo,  
@@ -144,7 +124,8 @@ const consumirPersonajesBd = async () => {
                 pj.fasesPos,
                 pj.fasesNeg,
                 pj.nombreArma,
-                pj.consumicionKi
+                pj.consumicionKi,
+                pj.imagenFile
             );
             coleccionPj.push(pjNuevo);
             console.log(coleccionPj)
@@ -299,7 +280,7 @@ async function realizarUpdateBbdd(idpersonaje,nombre,raza,naturaleza,dominio,fue
                 title: `Los cambios fueron guardados!`,
                 showConfirmButton: false,
                 timer: 1500
-              });
+            });
 
 
         } else {

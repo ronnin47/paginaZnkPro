@@ -1,67 +1,3 @@
-
-//VERIFICA ESTADO DE SESION Y PERMISO PARA HABILITAR LA NAVEGACION EN LAS PAGINAS
-function verificacionEstadoSesion(){
-    let sesionIniciada = localStorage.getItem(`sesionIniciada`);
-    let permiso = localStorage.getItem(`permisoUsuario`);
-    let nombreUsuarioLocalStorage = localStorage.getItem('nombreusuario') || '';
-    let nombreSesion = document.getElementById('offcanvasDarkNavbarLabel');
-    nombreSesion.textContent=`ZNK-${nombreUsuarioLocalStorage}`;
-
-
- 
-    let paginaMisPersonajes = document.getElementById('paginaMisPersonajes');
-    let paginaNarrador = document.getElementById('paginaNarrador');
-    let paginaCrearPj = document.getElementById('paginaCrearPj');
-    let inicioSesion = document.getElementById('inicioSesion');
-    let cerrarSesion = document.getElementById('cerrarSesion');
-    
-    if (sesionIniciada === "true") {
-        cerrarSesion.classList.remove('d-none');
-        paginaCrearPj.classList.remove('d-none');
-        paginaMisPersonajes.classList.remove('d-none');
-
-        paginaNarrador.classList.add('d-none');
-        //paginaMaster.classList.add('d-none');
-
-        if (permiso === "1") {
-            paginaNarrador.classList.remove('d-none');
-        }
-        if (permiso === "2") {
-            paginaNarrador.classList.remove('d-none');
-        }
-    } else {
-        cerrarSesion.classList.add('d-none');
-        paginaCrearPj.classList.add('d-none');
-        paginaMisPersonajes.classList.add('d-none');
-        paginaNarrador.classList.add('d-none');
-    }
-}
-
-verificacionEstadoSesion();
-
-//BOTON CERRAR SESION
-let cerrarSesion=document.getElementById("cerrarSesion");
-cerrarSesion.addEventListener("click",()=>{
-    console.log("funciona el evento de cerrar sesion");
-    localStorage.removeItem(`sesionIniciada`);
-    localStorage.removeItem(`nombreusuario`);
-    localStorage.removeItem(`idusuario`);
-    localStorage.removeItem(`pj`);
-    localStorage.removeItem(`permisoUsuario`);
-    localStorage.removeItem(`estadoUsuario`);
-    localStorage.removeItem(`coleccionPj`);
-    console.log("sesion cerrada"); 
-    let nombresSesion = document.getElementById('offcanvasDarkNavbarLabel');
-    nombresSesion.textContent=`ZNK`;   
-})
-
-
-
-
-let coleccionUsuarios=[];
-let usuariosRows=document.getElementById("usuariosRows");
-
-//class para USUARIOS
 class usuario{
     constructor(idusuario,nombreusuario,estado,permiso){
         this.idusuario = idusuario,
@@ -87,7 +23,7 @@ class usuario{
                                                 <button id="btnCambiarPermiso-${this.idusuario}" class="btn btn-primary" type="button"></button>                                                                                    
                                         </div>
                                     </div> `
-        //append o appendChild adjuntamos AL DOM al nodo
+        
         usuariosRows.appendChild(nuevaFichaUsuario);
 
         let estado=document.getElementById(`estado-${this.idusuario}`);     
@@ -111,7 +47,6 @@ class usuario{
             btnCambiarEstado.remove();
         }
              
-        //creamos el evento para cambiar el estado
         btnCambiarEstado.addEventListener("click",()=>{
            console.log(`funciona el boton de cambio de estado del usuario ${this.idusuario}`);          
            let nuevoEstado
@@ -122,8 +57,6 @@ class usuario{
               nuevoEstado="0";
               console.log("el estado era 1 y es cambiado a 0")
             }
-           
-           //aca invocamos la async para update
            cambiarEstadoUsuario(this.idusuario,this.nombreusuario,nuevoEstado);
         });
 
@@ -137,17 +70,64 @@ class usuario{
                nuevoPermiso="0";
                console.log("el estado del permiso de usuario era 1 y es cambiado a 0")
             }     
-            //aca invocamos la async para update
             cambiarPermisoUsuario(this.idusuario,this.nombreusuario,nuevoPermiso);
          });
             
     }
 }
 
+function verificacionEstadoSesion(){
+    let sesionIniciada = localStorage.getItem(`sesionIniciada`);
+    let permiso = localStorage.getItem(`permisoUsuario`);
+    let nombreUsuarioLocalStorage = localStorage.getItem('nombreusuario') || '';
+    let nombreSesion = document.getElementById('offcanvasDarkNavbarLabel');
+    nombreSesion.textContent=`ZNK-${nombreUsuarioLocalStorage}`;
+    let paginaMisPersonajes = document.getElementById('paginaMisPersonajes');
+    let paginaNarrador = document.getElementById('paginaNarrador');
+    let paginaCrearPj = document.getElementById('paginaCrearPj');
+    let inicioSesion = document.getElementById('inicioSesion');
+    let cerrarSesion = document.getElementById('cerrarSesion');
+    
+    if (sesionIniciada === "true") {
+        cerrarSesion.classList.remove('d-none');
+        paginaCrearPj.classList.remove('d-none');
+        paginaMisPersonajes.classList.remove('d-none');
+        paginaNarrador.classList.add('d-none');
 
-//********************************************************** 
+        if (permiso === "1") {
+            paginaNarrador.classList.remove('d-none');
+        }
+        if (permiso === "2") {
+            paginaNarrador.classList.remove('d-none');
+        }
+    } else {
+        cerrarSesion.classList.add('d-none');
+        paginaCrearPj.classList.add('d-none');
+        paginaMisPersonajes.classList.add('d-none');
+        paginaNarrador.classList.add('d-none');
+    }
+}
+verificacionEstadoSesion();
 
-//consume usuarios de la bbdd
+let cerrarSesion=document.getElementById("cerrarSesion");
+cerrarSesion.addEventListener("click",()=>{
+    console.log("funciona el evento de cerrar sesion");
+    localStorage.removeItem(`sesionIniciada`);
+    localStorage.removeItem(`nombreusuario`);
+    localStorage.removeItem(`idusuario`);
+    localStorage.removeItem(`pj`);
+    localStorage.removeItem(`permisoUsuario`);
+    localStorage.removeItem(`estadoUsuario`);
+    localStorage.removeItem(`coleccionPj`);
+    console.log("sesion cerrada"); 
+    let nombresSesion = document.getElementById('offcanvasDarkNavbarLabel');
+    nombresSesion.textContent=`ZNK`;   
+})
+
+let coleccionUsuarios=[];
+let usuariosRows=document.getElementById("usuariosRows");
+
+
 const obtenerEstadoUsuarios = async () => {
     try {   
         coleccionUsuarios.length = 0;
