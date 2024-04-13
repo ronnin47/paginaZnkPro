@@ -501,6 +501,7 @@ io.on("connection",(socket)=>{
           fasesNeg,
           nombreArma,
           consumicionKi
+          
       } = pj;
            
       const queryString = `
@@ -530,7 +531,7 @@ console.log("esto es lo que tiene el array",[nombre,raza,naturaleza,dominio,fuer
 
        if (resultado.length > 0) {
          const pjActualizado = resultado;
-         console.log(pjActualizado);
+         console.log("ESTO ES LO QUE EMITE AL CLIENTE",pjActualizado);
          io.emit('pjActualizado', pjActualizado);
        } else {
          const infoActualizada = resultado;
@@ -811,6 +812,7 @@ app.put('/update/:idpersonaje', (req, res) => {
           fasesPos,
           fasesNeg,
           nombreArma,
+          historia
          
       } = req.body;
       console.log("es cuerpo de la solicitud es: ",req.body)
@@ -819,13 +821,13 @@ app.put('/update/:idpersonaje', (req, res) => {
      
       const queryString = `
           UPDATE personajes
-          SET nombre=?, raza=?, naturaleza=?, dominio=?, fuerza=?, fortaleza=?, ki=?, kiActual=?, faseSalud=?, vidaTotal=?, damageActual=?, ken=?, kenActual=?, imagen=?, destreza=?, agilidad=?, sabiduria=?, sentidos=?, presencia=?, principio=?, academisismo=?, artesMarciales=?, atletismo=?, conBakemono=?, conDemonio=? , conEsferas=?, conEspiritual=?, forja=?, medicina=?, montar=?, sigilo=?, pilotear=?, manejoArma=?, conObjMagicos=?, conLeyendas=?, resCorte=?, resEnergia=?, resRayo=?, resFuego=?, resFrio=?, resVeneno=?, manejoSombras=?, tratoBakemono=?, conHechiceria=?, meditacionEspiritual=?, meditacionVital=? , idusuario_fk=? , cantFases=?, fasesPos=?, fasesNeg=?, nombreArma=? 
+          SET nombre=?, raza=?, naturaleza=?, dominio=?, fuerza=?, fortaleza=?, ki=?, kiActual=?, faseSalud=?, vidaTotal=?, damageActual=?, ken=?, kenActual=?, imagen=?, destreza=?, agilidad=?, sabiduria=?, sentidos=?, presencia=?, principio=?, academisismo=?, artesMarciales=?, atletismo=?, conBakemono=?, conDemonio=? , conEsferas=?, conEspiritual=?, forja=?, medicina=?, montar=?, sigilo=?, pilotear=?, manejoArma=?, conObjMagicos=?, conLeyendas=?, resCorte=?, resEnergia=?, resRayo=?, resFuego=?, resFrio=?, resVeneno=?, manejoSombras=?, tratoBakemono=?, conHechiceria=?, meditacionEspiritual=?, meditacionVital=? , idusuario_fk=? , cantFases=?, fasesPos=?, fasesNeg=?, nombreArma=?, historia=?
           WHERE idpersonaje=?;
       `;
 
 
        //dejo el idpersonaje como ultimo parametro
-      connection.query(queryString, [nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos, fasesNeg, nombreArma, idpersonaje], (err, result) => {
+      connection.query(queryString, [nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos, fasesNeg, nombreArma,historia, idpersonaje], (err, result) => {
           if (err) {
               console.error('Error al ejecutar la consulta:', err);
               res.status(500).send('Error interno del servidor');

@@ -125,7 +125,8 @@ const consumirPersonajesBd = async () => {
                 pj.fasesNeg,
                 pj.nombreArma,
                 pj.consumicionKi,
-                pj.imagenFile
+                pj.imagenFile,
+                pj.historia || ""
             );
             coleccionPj.push(pjNuevo);
             console.log(coleccionPj)
@@ -207,7 +208,7 @@ const obtenerEstadoUsuario = async () => {
 };
 
 //async function de INSERT NUEVO PRODUCTO
-async function realizarUpdateBbdd(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma) {
+async function realizarUpdateBbdd(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,historia) {
     try {
         const response = await fetch(`/update/${idpersonaje}`, {
             method: 'PUT',
@@ -266,7 +267,8 @@ async function realizarUpdateBbdd(idpersonaje,nombre,raza,naturaleza,dominio,fue
             cantFases:`${cantFases}`,
             fasesPos:`${fasesPos}`,
             fasesNeg:`${fasesNeg}`,
-            nombreArma:`${nombreArma}`
+            nombreArma:`${nombreArma}`,
+            historia:`${historia}`
             
             })
         });
@@ -544,13 +546,16 @@ socket.on('pjActualizado', (infoActualizada) => {
             pj.fasesPos,
             pj.fasesNeg,
             pj.nombreArma,
-            pj.consumicionKi
+            pj.consumicionKi,
+            pj.imagenFile,
+            pj.historia
         );
         coleccionPj.push(pjNuevo);
     })
 
-
+    console.log("paso por el socket recibiendo  historia: ",coleccionPj)
     mostrarFichas(coleccionPj)
+    
     //invocamos esto para que consuma la base de datos y muestre los resultados en el dom
     
     //consumirPersonajesBd()

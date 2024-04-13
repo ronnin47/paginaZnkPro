@@ -1,7 +1,7 @@
 let coleccionPj=[];
 
 class Pj{
-    constructor(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,imagenFile)
+    constructor(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,imagenFile,historia)
       {
      this.idpersonaje=idpersonaje,
      this.nombre=nombre,
@@ -56,7 +56,8 @@ class Pj{
      this.fasesNeg=fasesNeg,
      this.nombreArma=nombreArma,
      this.consumicionKi=consumicionKi,
-     this.imagenFile=imagenFile
+     this.imagenFile=imagenFile,
+     this.historia=historia
     }  
 
     actualizarBarraDeProgreso(){
@@ -331,7 +332,7 @@ class Pj{
 
 
        
-}
+    }
 
 
     ficha(){   
@@ -861,13 +862,29 @@ if (this.imagenFile && this.imagenFile.data) {
 
                            <div class="collapse inventarios" id="inventario">  
                             <div id="inventario-container">
-                              
                             </div>
+                            
                             <div>
                                 <button class="agregar-inventario" id="agregar-inventario">+ inventario</button>
                             </div>
                            
                            </div>
+                           
+                           
+                           <div class="centrame">
+                           <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#historia" aria-expanded="false" aria-controls="collapseExample">
+                           Historia de personaje
+                           </button>
+                           </div>  
+
+                          <div class="collapse historia" id="historia"> 
+                          <textarea name="" id="historiaInput" cols="30" rows="30" class="textHistoria" >${this.historia}</textarea>
+                           
+                          
+                          </div>
+                          </div>
+
+                           
                            </div>
 
                             <div>
@@ -878,6 +895,10 @@ if (this.imagenFile && this.imagenFile.data) {
                                 
                             </div>  
                                         `
+            let historia=document.getElementById(`historiaInput`)
+            let texto=historia.value
+            console.log(texto)
+
 
             let consumicionKi=document.getElementById(`inputConsumicionKi-${this.idpersonaje}`);            
             consumicionKi.addEventListener("change",()=>{
@@ -1125,8 +1146,8 @@ if (this.imagenFile && this.imagenFile.data) {
         guardarCambiosBtn.addEventListener("click",()=>{
             this.modificarFicha();
             localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-
-            realizarUpdateBbdd(this.idpersonaje,this.nombre,this.raza,this.naturaleza,this.dominio,this.fuerza,this.fortaleza,this.ki,this.kiActual,this.faseSalud,this.vidaTotal,this.damageActual,this.ken,this.kenActual,this.imagen,this.destreza,this.agilidad,this.sabiduria,this.sentidos,this.presencia,this.principio, this.academisismo, this.artesMarciales, this.atletismo,this.conBakemono,this.conDemonio,this.conEsferas,this.conEspiritual,this.forja,this.medicina,this.montar,this.sigilo,this.pilotear,this.manejoArma,this.conObjMagicos,this.conLeyendas,this.resCorte,this.resEnergia,this.resRayo,this.resFuego,this.resFrio,this.resVeneno,this.manejoSombras,this.tratoBakemono,this.conHechiceria,this.meditacionEspiritual,this.meditacionVital,this.idusuario_fk,this.cantFases,this.fasesPos,this.fasesNeg,this.nombreArma);
+            console.log(this.historia)
+            realizarUpdateBbdd(this.idpersonaje,this.nombre,this.raza,this.naturaleza,this.dominio,this.fuerza,this.fortaleza,this.ki,this.kiActual,this.faseSalud,this.vidaTotal,this.damageActual,this.ken,this.kenActual,this.imagen,this.destreza,this.agilidad,this.sabiduria,this.sentidos,this.presencia,this.principio, this.academisismo, this.artesMarciales, this.atletismo,this.conBakemono,this.conDemonio,this.conEsferas,this.conEspiritual,this.forja,this.medicina,this.montar,this.sigilo,this.pilotear,this.manejoArma,this.conObjMagicos,this.conLeyendas,this.resCorte,this.resEnergia,this.resRayo,this.resFuego,this.resFrio,this.resVeneno,this.manejoSombras,this.tratoBakemono,this.conHechiceria,this.meditacionEspiritual,this.meditacionVital,this.idusuario_fk,this.cantFases,this.fasesPos,this.fasesNeg,this.nombreArma,this.historia);
             insertDominiosTecnicas(pjDominios);
             location.reload();            
         });
@@ -2159,6 +2180,8 @@ if (this.imagenFile && this.imagenFile.data) {
         let meditacionEspiritual=document.getElementById("meditacionEspiritualInput");
         let meditacionVital=document.getElementById("meditacionVitalInput"); 
         let nombreArma=document.getElementById("nombreArmaInput");
+        let historia=document.getElementById("historiaInput");
+        
 
         this.nombre=nombre.value;
         this.raza=raza.value;
@@ -2206,6 +2229,8 @@ if (this.imagenFile && this.imagenFile.data) {
         this.vidaTotal=this.faseSalud*3;
         this.kiActual=this.kiActual;
         this.kenActual=this.kenActual;
+        this.historia=historia.value;
+        //this.historia=this.historia;
 
         localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj)); 
     }

@@ -952,4 +952,17 @@ margin-top: 20px;
 .btnCrearSagaNueva{
     margin-left: 40%;
 }
+.textHistoria{
+    padding-top:30px;
+    width: 100%; 
+    height: 100%; 
+    padding: 20px; 
+    font-size: 16px; 
+    border: 1px solid black; 
+    border-radius: 5px; 
+    resize: vertical; 
+    box-sizing: border-box; 
+    background-color: rgba(0, 0, 0, 0.808);
+    color: aliceblue;
+}
 
