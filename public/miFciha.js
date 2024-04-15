@@ -126,7 +126,9 @@ const consumirPersonajesBd = async () => {
                 pj.nombreArma,
                 pj.consumicionKi,
                 pj.imagenFile,
-                pj.historia || ""
+                pj.historia || "",
+                pj.nivelDestino,
+                pj.puntosDestino
             );
             coleccionPj.push(pjNuevo);
             console.log(coleccionPj)
@@ -208,7 +210,7 @@ const obtenerEstadoUsuario = async () => {
 };
 
 //async function de INSERT NUEVO PRODUCTO
-async function realizarUpdateBbdd(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,historia) {
+async function realizarUpdateBbdd(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,historia,nivelDestino,puntosDestino) {
     try {
         const response = await fetch(`/update/${idpersonaje}`, {
             method: 'PUT',
@@ -268,7 +270,9 @@ async function realizarUpdateBbdd(idpersonaje,nombre,raza,naturaleza,dominio,fue
             fasesPos:`${fasesPos}`,
             fasesNeg:`${fasesNeg}`,
             nombreArma:`${nombreArma}`,
-            historia:`${historia}`
+            historia:`${historia}`,
+            nivelDestino:`${nivelDestino}`,
+            puntosDestino:`${puntosDestino}`
             
             })
         });

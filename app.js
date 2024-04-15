@@ -681,17 +681,19 @@ app.post('/insert', async (req, res) => {
       fasesNeg,
       nombreArma,
       consumicionKi,
-      imagenFile
+      imagenFile,
+      nivelDestino,
+      puntosDestino
     } = req.body;
 
     console.log('Body del POST del cliente:', req.body);
 //aca va ir en el primer campo idpersonaje_fk
     const queryString = `
-      INSERT INTO personajes (nombre, raza, naturaleza, dominio, fuerza, fortaleza, ki, kiActual, faseSalud, vidaTotal, damageActual, ken, kenActual, imagen, destreza, agilidad, sabiduria, sentidos, presencia, principio, academisismo, artesMarciales, atletismo,conBakemono, conDemonio, conEsferas, conEspiritual, forja, medicina, montar, sigilo, pilotear, manejoArma, conObjMagicos, conLeyendas, resCorte, resEnergia, resRayo, resFuego, resFrio, resVeneno, manejoSombras, tratoBakemono, conHechiceria, meditacionEspiritual, meditacionVital, idusuario_fk, cantFases, fasesPos, fasesNeg, nombreArma, consumicionKi,imagenFile)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?);
+      INSERT INTO personajes (nombre, raza, naturaleza, dominio, fuerza, fortaleza, ki, kiActual, faseSalud, vidaTotal, damageActual, ken, kenActual, imagen, destreza, agilidad, sabiduria, sentidos, presencia, principio, academisismo, artesMarciales, atletismo,conBakemono, conDemonio, conEsferas, conEspiritual, forja, medicina, montar, sigilo, pilotear, manejoArma, conObjMagicos, conLeyendas, resCorte, resEnergia, resRayo, resFuego, resFrio, resVeneno, manejoSombras, tratoBakemono, conHechiceria, meditacionEspiritual, meditacionVital, idusuario_fk, cantFases, fasesPos, fasesNeg, nombreArma, consumicionKi,imagenFile,nivelDestino,puntosDestino)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?);
     `;
 
-    await connection.query(queryString, [nombre, raza, naturaleza, dominio, fuerza, fortaleza, ki, kiActual, faseSalud, vidaTotal, damageActual, ken, kenActual, imagen, destreza, agilidad, sabiduria, sentidos, presencia, principio, academisismo, artesMarciales, atletismo, conBakemono, conDemonio, conEsferas, conEspiritual, forja, medicina, montar, sigilo, pilotear, manejoArma, conObjMagicos, conLeyendas, resCorte, resEnergia, resRayo, resFuego, resFrio, resVeneno, manejoSombras, tratoBakemono, conHechiceria, meditacionEspiritual,meditacionVital, idusuario_fk,cantFases, fasesPos, fasesNeg, nombreArma,consumicionKi,imagenFile], (err, result) => {
+    await connection.query(queryString, [nombre, raza, naturaleza, dominio, fuerza, fortaleza, ki, kiActual, faseSalud, vidaTotal, damageActual, ken, kenActual, imagen, destreza, agilidad, sabiduria, sentidos, presencia, principio, academisismo, artesMarciales, atletismo, conBakemono, conDemonio, conEsferas, conEspiritual, forja, medicina, montar, sigilo, pilotear, manejoArma, conObjMagicos, conLeyendas, resCorte, resEnergia, resRayo, resFuego, resFrio, resVeneno, manejoSombras, tratoBakemono, conHechiceria, meditacionEspiritual,meditacionVital, idusuario_fk,cantFases, fasesPos, fasesNeg, nombreArma,consumicionKi,imagenFile,nivelDestino,puntosDestino], (err, result) => {
       if (err) {
         console.error('Error al ejecutar la consulta:', err);
         return res.status(500).json({ error: 'Error interno del servidor' });
@@ -814,7 +816,9 @@ app.put('/update/:idpersonaje', (req, res) => {
           fasesPos,
           fasesNeg,
           nombreArma,
-          historia
+          historia,
+          nivelDestino,
+          puntosDestino
          
       } = req.body;
       console.log("es cuerpo de la solicitud es: ",req.body)
@@ -823,13 +827,13 @@ app.put('/update/:idpersonaje', (req, res) => {
      
       const queryString = `
           UPDATE personajes
-          SET nombre=?, raza=?, naturaleza=?, dominio=?, fuerza=?, fortaleza=?, ki=?, kiActual=?, faseSalud=?, vidaTotal=?, damageActual=?, ken=?, kenActual=?, imagen=?, destreza=?, agilidad=?, sabiduria=?, sentidos=?, presencia=?, principio=?, academisismo=?, artesMarciales=?, atletismo=?, conBakemono=?, conDemonio=? , conEsferas=?, conEspiritual=?, forja=?, medicina=?, montar=?, sigilo=?, pilotear=?, manejoArma=?, conObjMagicos=?, conLeyendas=?, resCorte=?, resEnergia=?, resRayo=?, resFuego=?, resFrio=?, resVeneno=?, manejoSombras=?, tratoBakemono=?, conHechiceria=?, meditacionEspiritual=?, meditacionVital=? , idusuario_fk=? , cantFases=?, fasesPos=?, fasesNeg=?, nombreArma=?, historia=?
+          SET nombre=?, raza=?, naturaleza=?, dominio=?, fuerza=?, fortaleza=?, ki=?, kiActual=?, faseSalud=?, vidaTotal=?, damageActual=?, ken=?, kenActual=?, imagen=?, destreza=?, agilidad=?, sabiduria=?, sentidos=?, presencia=?, principio=?, academisismo=?, artesMarciales=?, atletismo=?, conBakemono=?, conDemonio=? , conEsferas=?, conEspiritual=?, forja=?, medicina=?, montar=?, sigilo=?, pilotear=?, manejoArma=?, conObjMagicos=?, conLeyendas=?, resCorte=?, resEnergia=?, resRayo=?, resFuego=?, resFrio=?, resVeneno=?, manejoSombras=?, tratoBakemono=?, conHechiceria=?, meditacionEspiritual=?, meditacionVital=? , idusuario_fk=? , cantFases=?, fasesPos=?, fasesNeg=?, nombreArma=?, historia=?,nivelDestino=?, puntosDestino=?
           WHERE idpersonaje=?;
       `;
 
 
        //dejo el idpersonaje como ultimo parametro
-      connection.query(queryString, [nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos, fasesNeg, nombreArma,historia, idpersonaje], (err, result) => {
+      connection.query(queryString, [nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos, fasesNeg, nombreArma,historia,nivelDestino,puntosDestino, idpersonaje], (err, result) => {
           if (err) {
               console.error('Error al ejecutar la consulta:', err);
               res.status(500).send('Error interno del servidor');

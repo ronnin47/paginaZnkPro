@@ -1,7 +1,7 @@
 let coleccionPj=[];
 
 class Pj{
-    constructor(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,imagenFile,historia)
+    constructor(idpersonaje,nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,imagenFile,historia,nivelDestino,puntosDestino)
       {
      this.idpersonaje=idpersonaje,
      this.nombre=nombre,
@@ -57,7 +57,9 @@ class Pj{
      this.nombreArma=nombreArma,
      this.consumicionKi=consumicionKi,
      this.imagenFile=imagenFile,
-     this.historia=historia
+     this.historia=historia,
+     this.nivelDestino=nivelDestino,
+     this.puntosDestino=puntosDestino
     }  
 
     actualizarBarraDeProgreso(){
@@ -525,7 +527,15 @@ class Pj{
                                             <div>
                                                 <label for="ken" class="labelParejoDerecho">KEN:</label>
                                                 <input type="number" class="form-control inputSegundaFicha2 inputParejoDerecho" id="kenInput" aria-describedby="ken" value="${this.ken}" placeholder="Ingrese puntos de ken" required>  
-                                            </div>                  
+                                            </div>     
+                                            <div>
+                                                <label for="destino" class="labelParejoDerecho ">Nivel de destino:</label>
+                                                <input type="number" class="form-control inputSegundaFicha2 inputParejoDerecho nivelDestino" id="destinoInput" aria-describedby="destino" value="${this.nivelDestino}" placeholder="" readonly required>  
+                                            </div>   
+                                            <div>
+                                                <label for="puntosDestino" class="labelParejoDerecho">Puntos de destino:</label>
+                                                <input type="number" class="form-control inputSegundaFicha2 inputParejoDerecho" id="puntosDestinoInput" aria-describedby="PuntosDestino" value="${this.puntosDestino}" placeholder="" required>  
+                                            </div>            
                                         </div>                                        
                                         <div>
                                             <label for="imagen" class="form-label labels">url de la imagen del personaje:</label>
@@ -942,7 +952,6 @@ class Pj{
                 console.log(`cambios guardados`);
                 this.actualizarPj()
             }
-
             });
 
             botonCargarKi.addEventListener('click', () => {
@@ -979,6 +988,20 @@ class Pj{
                 localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
                 this.actualizarPj();
             });
+
+
+            document.getElementById("kenInput").addEventListener("input",()=>{  
+                let newKen=document.getElementById("kenInput").value
+                this.ken=newKen;
+                let resultado = Math.floor(parseInt(this.ken, 10) / 100);
+                this.nivelDestino=resultado;     
+            });
+
+            document.getElementById("puntosDestinoInput").addEventListener("input",()=>{    
+                let newPuntaje= document.getElementById("puntosDestinoInput").value
+                this.puntosDestino=newPuntaje;        
+            });
+
 
             document.getElementById("fuerzaInput").addEventListener("input",()=>{
                 this.calcularTotalTronco();
@@ -1084,6 +1107,16 @@ class Pj{
                 this.calcularTotalHabilidades();
             }) 
 
+            
+
+          /*  document.getElementById("destinoInput").addEventListener("input",()=>{
+                console.log("funciona boton de input nivel destino para guardar cambios")
+                let newPuntaje= document.getElementById("destinoInput").value;
+                this.nivelDestino=newPuntaje;
+                console.log(this.nivelDestino);
+            });
+            */
+
             this.calcularTotalTronco();
             this.calcularTotalHabilidades();
 
@@ -1126,7 +1159,10 @@ class Pj{
             this.modificarFicha();
             localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
             console.log(this.historia)
-            realizarUpdateBbdd(this.idpersonaje,this.nombre,this.raza,this.naturaleza,this.dominio,this.fuerza,this.fortaleza,this.ki,this.kiActual,this.faseSalud,this.vidaTotal,this.damageActual,this.ken,this.kenActual,this.imagen,this.destreza,this.agilidad,this.sabiduria,this.sentidos,this.presencia,this.principio, this.academisismo, this.artesMarciales, this.atletismo,this.conBakemono,this.conDemonio,this.conEsferas,this.conEspiritual,this.forja,this.medicina,this.montar,this.sigilo,this.pilotear,this.manejoArma,this.conObjMagicos,this.conLeyendas,this.resCorte,this.resEnergia,this.resRayo,this.resFuego,this.resFrio,this.resVeneno,this.manejoSombras,this.tratoBakemono,this.conHechiceria,this.meditacionEspiritual,this.meditacionVital,this.idusuario_fk,this.cantFases,this.fasesPos,this.fasesNeg,this.nombreArma,this.historia);
+
+            console.log(this.nivelDestino)
+            console.log(this.puntosDestino) 
+            realizarUpdateBbdd(this.idpersonaje,this.nombre,this.raza,this.naturaleza,this.dominio,this.fuerza,this.fortaleza,this.ki,this.kiActual,this.faseSalud,this.vidaTotal,this.damageActual,this.ken,this.kenActual,this.imagen,this.destreza,this.agilidad,this.sabiduria,this.sentidos,this.presencia,this.principio, this.academisismo, this.artesMarciales, this.atletismo,this.conBakemono,this.conDemonio,this.conEsferas,this.conEspiritual,this.forja,this.medicina,this.montar,this.sigilo,this.pilotear,this.manejoArma,this.conObjMagicos,this.conLeyendas,this.resCorte,this.resEnergia,this.resRayo,this.resFuego,this.resFrio,this.resVeneno,this.manejoSombras,this.tratoBakemono,this.conHechiceria,this.meditacionEspiritual,this.meditacionVital,this.idusuario_fk,this.cantFases,this.fasesPos,this.fasesNeg,this.nombreArma,this.historia,this.nivelDestino,this.puntosDestino);
             insertDominiosTecnicas(pjDominios);
             location.reload();            
         });

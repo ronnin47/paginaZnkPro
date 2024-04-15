@@ -166,7 +166,10 @@ const consumirPersonajesBd = async () => {
                 pj.fasesNeg,
                 pj.nombreArma,
                 pj.consumicionKi,
-                pj.imagenFile
+                pj.imagenFile,
+                pj.historia,
+                pj.nivelDestino,
+                pj.puntosDestino
             );
            /*  // Convertir imagenFile a Base64 si es válido
              if (pj.imagenFile && pj.imagenFile.type === 'Buffer' && Array.isArray(pj.imagenFile.data)) {

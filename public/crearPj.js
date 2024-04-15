@@ -1,3 +1,5 @@
+//const { parse } = require("path");
+
 //VERIFICA ESTADO DE SESION Y PERMISO PARA HABILITAR LA NAVEGACION EN LAS PAGINAS
 function verificacionEstadoSesion(){
     let sesionIniciada = localStorage.getItem(`sesionIniciada`);
@@ -163,7 +165,7 @@ if(sesionIniciada=="true"){
 
 
 //async function de INSERT NUEVO PRODUCTO
-async function realizarInsertBbdd(nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,imagenFile){
+async function realizarInsertBbdd(nombre,raza,naturaleza,dominio,fuerza,fortaleza,ki,kiActual,faseSalud,vidaTotal,damageActual,ken,kenActual,imagen,destreza,agilidad,sabiduria,sentidos,presencia,principio, academisismo, artesMarciales, atletismo,conBakemono,conDemonio,conEsferas,conEspiritual,forja,medicina,montar,sigilo,pilotear,manejoArma,conObjMagicos,conLeyendas,resCorte,resEnergia,resRayo,resFuego,resFrio,resVeneno,manejoSombras,tratoBakemono,conHechiceria,meditacionEspiritual,meditacionVital,idusuario_fk,cantFases,fasesPos,fasesNeg,nombreArma,consumicionKi,imagenFile,nivelDestino,puntosDestino){
     try{
         //let idusuario_fk = localStorage.getItem("idusuario");
         const response= await fetch('/insert',{
@@ -225,7 +227,9 @@ async function realizarInsertBbdd(nombre,raza,naturaleza,dominio,fuerza,fortalez
             fasesNeg: `${fasesNeg}`,
             nombreArma: `${nombreArma}`,
             consumicionKi: `${consumicionKi}`,
-            imagenFile: `${imagenFile}`
+            imagenFile: `${imagenFile}`,
+            nivelDestino: `${nivelDestino}`,
+            puntosDestino: `${puntosDestino}`
 
         })
         });
@@ -399,6 +403,12 @@ async function guardarPjNuevo(coleccionPj)
         let damageActual=0;
         let kiActual=parseInt(ki);
         let kenActual=parseInt(ken);
+
+        let resultado = Math.floor(parseInt(ken, 10) / 100);
+
+
+        let nivelDestino=resultado;
+        let puntosDestino=resultado;
   
    const idNuevoPersonaje = await realizarInsertBbdd(
     nombre || '',
@@ -453,10 +463,12 @@ async function guardarPjNuevo(coleccionPj)
     parseInt(fasesNeg) || 3,
     nombreArma || '',
     parseInt(consumicionKi) || 0,
-    imagenFile || ''
+    imagenFile || '',
+   parseInt(nivelDestino) || 0,
+    parseInt(puntosDestino) || 0
 );
         let idpersonaje=idNuevoPersonaje;
-        let nuevoPj= new Pj(idpersonaje,nombre,raza,naturaleza,dominio,parseInt(fuerza),parseInt(fortaleza),parseInt(ki),kiActual,faseSalud,vidaTotal,damageActual,parseInt(ken),kenActual,imagen,parseInt(destreza),parseInt(agilidad),parseInt(sabiduria),parseInt(sentidos),parseInt(presencia),parseInt(principio), parseInt(academisismo), parseInt(artesMarciales), parseInt(atletismo),parseInt(conBakemono),parseInt(conDemonio),parseInt(conEsferas),parseInt(conEspiritual),parseInt(forja),parseInt(medicina),parseInt(montar),parseInt(sigilo),parseInt(pilotear),parseInt(manejoArma),parseInt(conObjMagicos),parseInt(conLeyendas),parseInt(resCorte),parseInt(resEnergia),parseInt(resRayo),parseInt(resFuego),parseInt(resFrio),parseInt(resVeneno),parseInt(manejoSombras),parseInt(tratoBakemono),parseInt(conHechiceria),parseInt(meditacionEspiritual),parseInt(meditacionVital),idusuario_fk,parseInt(cantFases),parseInt(fasesPos), parseInt(fasesNeg), nombreArma, parseInt(consumicionKi),imagenFile);        
+        let nuevoPj= new Pj(idpersonaje,nombre,raza,naturaleza,dominio,parseInt(fuerza),parseInt(fortaleza),parseInt(ki),kiActual,faseSalud,vidaTotal,damageActual,parseInt(ken),kenActual,imagen,parseInt(destreza),parseInt(agilidad),parseInt(sabiduria),parseInt(sentidos),parseInt(presencia),parseInt(principio), parseInt(academisismo), parseInt(artesMarciales), parseInt(atletismo),parseInt(conBakemono),parseInt(conDemonio),parseInt(conEsferas),parseInt(conEspiritual),parseInt(forja),parseInt(medicina),parseInt(montar),parseInt(sigilo),parseInt(pilotear),parseInt(manejoArma),parseInt(conObjMagicos),parseInt(conLeyendas),parseInt(resCorte),parseInt(resEnergia),parseInt(resRayo),parseInt(resFuego),parseInt(resFrio),parseInt(resVeneno),parseInt(manejoSombras),parseInt(tratoBakemono),parseInt(conHechiceria),parseInt(meditacionEspiritual),parseInt(meditacionVital),idusuario_fk,parseInt(cantFases),parseInt(fasesPos), parseInt(fasesNeg), nombreArma, parseInt(consumicionKi),imagenFile,parseInt(nivelDestino),parseInt(puntosDestino));        
         coleccionPj.push(nuevoPj);
         console.log(coleccionPj);
         localStorage.setItem("pj", JSON.stringify(coleccionPj));//guardo       

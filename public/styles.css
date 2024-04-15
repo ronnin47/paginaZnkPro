@@ -491,7 +491,7 @@ footer {
 }
 .parejo{
    display: grid;
-    grid-template-columns: 40% 40%;
+    grid-template-columns: 20% 20% 20% 20%;
     gap: 5%;
 }
 .labelParejoIzquierdo{
@@ -974,15 +974,16 @@ margin-top: 20px;
     border-radius: 5px; /* Borde redondeado */
     margin-top: 10px;
     font-weight: bold; 
- 
     display: block; 
-    background: linear-gradient(90deg, #e0e0e0, #c0c0c0, #909090, #c0c0c0, #e0e0e0);
-    
-    
+    background: linear-gradient(90deg, #e0e0e0, #c0c0c0, #909090, #c0c0c0, #e0e0e0);    
 }
 .btnSaga{
     padding: 4px;
     font-size: 26px;
     color: black;
     font-family: Impact;
+}
+#destinoInput.nivelDestino {
+    background-color: rgba(31, 31, 30, 0.697);
+    color: yellow;
 }
