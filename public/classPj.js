@@ -184,6 +184,12 @@ class Pj{
     
             // Usar innerHTML para construir el contenido del nuevo grupo
             divNuevoGrupo.innerHTML = `
+            <div class="botonNombreSaga">
+            <button class="btn btn-primary botonesCollapse btnSaga" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample-${idGrupo}" aria-expanded="false" aria-controls="collapseExample-${idGrupo}">
+           SAGA: ${nombreSaga}
+            </button>
+           </div>      
+           <div class="collapse" id="collapseExample-${idGrupo}">
             <div class="borderGrupo">
                 <div class="tituloSaga">
                 <h3 class="tituloSaga">SAGA: ${nombreSaga}</h3>
@@ -193,6 +199,7 @@ class Pj{
                 </div>   
                 <div id="results-${idGrupo}" class="results"></div> 
                 <div id="cards-${idGrupo}" class="ordenCards"></div>
+            </div>
             </div>
             `;
             let gruposSagas=document.getElementById(`gruposSagas`)
@@ -334,13 +341,13 @@ class Pj{
        
     }
 
-
     ficha(){   
                 let nuevaFichaCard = document.createElement("div")
                 nuevaFichaCard.className = "col-sm-12 col-md-6 col-lg-4 col-xxl-3 my-3"         
-                nuevaFichaCard.innerHTML = `<div id="${this.idpersonaje}"  class="card mx-auto cardInicio cardGrupoHover" style="width: 18rem;">
+                nuevaFichaCard.innerHTML = `<div id="${this.idpersonaje}" class="card mx-auto cardInicio cardGrupoHover" style="width: 18rem;">
                                                 <img src="${this.imagen}" height="300px" width="" class="card-img-top circular" alt="${this.nombre} de ${this.dominio}">
-                                               
+                                
+                                           
                                                 <div class="card-body mx-auto">
                                                 <h5 class="card-Nombre">${this.nombre}</h5>
                                                 <p>ID: ${this.idpersonaje}</p>
@@ -380,43 +387,15 @@ class Pj{
                                                 <a class="btn btn-danger" id="abrirFicha" href="miFicha.html?id=${this.idpersonaje}" target="_blank">Abrir ficha</a>
                                                 </div>
             
-                                            </div> `
-            
-/*
-console.log(this.imagenFile.data)
-// Verificar si hay una imagen de archivo disponible
-if (this.imagenFile && this.imagenFile.data) {
-    // Obtener los datos de la imagen
-    var imageData = this.imagenFile;
-
-    // Obtener el ID del personaje
-    var idPersonaje = this.idpersonaje;
-
-    // Convertir los datos de imagen a un Uint8Array
-    var uint8Array = new Uint8Array(imageData.data);
-
-    // Crear un Blob a partir de los datos en Uint8Array
-    var blob = new Blob([uint8Array], { type: 'image/jpeg' }); // Ajusta el tipo según el formato de la imagen
-
-    // Crear un objeto FileReader
-    var reader = new FileReader();
-
-    // Configurar el evento onload del FileReader
-    reader.onload = function(event) {
-        // Establecer la URL de la imagen como el origen de la etiqueta de imagen
-      
-        document.getElementById(`imagenFile-${idPersonaje}`).src = event.target.result;
-    };
-
-    // Leer el contenido del blob como una URL base64
-    reader.readAsDataURL(blob);
-} else {
-    console.error("No se encontraron datos de imagen válidos.");
-}
-   */            
+                                            </div> `       
 
 
-                fichasCard.appendChild(nuevaFichaCard)      
+                fichasCard.appendChild(nuevaFichaCard)
+
+           
+
+
+                
                 let newDamage=0;
                 let newKi=0;
                 let newKen=0;

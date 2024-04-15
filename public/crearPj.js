@@ -278,8 +278,31 @@ async function guardarPjNuevo(coleccionPj)
         let kenInput=document.getElementById("kenInput");
         let fuerzaInput=document.getElementById("fuerzaInput");
         let fortalezaInput=document.getElementById("fortalezaInput");
+        
         let imagenInput=document.getElementById("imagenInput");
-        //let imagenFileInput=document.getElementById("imagenFile").files[0];
+        let imagenFile=""
+        
+        /*// Obtener archivo de imagen del elemento de entrada
+        let imagenFileInput = document.getElementById("imagenFile").files[0];
+
+        // Verificar si la imagen está en base64
+        let imagenFileBase64;
+        if (imagenFileInput) {
+            // Convertir la imagen a base64 utilizando la función existente
+            imagenFileBase64 = await convertImageToBase64(imagenFileInput);
+        } else {
+            // Si no se selecciona ninguna imagen, usar una imagen predeterminada
+            imagenFileBase64 = "/assets/plumas.jpg";
+        }
+
+        console.log(imagenFileBase64)   
+
+        // verificacion de base 64
+        const data = imagenFileBase64;
+        console.log(isBase64Image(data));
+        let imagenFile=imagenFileBase64;
+*/
+
         let destrezaInput=document.getElementById("destrezaInput");
         let agilidadInput=document.getElementById("agilidadInput");
         let sabiduriaInput=document.getElementById("sabiduriaInput");
@@ -328,8 +351,9 @@ async function guardarPjNuevo(coleccionPj)
         let ken=kenInput.value || 0;
         let fuerza=fuerzaInput.value || 0;
         let fortaleza=fortalezaInput.value || 0;
+
         let imagen=imagenInput.value || "/assets/plumas.jpg";
-        let imagenFile="/assets/plumas.jpg";
+
         let destreza=destrezaInput.value || 0;
         let agilidad=agilidadInput.value || 0;
         let sabiduria=sabiduriaInput.value || 0;
@@ -429,7 +453,7 @@ async function guardarPjNuevo(coleccionPj)
     parseInt(fasesNeg) || 3,
     nombreArma || '',
     parseInt(consumicionKi) || 0,
-    imagenFile
+    imagenFile || ''
 );
         let idpersonaje=idNuevoPersonaje;
         let nuevoPj= new Pj(idpersonaje,nombre,raza,naturaleza,dominio,parseInt(fuerza),parseInt(fortaleza),parseInt(ki),kiActual,faseSalud,vidaTotal,damageActual,parseInt(ken),kenActual,imagen,parseInt(destreza),parseInt(agilidad),parseInt(sabiduria),parseInt(sentidos),parseInt(presencia),parseInt(principio), parseInt(academisismo), parseInt(artesMarciales), parseInt(atletismo),parseInt(conBakemono),parseInt(conDemonio),parseInt(conEsferas),parseInt(conEspiritual),parseInt(forja),parseInt(medicina),parseInt(montar),parseInt(sigilo),parseInt(pilotear),parseInt(manejoArma),parseInt(conObjMagicos),parseInt(conLeyendas),parseInt(resCorte),parseInt(resEnergia),parseInt(resRayo),parseInt(resFuego),parseInt(resFrio),parseInt(resVeneno),parseInt(manejoSombras),parseInt(tratoBakemono),parseInt(conHechiceria),parseInt(meditacionEspiritual),parseInt(meditacionVital),idusuario_fk,parseInt(cantFases),parseInt(fasesPos), parseInt(fasesNeg), nombreArma, parseInt(consumicionKi),imagenFile);        
@@ -710,7 +734,6 @@ document.getElementById("fortalezaInput").addEventListener("input",()=>{
     document.documentElement.style.setProperty('--numeroDivisionesNeg', numeroDivisionesNeg);
 });
 
-
 document.getElementById("kiInput").addEventListener("input",()=>{
     let kiInput=document.getElementById("kiInput").value;
     let labelKi=document.getElementById(`ki`);
@@ -792,7 +815,7 @@ guardarPersonajeBtn.addEventListener("click",async ()=>{
       }).then(() => {
         //window.location.href = "misPersonajes.html";
         console.log(idCapturado)
-        window.location.href = `miFicha.html?id=${idCapturado}`; 
+      window.location.href = `miFicha.html?id=${idCapturado}`; 
         
       });
      
@@ -1113,3 +1136,99 @@ function eliminarVentaja(idVentaja) {
     const ventajaEliminar = document.getElementById("ventaja-" + idVentaja);
     ventajaEliminar.remove();
 };
+
+
+
+
+/*
+
+//CARGAR UN ARCHIVO DE IMAGEN
+function convertImageToBase64(file) {
+    // Crear una instancia de FileReader
+    const reader = new FileReader();
+    
+    // Definir una función de devolución de llamada para manejar la carga completa
+    reader.onload = function(event) {
+        // `event.target.result` contiene la cadena base64 de la imagen
+        const base64String = event.target.result;
+        
+        // Obtener la etiqueta <img> donde quieres mostrar la imagen
+        const imgElement = document.getElementById('imagenFileVer');
+        
+        // Establecer el atributo src usando la cadena base64
+        imgElement.src = base64String;
+    };
+    
+    // Leer el archivo como una URL de datos (base64)
+    reader.readAsDataURL(file);
+}
+*/
+/*
+
+function convertImageToBase64(file) {
+    // Crear una promesa para el resultado en base64
+    return new Promise((resolve, reject) => {
+        // Crear una instancia de FileReader
+        const reader = new FileReader();
+        
+        // Definir una función de devolución de llamada para manejar la carga completa
+        reader.onload = function(event) {
+            // `event.target.result` contiene la cadena base64 de la imagen
+            const base64String = event.target.result;
+            
+            // Obtener la etiqueta <img> donde quieres mostrar la imagen
+            const imgElement = document.getElementById('imagenFileVer');
+            
+            // Establecer el atributo src usando la cadena base64
+            imgElement.src = base64String;
+            
+            // Resolver la promesa con la cadena base64
+            resolve(base64String);
+        };
+        
+        // Definir una función de devolución de llamada para manejar errores de carga
+        reader.onerror = function(error) {
+            reject(error);
+        };
+        
+        // Leer el archivo como una URL de datos (base64)
+        reader.readAsDataURL(file);
+    });
+}
+
+
+
+
+// Función para manejar la carga de archivos
+function handleFileUpload(event) {
+    const file = event.target.files[0]; // Obtener el archivo cargado
+
+    // Llamar a la función para convertir la imagen a base64
+    convertImageToBase64(file);
+}
+
+
+
+
+// Obtener el elemento de entrada de archivo del DOM
+const fileInput = document.getElementById('imagenFile');
+
+// Agregar un evento de cambio para manejar la carga de archivos
+fileInput.addEventListener('change', handleFileUpload);
+
+
+
+
+
+
+
+
+//verificar base64
+function isBase64Image(data) {
+    // Convertir a cadena por si acaso `data` no es ya una cadena
+    const strData = String(data);
+    
+    // Verifica si la cadena comienza con el prefijo 'data:image' y ';base64,'
+    return strData.startsWith('data:image') && strData.includes(';base64,');
+}
+*/

@@ -630,7 +630,7 @@ border: 3px solid black;
     background-color: black;  
 }
 .margin16{
-    margin-top: 16px;
+    margin-top: 12px;
 }
 .botonesCollapse{
     padding: 1px;
@@ -966,3 +966,23 @@ margin-top: 20px;
     color: aliceblue;
 }
 
+
+.botonNombreSaga {
+    text-align: center; /* Centra el texto del botón */
+    border: 10px solid black; /* Agrega un borde claro */
+    padding: 10px; 
+    border-radius: 5px; /* Borde redondeado */
+    margin-top: 10px;
+    font-weight: bold; 
+ 
+    display: block; 
+    background: linear-gradient(90deg, #e0e0e0, #c0c0c0, #909090, #c0c0c0, #e0e0e0);
+    
+    
+}
+.btnSaga{
+    padding: 4px;
+    font-size: 26px;
+    color: black;
+    font-family: Impact;
+}

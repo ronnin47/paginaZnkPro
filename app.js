@@ -426,6 +426,7 @@ app.get('/misPersonajes', async (req, res) => {
     `);
 
       if (Array.isArray(resultado)) {
+        console.log("TRAE DE LA BASE DE DATOS:",resultado)
           res.json(resultado);
           
       } else {
@@ -563,6 +564,7 @@ try {
   `);
 
     if (Array.isArray(resultado)) {
+        console.log("CA ESTA LO QUE TRAE DE LA BASE: ",resultado)
         res.json(resultado);
         
     } else {

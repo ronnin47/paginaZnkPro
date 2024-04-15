@@ -375,20 +375,6 @@ function mostrarFichasSagas(data){
         pj.gruposSaga(idGrupo,nombreSaga);
         });
     });
-
-
-/*
-console.log(coleccionPj)
-
-coleccionPj.forEach(pj=>{
-    if(pj.idpersonaje==data.idPersonajes){
-        pj.gruposSaga()
-    }
-})
-*/
-
-  
-
 };
 
 async function agregarPersonajeSaga(idSaga,idpersonaje){
@@ -449,3 +435,5 @@ async function eliminarPersonajeSaga(idSaga, idpersonaje) {
         return null;
     }
 }
+
+
