@@ -284,11 +284,11 @@ async function guardarPjNuevo(coleccionPj)
         let fortalezaInput=document.getElementById("fortalezaInput");
         
         let imagenInput=document.getElementById("imagenInput");
-        let imagenFile=""
+        //let imagenFile=""
         
-        /*// Obtener archivo de imagen del elemento de entrada
-        let imagenFileInput = document.getElementById("imagenFile").files[0];
-
+       // Obtener archivo de imagen del elemento de entrada
+        //let imagenFileInput = document.getElementById("imagenFile").files[0];
+/*
         // Verificar si la imagen está en base64
         let imagenFileBase64;
         if (imagenFileInput) {
@@ -302,10 +302,11 @@ async function guardarPjNuevo(coleccionPj)
         console.log(imagenFileBase64)   
 
         // verificacion de base 64
-        const data = imagenFileBase64;
-        console.log(isBase64Image(data));
-        let imagenFile=imagenFileBase64;
+        //const data = imagenFileBase64;
+       // console.log(isBase64Image(data));
+       let imagenFile=imagenFileBase64;
 */
+       let imagenFile="";
 
         let destrezaInput=document.getElementById("destrezaInput");
         let agilidadInput=document.getElementById("agilidadInput");
@@ -797,21 +798,21 @@ document.getElementById("kenInput").addEventListener("input",()=>{
 //BOTON PARA GUARDAR PERSONAJE NUEVO
 let guardarPersonajeBtn=document.getElementById("guardarPersonajeBtn");
 guardarPersonajeBtn.addEventListener("click",async ()=>{
-    console.log("funciona boton guardar pj nuevo")
+    //console.log("funciona boton guardar pj nuevo")
    let idCapturado= await guardarPjNuevo(coleccionPj); 
 
 
     //despues de guardar pj nuevo quiero el idpersonaje
     //let ultimoPersonaje = coleccionPj[coleccionPj.length];
     //let idpersonaje = ultimoPersonaje.idpersonaje;
-    console.log(idCapturado)
+    //console.log(idCapturado)
     //quiero tomar el idpersonaje
     pjDominios.idPersonaje=idCapturado
     ventajasData.idPersonaje=idCapturado;
 
-    console.log(pjDominios);
+    //console.log(pjDominios);
     //AHORA TENDRIA QUE INSERTAR ESTO EN MI BASE DE DATOS , CON UN POST 
-    console.log(ventajasData);
+    //console.log(ventajasData);
     guardarVentajas(ventajasData)
     enviarVentajasAlServidor(ventajasData)
 
@@ -826,17 +827,12 @@ guardarPersonajeBtn.addEventListener("click",async ()=>{
         timer: 1500
       }).then(() => {
         //window.location.href = "misPersonajes.html";
-        console.log(idCapturado)
-      window.location.href = `miFicha.html?id=${idCapturado}`; 
+        //console.log(idCapturado)
+        window.location.href = `miFicha.html?id=${idCapturado}`; 
         
       });
      
 })
-
-
-
-
-console.log(coleccionPj);
 
 
 window.addEventListener('storage', function (event) {
@@ -1152,31 +1148,27 @@ function eliminarVentaja(idVentaja) {
 
 
 
+
 /*
 
-//CARGAR UN ARCHIVO DE IMAGEN
-function convertImageToBase64(file) {
-    // Crear una instancia de FileReader
-    const reader = new FileReader();
-    
-    // Definir una función de devolución de llamada para manejar la carga completa
-    reader.onload = function(event) {
-        // `event.target.result` contiene la cadena base64 de la imagen
-        const base64String = event.target.result;
-        
-        // Obtener la etiqueta <img> donde quieres mostrar la imagen
-        const imgElement = document.getElementById('imagenFileVer');
-        
-        // Establecer el atributo src usando la cadena base64
-        imgElement.src = base64String;
-    };
-    
-    // Leer el archivo como una URL de datos (base64)
-    reader.readAsDataURL(file);
-}
-*/
-/*
 
+//DONDE CARGAMOS LA IMAGEN JPG PNG PENG
+document.getElementById('imagenFile').addEventListener('change', function(event) {
+    const fileInput = event.target;
+    const file = fileInput.files[0]; // Obtener el archivo seleccionado
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Obtener el elemento <img> donde se mostrará la imagen cargada
+            const imgElement = document.getElementById('imagenFileVer');
+            // Establecer el atributo src del <img> con el contenido leído
+            imgElement.src = e.target.result;
+        };
+        reader.readAsDataURL(file); // Leer el archivo como URL de datos
+    }
+});
+
+//convierte a base 64
 function convertImageToBase64(file) {
     // Crear una promesa para el resultado en base64
     return new Promise((resolve, reject) => {
@@ -1206,41 +1198,5 @@ function convertImageToBase64(file) {
         // Leer el archivo como una URL de datos (base64)
         reader.readAsDataURL(file);
     });
-}
-
-
-
-
-// Función para manejar la carga de archivos
-function handleFileUpload(event) {
-    const file = event.target.files[0]; // Obtener el archivo cargado
-
-    // Llamar a la función para convertir la imagen a base64
-    convertImageToBase64(file);
-}
-
-
-
-
-// Obtener el elemento de entrada de archivo del DOM
-const fileInput = document.getElementById('imagenFile');
-
-// Agregar un evento de cambio para manejar la carga de archivos
-fileInput.addEventListener('change', handleFileUpload);
-
-
-
-
-
-
-
-
-//verificar base64
-function isBase64Image(data) {
-    // Convertir a cadena por si acaso `data` no es ya una cadena
-    const strData = String(data);
-    
-    // Verifica si la cadena comienza con el prefijo 'data:image' y ';base64,'
-    return strData.startsWith('data:image') && strData.includes(';base64,');
 }
 */

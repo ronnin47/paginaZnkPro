@@ -33,10 +33,16 @@ io.on("connection",(socket)=>{
   })
 })
 
+// Configura el tamaño máximo permitido para el cuerpo de una solicitud
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(morgan("dev"))
+
+
 
 // Establece la carpeta 'public' como el directorio de archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
@@ -54,6 +60,7 @@ app.get('/', (req, res) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 
 /* CONEXION PARA PRODUCCION EN EL SERVIDOR TOWEB
 let connection = mysql.createConnection({

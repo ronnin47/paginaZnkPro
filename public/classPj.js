@@ -349,7 +349,10 @@ class Pj{
                 nuevaFichaCard.innerHTML = `<div id="${this.idpersonaje}" class="card mx-auto cardInicio cardGrupoHover" style="width: 18rem;">
                                                 <img src="${this.imagen}" height="300px" width="" class="card-img-top circular" alt="${this.nombre} de ${this.dominio}">
                                 
-                                           
+                                                
+                                               <!-- <img src="" id="etiquetaImagenFile-${this.idpersonaje}" class="imagen" alt="imagenPj">
+                                             -->
+
                                                 <div class="card-body mx-auto">
                                                 <h5 class="card-Nombre">${this.nombre}</h5>
                                                 <p>ID: ${this.idpersonaje}</p>
@@ -394,10 +397,37 @@ class Pj{
 
                 fichasCard.appendChild(nuevaFichaCard)
 
-           
+           /*
+                let etiquetaImagenFile=document.getElementById(`etiquetaImagenFile-${this.idpersonaje}`);
+               
+                // Verifica si el elemento fue encontrado
+                    if (etiquetaImagenFile) {
+                        if (this.imagenFile) {
+                            // Asegúrate de que `this.imagenFile` sea una cadena Base64 válida
+                            // Agrega el prefijo necesario si no está presente
+                            const base64Prefix = 'data:image/jpeg;base64,';
+                            let base64DataUrl;
+
+                            if (this.imagenFile.startsWith(base64Prefix)) {
+                                base64DataUrl = this.imagenFile;
+                            } else {
+                                base64DataUrl = `${base64Prefix}${this.imagenFile}`;
+                            }
+
+                            // Establecer la URL de datos como la fuente de la imagen
+                            etiquetaImagenFile.src = base64DataUrl;
+                        } else {
+                            console.error('La imagen en Base64 no está disponible.');
+                        }
+                    } else {
+                        console.error(`No se encontró el elemento con id 'etiquetaImagenFile-${this.idpersonaje}'`);
+                    }
 
 
-                
+                    console.log('Fuente de la imagen:', etiquetaImagenFile.src);
+                    console.log('Contenido de etiquetaImagenFile:', etiquetaImagenFile);
+
+             */       
                 let newDamage=0;
                 let newKi=0;
                 let newKen=0;
@@ -491,7 +521,8 @@ class Pj{
                              <div class="apertura" id="${this.idpersonaje}">        
                                 <div>
                                     <img src="${this.imagen}" id="etiquetaImagen" class="imagen" alt="imagenPj">
-                                </div>     
+                                </div>   
+                                 
                                 <div class="info">
                                     <ul>
                                         <div>
@@ -884,9 +915,9 @@ class Pj{
                                 
                             </div>  
                                         `
-            let historia=document.getElementById(`historiaInput`)
-            let texto=historia.value
-            console.log(texto)
+            //let historia=document.getElementById(`historiaInput`)
+            //let texto=historia.value
+           // console.log(texto)
 
 
             let consumicionKi=document.getElementById(`inputConsumicionKi-${this.idpersonaje}`);            
@@ -1158,10 +1189,10 @@ class Pj{
         guardarCambiosBtn.addEventListener("click",()=>{
             this.modificarFicha();
             localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-            console.log(this.historia)
+           // console.log(this.historia)
 
-            console.log(this.nivelDestino)
-            console.log(this.puntosDestino) 
+            //console.log(this.nivelDestino)
+           // console.log(this.puntosDestino) 
             realizarUpdateBbdd(this.idpersonaje,this.nombre,this.raza,this.naturaleza,this.dominio,this.fuerza,this.fortaleza,this.ki,this.kiActual,this.faseSalud,this.vidaTotal,this.damageActual,this.ken,this.kenActual,this.imagen,this.destreza,this.agilidad,this.sabiduria,this.sentidos,this.presencia,this.principio, this.academisismo, this.artesMarciales, this.atletismo,this.conBakemono,this.conDemonio,this.conEsferas,this.conEspiritual,this.forja,this.medicina,this.montar,this.sigilo,this.pilotear,this.manejoArma,this.conObjMagicos,this.conLeyendas,this.resCorte,this.resEnergia,this.resRayo,this.resFuego,this.resFrio,this.resVeneno,this.manejoSombras,this.tratoBakemono,this.conHechiceria,this.meditacionEspiritual,this.meditacionVital,this.idusuario_fk,this.cantFases,this.fasesPos,this.fasesNeg,this.nombreArma,this.historia,this.nivelDestino,this.puntosDestino);
             insertDominiosTecnicas(pjDominios);
             location.reload();            
@@ -1173,7 +1204,7 @@ class Pj{
 
 
         //PRIMERO TOMAMOS LOS DOMINIOS Y TECNICAS DEL PERSONAJE 
-        console.log("DOMINIOS Y TECNICAS: ",arrayDominiosTecnicas)
+        //console.log("DOMINIOS Y TECNICAS: ",arrayDominiosTecnicas)
         //obtengo los dominios
         function obtenerIdsDominios(arrayDominiosTecnicas) {
             // Utilizamos el método map() para extraer solo los IDs de dominios
@@ -1190,10 +1221,10 @@ class Pj{
             return idsTecnicas;
         }        
         let tecnicasSeleccionadas=obtenerIdsTecnicas(arrayDominiosTecnicas);
-        console.log(tecnicasSeleccionadas)
+        //console.log(tecnicasSeleccionadas)
    
         let dominiosSeleccionados=obtenerIdsDominios(arrayDominiosTecnicas);
-        console.log(dominiosSeleccionados)
+        //console.log(dominiosSeleccionados)
 
         function obtenerTecnicas(arrayDominiosTecnicas) {
             let tecnicas = [];
@@ -1214,7 +1245,7 @@ class Pj{
         }
 
         let infoTecnica=obtenerTecnicas(arrayDominiosTecnicas)
-        console.log("INFORMACION DE LAS TECNICAS:",infoTecnica)
+        //console.log("INFORMACION DE LAS TECNICAS:",infoTecnica)
 
         //CUANDO IMPRIMIMOS MANDAMOS DOMINIOS Y TECNICAS SELECCIONADAS
         imprimirDominiosYTecnicas(dominiosSeleccionados,tecnicasSeleccionadas,infoTecnica);      
@@ -1743,11 +1774,11 @@ class Pj{
             const tiempoInvo = nuevoDiv.querySelector(".tiempoInvo-nueva-tecnicaEspecial").value;
 
             // Realizar la inserción en la base de datos o hacer lo que sea necesario con los datos capturados
-            console.log("Nombre:", nombre);
-            console.log("Descripción:", descripcion);
-            console.log("Sistema:", sistema);
-            console.log("Coste:", coste);
-            console.log("Tiempo de Invocación:", tiempoInvo);
+            //console.log("Nombre:", nombre);
+            //console.log("Descripción:", descripcion);
+            //console.log("Sistema:", sistema);
+            //console.log("Coste:", coste);
+            //console.log("Tiempo de Invocación:", tiempoInvo);
 
             // Aquí puedes enviar los datos al servidor para realizar la inserción en la base de datos
             enviarNuevasTecnicasEspecialesAlServidor(idPersonaje,nombre,descripcion,sistema,coste,tiempoInvo)
@@ -1796,7 +1827,7 @@ class Pj{
         async function imprimirInventario() {
             try {
                 inventario = await consumirInventario(inventario);
-                console.log(inventario); // Imprimir inventario aquí
+              //  console.log(inventario); // Imprimir inventario aquí
 
                 const contenedorInventario = document.getElementById("inventario-container");
 
@@ -1962,7 +1993,7 @@ class Pj{
         async function imprimirVentajas() {
             try {
                 ventajas = await consumirVentajas(ventajas);
-                console.log(ventajas); // Imprimir inventario aquí
+                //console.log(ventajas); // Imprimir inventario aquí
 
                 const contenedorVentajas = document.getElementById("ventajas-container");
 

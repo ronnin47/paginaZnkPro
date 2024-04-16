@@ -131,12 +131,12 @@ const consumirPersonajesBd = async () => {
                 pj.puntosDestino
             );
             coleccionPj.push(pjNuevo);
-            console.log(coleccionPj)
+            //console.log(coleccionPj)
         });
         // Guarda la lista en el localStorage
         localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));  
         arrayDominiosTecnicas=await consumirDominiosTecnicas()
-        console.log(arrayDominiosTecnicas)
+        //console.log(arrayDominiosTecnicas)
         // Muestra la lista de personajes
         mostrarFichas(coleccionPj);
         console.log("el array tiene dentro: ",coleccionPj);
@@ -155,16 +155,16 @@ function mostrarFichas(coleccionPj) {
     const urlParams = new URLSearchParams(window.location.search);
     const idpersonaje = parseInt(urlParams.get('id'));
   
-    console.log("ID del personaje:", idpersonaje);
-    console.log("Tipo de ID:", typeof idpersonaje);
+    //console.log("ID del personaje:", idpersonaje);
+    //console.log("Tipo de ID:", typeof idpersonaje);
   
-    console.log("Estado de la colección antes de buscar:", coleccionPj);
+    //console.log("Estado de la colección antes de buscar:", coleccionPj);
   
     // ENCONTRAR EL ÍNDICE DEL PERSONAJE EN LA COLECCIÓN
     // Utiliza findIndex para encontrar el índice del personaje con el ID dado
     const pjFichaEncontrado = coleccionPj.findIndex(pj => pj.idpersonaje === idpersonaje);
   
-    console.log("Índice encontrado:", pjFichaEncontrado);
+    //console.log("Índice encontrado:", pjFichaEncontrado);
   
     // Verifica si se encontró el personaje
     if (pjFichaEncontrado !== -1) {
@@ -395,7 +395,7 @@ const consumirDominiosTecnicas = async () => {
                 tecnicasOrdenadasPorDominio.sort((a, b) => a.idDominio - b.idDominio);
 
                 // Ahora tienes un array donde las técnicas están agrupadas y ordenadas por dominio
-                console.log(tecnicasOrdenadasPorDominio);
+               // console.log(tecnicasOrdenadasPorDominio);
         
         return tecnicasOrdenadasPorDominio;
 
@@ -424,7 +424,7 @@ const consumirTecnicasEspeciales = async () => {
         }
 
         const data = await resp.json();
-        console.log("********INFORMACION de TECNCIAS ESPECIALES********: ", data);
+        //console.log("********INFORMACION de TECNCIAS ESPECIALES********: ", data);
         
         return data;
 
@@ -451,7 +451,7 @@ const consumirInventario = async (inventario) => {
         }
 
         const data = await resp.json();
-        console.log("********INFORMACION DEL INVENTARIO********: ", data);
+       // console.log("********INFORMACION DEL INVENTARIO********: ", data);
         inventario=data
         return inventario;
 
@@ -478,7 +478,7 @@ const consumirVentajas = async () => {
         }
 
         const data = await resp.json();
-        console.log("********INFORMACION de VENTAJAS********: ", data);
+        //console.log("********INFORMACION de VENTAJAS********: ", data);
         ventajas=data
         return ventajas;
 
@@ -490,8 +490,8 @@ const consumirVentajas = async () => {
 socket.on('pjActualizado', (infoActualizada) => {
     console.log('Datos actualizados recibidos:', infoActualizada);
     
-    coleccionPj=infoActualizada;
-    console.log(infoActualizada);
+    //coleccionPj=infoActualizada;
+    //console.log(infoActualizada);
     coleccionPj=[];
 
     infoActualizada.forEach((pj) => {

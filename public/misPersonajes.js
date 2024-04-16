@@ -1,21 +1,5 @@
 const socket = io();
 
-
-/*
-let lista=document.getElementById("fichasCard");
-Sortable.create(lista, {
-    store: {
-        set: (sortable) => {
-            const orden = sortable.toArray();
-            console.log('Orden de IDs:', orden);
-        
-            document.querySelectorAll('.card').forEach((card, index) => {
-                console.log(`Tarjeta ${index} ID:`, card.id);
-            });
-        }
-    }
-});
-*/
 let lista = document.getElementById("fichasCard");
 Sortable.create(lista, {
     store: {
@@ -171,21 +155,31 @@ const consumirPersonajesBd = async () => {
                 pj.nivelDestino,
                 pj.puntosDestino
             );
-           /*  // Convertir imagenFile a Base64 si es válido
-             if (pj.imagenFile && pj.imagenFile.type === 'Buffer' && Array.isArray(pj.imagenFile.data)) {
-                // Convertir array de bytes a Base64
-                const bytes = pj.imagenFile.data;
-                const bufferData = bytesToBase64(bytes);
-                pj.imagenFile = bufferData; // Almacena Base64 en el personaje
-            } else {
-                console.error(`Datos de imagen no válidos para el personaje con ID ${pj.idpersonaje}`);
-            }*/
-            coleccionPj.push(pjNuevo);          
-        });
+           /*
+        // Convertir imagenFile a Base64 si es válido
+         if (pjNuevo.imagenFile && pjNuevo.imagenFile.type === 'Buffer' && Array.isArray(pjNuevo.imagenFile.data)) {
+            // Convertir array de bytes a Base64
+            const bytes = pjNuevo.imagenFile.data;
+            const bufferData = bytesToBase64(bytes);
+            // Almacena Base64 en el personaje
+          
+            pjNuevo.imagenFile = bufferData;
+           // console.log(typeof pjNuevo.imagenFile) 
+            //console.log(`El personaje con ID ${pjNuevo.idpersonaje} tiene una imagen en Base64: ${pjNuevo.imagenFile}`);
+        } else {
+            console.error(`Datos de imagen no válidos para el personaje con ID ${pjNuevo.idpersonaje}`);
+        }
+         */
+           // console.log("Estos tiene pj nuevo: ",pjNuevo.imagenFile)
+            coleccionPj.push(pjNuevo);   
 
+        });
+      
+      //  console.log(typeof coleccionPj[2].imagenFile)
+        console.log("el array tiene dentro: ",coleccionPj);
         localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));  
         mostrarFichas(coleccionPj);
-        console.log("el array tiene dentro: ",coleccionPj);
+        
     } catch (error) {
         console.error('Error al obtener personajes:', error);
     }
@@ -319,16 +313,10 @@ socket.on('pjActualizado', (infoActualizada) => {
 
 
 
-/*
-// Función para convertir un array de bytes a Base64
-function bytesToBase64(bytes) {
-    let binaryString = '';
-    for (let i = 0; i < bytes.length; i++) {
-        binaryString += String.fromCharCode(bytes[i]);
-    }
-    return btoa(binaryString);
-}*/
-/*
+
+
+
+
 function bytesToBase64(bytes) {
     // Crea un Uint8Array a partir del array de bytes
     const uint8Array = new Uint8Array(bytes);
@@ -341,4 +329,5 @@ function bytesToBase64(bytes) {
     
     return btoa(binaryString);
 }
-*/
+
+
