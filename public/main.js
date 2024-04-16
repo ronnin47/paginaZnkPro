@@ -239,4 +239,20 @@ window.addEventListener('storage', function (event) {
 verificacionEstadoSesion();
 
 
+Toastify({
+    text: "Bienvenido a Zepiro no Kioku",
+    duration: 2000,
+    close: true,
+    gravity: "top", // `top` or `bottom`
+    position: "center", // `left`, `center` or `right`
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(to right, #b2ebf2, #00acc1)",
+      fontSize: "26px",
+      color: "black",
+      opacity: 0.7 
 
+
+    },
+    //onClick: function(){} // Callback after click
+  }).showToast();

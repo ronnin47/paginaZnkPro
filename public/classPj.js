@@ -484,7 +484,7 @@ class Pj{
             origen.innerHTML=`
                     <div class="centrame margin16">
                         <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#presentacion" aria-expanded="false" aria-controls="collapseExample">
-                        presentacion
+                        Presentacion
                         </button>
                     </div>      
                     <div class="collapse show" id="presentacion">
@@ -493,7 +493,7 @@ class Pj{
                                     <img src="${this.imagen}" id="etiquetaImagen" class="imagen" alt="imagenPj">
                                 </div>     
                                 <div class="info">
-                                    <ul>
+                                    <ul class="container informacionPj">
                                         <div>
                                             <label for="nombre" class="form-label labels">Nombre de personaje:</label>
                                             <input type="text" class="form-control inputSegundaFicha1" id="nombreInput" aria-describedby="nombre" value="${this.nombre}" placeholder="Ingrese nombre del personaje">
@@ -539,7 +539,7 @@ class Pj{
                                         </div>                                        
                                         <div>
                                             <label for="imagen" class="form-label labels">url de la imagen del personaje:</label>
-                                            <input type="text" class="form-control inputSegundaFicha" id="imagenInput" aria-describedby="imagen" value="${this.imagen}" placeholder="Ingrese url de imagen del personaje">                                           
+                                            <input type="text" class="form-control inputSegundaFicha1" id="imagenInput" aria-describedby="imagen" value="${this.imagen}" placeholder="Ingrese url de imagen del personaje">                                           
                                         </div>                                        
                                     </ul>
                                 </div>                                
@@ -885,9 +885,7 @@ class Pj{
                             </div>  
                                         `
             let historia=document.getElementById(`historiaInput`)
-            let texto=historia.value
-            console.log(texto)
-
+            
 
             let consumicionKi=document.getElementById(`inputConsumicionKi-${this.idpersonaje}`);            
             consumicionKi.addEventListener("change",()=>{
@@ -930,14 +928,11 @@ class Pj{
                 event.preventDefault();
             if(this.damageActual>this.vidaTotal){
                     newDamage = parseInt(inputDamage.value) || 0;
-                    console.log(newDamage)
                     this.damageActual=this.damageActual+newDamage  
                     this.actualizarBarraDeProgreso()
                     inputDamage.value="";
                     inputDamage.focus();
-                    console.log(`el daño actual de ${this.nombre} es ${this.damageActual}`); 
                     localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
-                    console.log(`cambios guardados`);
                     this.actualizarPj()
             }else{
                 console.log(`funciona evento de carga de daño en barra de vida en ${this.nombre}`)
@@ -957,24 +952,21 @@ class Pj{
             botonCargarKi.addEventListener('click', () => {
                 event.preventDefault();
                 let newKi = parseInt(inputKiGastado.value) || 0;
-                console.log(newKi);
                 this.kiActual = this.kiActual - newKi;
-                // Verificar si se gastó más ki del que se tenía y actualizar la consumición de ki
                 if (newKi > 0 && this.kiActual < 0) {
-                    this.consumicionKi = this.consumicionKi + (newKi + this.kiActual); // Agregar la diferencia a consumiciónKi
-                    this.kiActual = 0; // Establecer kiActual a cero ya que no puede ser negativo
+                    this.consumicionKi = this.consumicionKi + (newKi + this.kiActual); 
+                    this.kiActual = 0; 
                 } else if (newKi > 0 && this.kiActual >= 0) {
                     this.consumicionKi = this.consumicionKi + newKi;
                 }
 
-                // Guardar cambios en localStorage y actualizar la interfaz si es necesario
+    
                 if (newKi > 0 && this.kiActual >= 0) {
                     localStorage.setItem("coleccionPj", JSON.stringify(coleccionPj));
-                    console.log(`Cambios guardados`);
                     this.actualizarPj();
                 }
                 this.actualizarBarraDeProgreso()
-                console.log(`el Ki actual de ${this.nombre} es ${this.kiActual}`);
+               
                 localStorage.setItem("coleccionPj",JSON.stringify(coleccionPj));
                 this.actualizarPj();
             });
@@ -1233,7 +1225,6 @@ class Pj{
                // dominiosBox.innerHTML += tecnicasHtml;
                console.log(parseInt(dominioId))
                let tecnicasHtml = obtenerTextoCasillas(parseInt(dominioId),tecnicasSeleccionadas,infoTecnica);
-               console.log(tecnicasHtml)
                dominiosBox.innerHTML += tecnicasHtml;
             });
 

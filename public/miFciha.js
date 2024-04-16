@@ -552,7 +552,9 @@ socket.on('pjActualizado', (infoActualizada) => {
             pj.nombreArma,
             pj.consumicionKi,
             pj.imagenFile,
-            pj.historia
+            pj.historia,
+            pj.nivelDestino,
+            pj.puntosDestino
         );
         coleccionPj.push(pjNuevo);
     })
@@ -588,3 +590,6 @@ window.addEventListener('storage', function (event) {
     }
 });
 */
+
+
+

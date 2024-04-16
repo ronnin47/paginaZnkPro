@@ -53,18 +53,17 @@
 
           <div class="centrame">
               <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                presentacion
+                Presentacion
               </button>
           </div>      
           <div class="collapse show" id="collapseExample">
             <div class="card card-body fondo">
-              <!--presentacion del personaje-->
               <div class="apertura">
                 <div>
                     <img src="https://i.pinimg.com/550x/33/2a/be/332abe02e0fcc2c15e6b1f08515368ca.jpg" class="imagen" alt="imagenPj" id="imagenFileVer">
                 </div>           
-                <div class="container info">
-                    <ul>
+                <div class="info">
+                    <ul class="container informacionPj">
                         <div>
                             <label for="nombre" class="form-label labels">Nombre de personaje:</label>
                             <input type="text" class="form-control inputSegundaFicha1" id="nombreInput" aria-describedby="nombre" placeholder="Ingrese nombre del personaje">
@@ -102,7 +101,7 @@
                         
                         <div >
                             <label for="imagen" class="form-label labels">url de la imagen del personaje:</label>
-                            <input type="text" class="form-control inputSegundaFicha" id="imagenInput" aria-describedby="imagen" placeholder="Ingrese url de imagen del producto" >
+                            <input type="text" class="form-control inputSegundaFicha1" id="imagenInput" aria-describedby="imagen" placeholder="Ingrese url de imagen del producto" >
                           
 
                             <!-- CARGAR ARCHIVO DE IMAGEN
@@ -123,13 +122,11 @@
 
          <div class="centrame">
           <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
-            caracteristicas
+            Caracteristicas
           </button>
          </div>
          <div class="collapse show" id="collapseExample2">
               <div class="card card-body fondo">
-                <!--caracteristicas del personaje-->
-                  <!--CARACTERISTICAS ZNK-->
                     <div class="tronco">
                       <!--RAMAS DEL TRONCO-->
                       <div class="caracteristicasIzquierda">
@@ -247,8 +244,6 @@
                           </div>
 
                     </div>
-
-                      <!--aptitudes especializadas-->
                     <div class="aptitudesE">
                       <div>
                       <label for="resCorte" class="form-label labelHabilidad">Res. Esp. Corte:</label>
@@ -298,13 +293,9 @@
                                               
               </div>
          </div>
-          
-        
-
-
           <div class="centrame">
             <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample2">
-              barras
+              Barras
             </button>
           </div>
           <div class="collapse show" id="collapseExample3">
@@ -401,44 +392,28 @@
               <option value="6">Maestro espiritual</option>
               </select>
               <button id="btnNuevoDominio" class="btn btn-success">+ Dominio</button>
-            </div>
-          
-              
-       
+            </div>                    
         </div>
-
-
-
         <div class="centrame">
           <button class="btn btn-primary botonesCollapse" type="button" data-bs-toggle="collapse" data-bs-target="#ventajasDesventajas" aria-expanded="false" aria-controls="collapseExample">
-            ventajas y desventajas
+            Ventajas y desventajas
           </button>
       </div>  
     </div>      
     <div class="collapse show ventajas" id="ventajasDesventajas">
       <div id="ventajas-container">
-       <!-- <div id="ventaja-1"  class="ventajasClass">
-            <input type="text" class="item-ventajas nombreVentaja" placeholder="Nombre de la ventaja" class="nombre-ventaja">
-            <button class="btn btn-danger eliminar-item-ventajas" onclick="eliminarVentaja(1)">Eliminar</button>
-        </div>-->
-      
-        
       </div>
       <div>
         <button class="agregar-ventaja" id="agregar-ventaja">Agregar Ventaja</button>
      </div>
-
     </div>
 
       </main>
     </div>          
     <div class="guardarCambios">
-    <button type="button" class="btn btn-success" id="guardarPersonajeBtn">crear personaje</button>
+    <button type="button" class="btn btn-success" id="guardarPersonajeBtn">Crear personaje</button>
     </div> 
-  
-      <!--quite el footer momentaneamente-->
       <footer >@ ZNK-2024</footer>
-      <!--Script de Bootstrap-->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
       </script> 
