@@ -827,16 +827,11 @@ guardarPersonajeBtn.addEventListener("click",async ()=>{
       }).then(() => {
         //window.location.href = "misPersonajes.html";
         console.log(idCapturado)
-      window.location.href = `miFicha.html?id=${idCapturado}`; 
+        window.location.href = `miFicha.html?id=${idCapturado}`; 
         
       });
      
 })
-
-
-
-
-console.log(coleccionPj);
 
 
 window.addEventListener('storage', function (event) {
@@ -918,13 +913,13 @@ checkboxes.forEach(checkbox => {
             let tecnica = parseInt(this.value);
             // Guardar la técnica seleccionada en el objeto pjDominios
             guardarTecnicaSeleccionada(dominio, tecnica);
-            console.log(pjDominios);
+           // console.log(pjDominios);
         } else {
             let dominio = parseInt(dominioSeleccionado);
             let tecnica = parseInt(this.value);
             // Eliminar la técnica seleccionada del objeto pjDominios
             eliminarTecnicaSeleccionada(dominio, tecnica);
-            console.log(pjDominios);
+            //console.log(pjDominios);
         }
     });
 });
